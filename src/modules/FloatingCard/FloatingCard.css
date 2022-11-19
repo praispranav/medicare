@@ -1,0 +1,63 @@
+
+
+.floating-card{
+    position: fixed;
+    top: 85vh;
+    left: 3vw;
+    background-color: white;
+    border-radius: 7px;
+    padding: 4px 15px;
+    display: flex;
+    border: 1px solid #e7e7e7;
+    z-index: 10;
+    column-gap: 15px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.03);
+}
+
+.floating-card > .img, .floating-card-active > .img{
+    width: 60px;
+    height: 60px;
+}
+
+.floating-card > .text{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.floating-card-active{
+    z-index: 100 !important;
+    position: fixed;
+    top: 85vh;
+    left: 3vw;
+    background-color: white;
+    border-radius: 7px;
+    padding: 12px 70px 12px 20px;
+    display: flex;
+    border: 1px solid #e7e7e7;
+    z-index: 10;
+    column-gap: 15px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+    animation: showin 4s forwards;
+    text-align: left;
+    cursor: default;
+}
+
+@keyframes showin {
+    0%{
+        transform: translateY(30vh);
+    }
+
+    15%{
+        transform: translateY(0vh);
+    }
+
+    85%{
+        transform: translateY(0vh);
+    }
+
+    100%{
+        transform: translateY(30vh);
+    }
+}

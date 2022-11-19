@@ -1,0 +1,170 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+  width: 100%;
+  overflow-y: hidden;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.color-error{
+  color: #fb533c;
+}
+
+.row-gap-15{
+  display: flex;
+  row-gap: 15px;
+}
+
+.row-gap-20{
+  display: flex;
+  row-gap: 1.25rem;
+}
+
+.row-gap-30{
+  display: flex;
+  row-gap: 1.875rem;
+}
+
+.col-gap-70{
+  column-gap: 4.375rem;
+}
+
+.pad-v-20-h-50{
+  padding: 1.25rem 3.125rem;
+}
+
+.flex-a-cen-j-cen{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-a-cen{
+  display: flex;
+  align-items: center;
+}
+
+.flex-a-cen-j-spbet{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-a-cen-j-spevn{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.flex-a-cen-j-sparnd{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.flex-d-col{
+  display: flex;
+  flex-direction: column;
+}
+
+.color-white{
+  color: white;
+}
+
+.color-primary{
+  color: #274066;
+}
+
+.bg-primary{
+  background-color: #274066;
+}
+
+.color-accent-blue{
+  color: #2DA9C2;
+}
+
+.bg-accent-blue{
+  background-color: #2DA9C2;
+}
+
+.color-accent-green{
+  color: #00B67A;
+}
+
+.bg-accent-green{
+  background-color: #00B67A;
+}
+
+.color-grey{
+  color: #E7E7E7;
+}
+
+.bg-grey{
+  background-color: #E7E7E7;
+}
+
+.color-dark-grey{
+  color: #4D4D4D;
+}
+
+.font-12{
+  font-size: 0.75rem;
+}
+
+.font-13{
+  font-size: 0.8125rem;
+  line-height: 1.0625rem;
+}
+
+.font-14{
+  font-size: 0.875rem
+}
+
+.font-16{
+  font-size: 1rem;
+  line-height: 1.3125rem;
+}
+
+.font-20{
+  font-size: 1.25rem;
+}
+
+.font-24{
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.font-32{
+  font-size: 2rem;
+  line-height: 2.625rem;
+}
+
+.font-40{
+  font-size: 2.5rem;
+  line-height: 3.3125rem;
+}
+
+.medium-bold{
+  font-weight: 500;
+}
+
+.semi-bold{
+  font-weight: 600;
+}
+
+.bold{
+  font-weight: 700;
+}

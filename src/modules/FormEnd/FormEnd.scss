@@ -1,0 +1,114 @@
+.congrats-card{
+    margin: 2rem 1rem;
+    padding: 2rem 1rem;
+    background-color: white;
+    border-radius: 10px;
+    max-width: 45rem;
+    @media (min-width:768px) {
+        min-width: 45rem;
+    }
+}
+.form-end-congrats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //padding: 100px 20%;
+    background-color: #F5FBFF;
+}
+.form-end{
+    width: 100%;
+    background-color: #F5FBFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //background-image: url('../../assets/mainback.png');
+    background-position: initial;
+    padding: 4rem 1.5rem;
+    min-height: 60vh;
+    .congrats-message {
+        max-width: 42rem;
+        .congrats-headline-cta, .congrats-text, .congrats-deadline {
+            margin-bottom: 1.5rem;
+        }
+        .congrats-headline-cta {
+            @media (min-width:576px) {
+                font-size: 2rem;
+            }
+        }
+        .congrats-text {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        .form-end-contact{
+            margin-bottom: 1.5rem;
+            --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / .1), 0 4px 6px -4px rgb(0 0 0 / .1);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+            display: flex;
+            width: 100%;
+            max-width: 28rem;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            animation: throb 1s ease-in-out infinite alternate;
+            .contact-btn {
+                display: flex;
+                background-color: rgb(220, 38, 38);
+                border-radius: .5rem;
+                padding: 1rem 2rem;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                img {
+                    width: 3rem;
+                    height: 3rem;
+                    margin-right: .25rem;
+                    @media (min-width: 1024px) {
+                        width: 4em;
+                        height: 4em;
+                        margin-right: 1em;
+                    }
+                }
+                .toll-free {
+                    display: flex;
+                    white-space: nowrap;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    span {
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                        @media (min-width: 1024px) {
+                            font-size: 2.25rem;
+                        }
+                    }
+                    .tfn-cta {
+                        font-weight: 600;
+                        line-height: 1.4;
+                        font-size: 1rem;
+                        @media (min-width: 1024px) {
+                            letter-spacing: .1em;
+                            letter-spacing: 2;
+                        }
+                    }
+                }
+            }
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .congrats-deadline {
+            .uppercase {
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+.animate-throb{
+    animation:throb 1s ease-in-out infinite alternate
+}
+@keyframes throb{
+    0%{transform:scale(1)}
+    to{transform:scale(1.05)}
+}

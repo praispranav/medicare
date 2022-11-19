@@ -1,0 +1,220 @@
+.form {
+  padding: 6.25rem 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  row-gap: 1.875rem;
+  background-color: #F5FBFF;
+  background-image: url("../../assets/mainback.png");
+  background-position: initial;
+  min-height: 60vh; }
+  @media (min-width: 576px) {
+    .form {
+      padding: 6.25rem 20%; } }
+  .form .main-headline {
+    font-size: 2rem;
+    line-height: 1.25; }
+  .form .form-card-holder {
+    width: 100%; }
+    .form .form-card-holder .form-completion {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      row-gap: 10px; }
+      .form .form-card-holder .form-completion .form-completion-bar {
+        background-color: #E7E7E7;
+        height: 0.625rem;
+        width: 18.75rem;
+        border-radius: 0.625rem;
+        position: relative; }
+        .form .form-card-holder .form-completion .form-completion-bar.twenty-percent .loadingbar {
+          width: 20%; }
+        .form .form-card-holder .form-completion .form-completion-bar.fifty-percent .loadingbar {
+          width: 50%; }
+        .form .form-card-holder .form-completion .form-completion-bar.ninty-percent .loadingbar {
+          width: 90%; }
+        .form .form-card-holder .form-completion .form-completion-bar.hundred-percent .loadingbar {
+          width: 100%; }
+        .form .form-card-holder .form-completion .form-completion-bar .loadingbar {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-color: #2DA9C2;
+          height: 0.625rem;
+          border-radius: 0.625rem;
+          -webkit-transition: all 1ms linear;
+          transition: all 1ms linear; }
+    .form .form-card-holder .form-ques-card {
+      min-width: 350px;
+      width: 100%;
+      max-width: 43.75rem;
+      background-color: white;
+      border-radius: 10px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      padding: 40px 30px;
+      border: 1px solid #E7E7E7;
+      -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.03);
+              box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.03); }
+      .form .form-card-holder .form-ques-card .form-options {
+        width: 100%; }
+        .form .form-card-holder .form-ques-card .form-options .form-age-option {
+          width: 100%;
+          border: 2px solid #1F7384;
+          border-radius: 8px;
+          padding: 10px 30px;
+          -webkit-transition: 0.3s;
+          transition: 0.3s;
+          cursor: pointer;
+          font-size: 1rem;
+          font-weight: bold; }
+          .form .form-card-holder .form-ques-card .form-options .form-age-option:hover {
+            -webkit-transform: scale(1.04);
+                    transform: scale(1.04);
+            background-color: #1F7384;
+            color: white; }
+          .form .form-card-holder .form-ques-card .form-options .form-age-option div {
+            -webkit-transition: 0.3s;
+            transition: 0.3s; }
+        .form .form-card-holder .form-ques-card .form-options input {
+          padding: 15px 20px;
+          border: 1px solid #E7E7E7;
+          border-radius: 10px;
+          width: 100%;
+          font-size: 1rem; }
+        .form .form-card-holder .form-ques-card .form-options div .form-error {
+          color: #FB533C;
+          text-align: left;
+          margin-top: 5px;
+          margin-left: 2px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          margin-top: .5rem; }
+        .form .form-card-holder .form-ques-card .form-options .form-option-continue {
+          padding: 15px 40px;
+          border-radius: 50px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          background-color: #1F7384;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center; }
+          .form .form-card-holder .form-ques-card .form-options .form-option-continue:hover {
+            cursor: pointer;
+            -webkit-transform: scale(1.02);
+                    transform: scale(1.02); }
+        .form .form-card-holder .form-ques-card .form-options .form-option-back {
+          padding: 15px 40px;
+          border-radius: 50px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          background-color: #fff;
+          border: 2px solid #1F7384;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          color: #1F7384; }
+          .form .form-card-holder .form-ques-card .form-options .form-option-back:hover {
+            cursor: pointer;
+            -webkit-transform: scale(1.02);
+                    transform: scale(1.02); }
+        .form .form-card-holder .form-ques-card .form-options .form-give-quote {
+          padding: 15px 40px;
+          border-radius: 50px;
+          border: 0; }
+          .form .form-card-holder .form-ques-card .form-options .form-give-quote:hover {
+            cursor: pointer;
+            -webkit-transform: scale(1.02);
+                    transform: scale(1.02); }
+      .form .form-card-holder .form-ques-card .tcpa label {
+        color: #333333;
+        display: block;
+        font-size: 10px;
+        line-height: 1.2;
+        max-width: 50rem;
+        padding-top: 1rem;
+        text-align: justify; }
+        .form .form-card-holder .form-ques-card .tcpa label a {
+          text-decoration: none; }
+
+.congrats-headline {
+  margin: 3rem 0 0 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-right: 1rem;
+  padding-left: 1rem; }
+
+.congrats-card .keymain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid #E7E7E7;
+  padding: 15px 2px;
+  text-align: left; }
+  .congrats-card .keymain .flex-a-cen img {
+    margin-right: .25rem; }
+  .congrats-card .keymain:last-child {
+    border-bottom: 0 solid; }
+  .congrats-card .keymain .reload {
+    -webkit-animation: rotate 2s infinite;
+            animation: rotate 2s infinite; }
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg); } }
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg); } }
+/*# sourceMappingURL=Form.css.map */

@@ -1,0 +1,55 @@
+
+.form-start{
+    width: 100%;
+    height: 100%;
+}
+
+.pre-form{
+    max-width: 100%;
+    height: 100%;
+    padding: 8.125rem 25%;
+    background-color: #F5FBFF;
+    row-gap: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url('../../assets/mainback.png');
+    background-position: initial;
+}
+
+.qualify-button{
+    padding: 15px 40px;
+    color: white;
+    font-weight: 700;
+    font-size: 24px;
+    background-color: #00B67A;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.qualify-button:hover{
+    transform: scale(1.04);
+}
+
+.qualify-button:active{
+    transform: scale(0.99);
+}
+
+.carrier-images {
+    max-width: 620px;
+    margin: 1rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.carrier-images img {
+    height: 50px;
+    max-width: 100px;
+}
+@media (min-width:768px) {
+    .carrier-images {
+        max-width: 700px;
+    }
+}
