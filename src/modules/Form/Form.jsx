@@ -8,6 +8,8 @@ import back from "../../assets/form/back.svg";
 import errorimg from "../../assets/form/error.svg";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Cookies from "js-cookie";
+import { localStorageKeys, sessionStorageKeys } from "../../constants/localStorage.js";
+import { ROUTES } from "../../constants/routes";
 
 export const Form = ({ setForm, setFormEnd }) => {
   const [formState, setFormState] = useState(1);
@@ -84,10 +86,16 @@ export const Form = ({ setForm, setFormEnd }) => {
     getIpAdd();
   }, []);
 
+  const navigate = useNavigate();
+  
   const incFormState = () => {
-    if (!emailError && !phoneError) {
-      setFormState(formState + 1);
-    }
+    navigate(ROUTES.zipCodeForm)
+    // if (!emailError && !phoneError) {
+    //   if(formState === 1){
+    //     navigate(ROUTES.zipCodeForm)
+    //   }
+    //   setFormState(formState + 1);
+    // }
   };
 
   const incZipFormState = () => {
@@ -180,9 +188,32 @@ export const Form = ({ setForm, setFormEnd }) => {
     }
   };
 
+  const updateLastSavedFormValues = (values) =>{
+    const currentFormValues = localStorage.getItem(localStorageKeys.lastSubmittedData);
+    values.createdDate = new Date();
+    let finalValue = [];
+
+    if(currentFormValues){
+      const parsed = JSON.stringify(currentFormValues);
+      if(Array.isArray(parsed)){
+        const copyParsedValues = [...parsed];
+        copyParsedValues.push(values);
+        finalValue = copyParsedValues
+      } else {
+        localStorage.removeItem(localStorageKeys.lastSubmittedData)
+        finalValue = [values]
+      }
+    } else {      
+      finalValue = [values]
+    }
+
+    localStorage.setItem(localStorageKeys.lastSubmittedData, JSON.stringify(finalValue))
+  }
+
   const submit = (e) => {
     e.preventDefault();
     if (!error && !emailError && !phoneError) {
+      updateLastSavedFormValues(formData)
       const requestOptions = {
         method: "POST",
         mode: "no-cors",
@@ -229,28 +260,6 @@ export const Form = ({ setForm, setFormEnd }) => {
     }
   };
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const id = window.document.getElementById("LeadiDscript_campaign");
-      if (id) {
-      } else {
-        const s = document.createElement("script");
-        s.id = "LeadiDscript_campaign";
-        s.type = "text/javascript";
-        s.async = true;
-        s.src =
-          "//create.lidstatic.com/campaign/1a1b4c75-9f48-ab0e-0d04-dbc113047fc3.js?snippet_version=2";
-        <noscript>
-          <img
-            src="//create.leadid.com/noscript.gif?lac=2bfe796d-86b0-578a-2976-5c28f271c074&lck=1a1b4c75-9f48-ab0e-0d04-dbc113047fc3&snippet_version=2"
-            alt=""
-          />
-        </noscript>;
-        document.body.appendChild(s);
-      }
-    }
-  }, []);
-
   const blankEnter = (e) => {};
 
   return (
@@ -259,7 +268,7 @@ export const Form = ({ setForm, setFormEnd }) => {
       onSubmit={blankEnter}
       className="form row-gap-30 flex-d-col"
     >
-      <input id="leadid_token" name="universal_leadid" type="hidden" />
+    
 
       <div className="row-gap-20 flex-d-col">
         <div className="font-40 bold color-primary main-headline">
@@ -285,17 +294,19 @@ export const Form = ({ setForm, setFormEnd }) => {
             <div className="form-options row-gap-20 flex-d-col flex-a-cen">
               <div
                 onClick={() => {
+                  // setFormData({ ...formData, ageAbove64: "yes" });
+                  sessionStorage.setItem(sessionStorageKeys.ageAbove64, "yes")
                   incFormState();
-                  setFormData({ ...formData, ageAbove64: "yes" });
                 }}
                 className="form-age-option font-24 color-primary"
-              >
+                >
                 Yes
               </div>
               <div
                 onClick={() => {
+                  // setFormData({ ...formData, ageAbove64: "no" });
+                  sessionStorage.setItem(sessionStorageKeys.ageAbove64, "no")
                   incFormState();
-                  setFormData({ ...formData, ageAbove64: "no" });
                 }}
                 className="form-age-option font-24 color-primary"
               >
@@ -306,7 +317,7 @@ export const Form = ({ setForm, setFormEnd }) => {
         </div>
       )}
 
-      {formState === 2 && (
+      {/* {formState === 2 && (
         <div className="form-card-holder flex-a-cen-j-cen row-gap-30 flex-d-col">
           <div className="form-completion">
             <div className="semi-bold font-16 color-accent-blue">
@@ -360,7 +371,7 @@ export const Form = ({ setForm, setFormEnd }) => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
 
       {formState === 3 && (
         <div className="flex-a-cen-j-cen flex-d-col row-gap-30 form-card-holder">

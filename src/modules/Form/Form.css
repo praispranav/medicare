@@ -106,7 +106,7 @@
         .form .form-card-holder .form-ques-card .form-options div .form-error {
           color: #FB533C;
           text-align: left;
-          margin-top: 5px;
+          margin-top: 1rem;
           margin-left: 2px;
           display: -webkit-box;
           display: -ms-flexbox;
@@ -201,6 +201,29 @@
   .congrats-card .keymain .reload {
     -webkit-animation: rotate 2s infinite;
             animation: rotate 2s infinite; }
+
+.form-button{
+  margin-top: 1rem;
+  width: 100%;
+  border: 0px;
+}
+
+.form-error-2{
+  color: #FB533C;
+          text-align: left;
+          margin-top: 1rem;
+          margin-left: 2px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          margin-top: .5rem;
+}
 
 @-webkit-keyframes rotate {
   0% {

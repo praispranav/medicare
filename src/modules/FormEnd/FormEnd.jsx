@@ -14,6 +14,7 @@ import check from '../../assets/form/check.svg';
 import reload from '../../assets/form/reload.svg';
 import { FormStart } from "../FormStart/FormStart";
 import { useSearchParams } from "react-router-dom";
+import { LEAD } from "../../constants/lead";
 
 let load = 0;
 const Congrats = ({fname, lname}) => {
@@ -95,7 +96,14 @@ export const FormEnd = ({number, form,fname, lname}) => {
     const [sec, setSec] = useState(3);
     const [num, setNum] = useState();
     const [history, setHistory] = useSearchParams();
-    
+
+    const leadNode = window.document.getElementById(LEAD.id);
+
+    const removeLeadScript = () =>{
+        if(leadNode){
+            leadNode.remove()
+        }
+    }
 
     useEffect(()=>{
         window.dataLayer = window.dataLayer || [];
@@ -105,7 +113,12 @@ export const FormEnd = ({number, form,fname, lname}) => {
             'adset_id': form['ADS_ID'] || "",
             'ad_id':  form['ADID'] || ""
         });
+        removeLeadScript();
     },[form])
+
+    useEffect(()=>{
+        removeLeadScript();
+    },[leadNode])
 
     useEffect(()=>{
         $(document).ready(function ($) {
