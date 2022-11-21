@@ -213,7 +213,6 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
               <input
                 value={values.email}
                 onChange={handleChange}
-                pattern=".+@globex\.com"
                 type={"email"}
                 name="email"
                 id="email"
