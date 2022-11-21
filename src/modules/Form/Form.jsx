@@ -246,11 +246,11 @@ export const Form = ({ setForm, setFormEnd }) => {
       onSubmit={blankEnter}
       className="form row-gap-30 flex-d-col"
     >
-      <div className="row-gap-20 flex-d-col">
+      {/*<div className="row-gap-20 flex-d-col">
         <div className="font-40 bold color-primary main-headline">
-          Medicare Annual Enrollment Benefits
+        Medicare Annual Enrollment Benefits
         </div>
-      </div>
+      </div>*/}
 
       {formState === 1 && (
         <div className="form-card-holder flex-a-cen-j-cen row-gap-30 flex-d-col">

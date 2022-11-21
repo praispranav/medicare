@@ -108,11 +108,11 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
 
   return (
     <div className="form row-gap-30 flex-d-col">
-      <div className="row-gap-20 flex-d-col">
+      {/*<div className="row-gap-20 flex-d-col">
         <div className="font-40 bold color-primary main-headline">
-          Medicare Open Enrollment Update
+        Medicare Annual Enrollment Benefits
         </div>
-      </div>
+      </div>*/}
 
       <div className="form-card-holder flex-a-cen-j-cen row-gap-30 flex-d-col">
         <div className="form-completion">
