@@ -94,11 +94,11 @@ export const Form = ({ setForm, setFormEnd }) => {
           sessionStorageKeys.utm_fbclid,
           JSON.stringify({
             userIp: error.response.data ? error.response.data["IPv4"] : "",
-            Campaign_Name: campaignname,
-            Adset_Name: adsetname,
-            Ad_Name: adname,
-            fbclid: fbclid,
-            utm_source: utmsource,
+            Campaign_Name: "",
+            Adset_Name: "",
+            Ad_Name: "",
+            fbclid: "",
+            utm_source: "",
           })
         );
 

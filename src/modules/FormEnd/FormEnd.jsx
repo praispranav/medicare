@@ -13,11 +13,22 @@ import agent from '../../assets/form/agent.svg';
 import check from '../../assets/form/check.svg';
 import reload from '../../assets/form/reload.svg';
 import { FormStart } from "../FormStart/FormStart";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, Navigate } from "react-router-dom";
 import { LEAD } from "../../constants/lead";
+import { sessionStorageKeys } from "../../constants/localStorage"
 
 let load = 0;
 const Congrats = ({fname, lname}) => {
+    const [zipCodeData, setZipCodeData] = useState({ caller_state:"", city:"" })
+
+    useEffect(()=>{
+        const zipCodeExtraValues = sessionStorage.getItem(sessionStorageKeys.zipCodeExtraValues);
+        if(zipCodeExtraValues){
+            const parsed = JSON.parse(zipCodeExtraValues)
+            setZipCodeData(parsed);
+        }
+    },[])
+    
     return <div className='flex-d-col form-end-congrats'>
         <div className="font-32 color-accent-blue congrats-headline">
             Congratulations {fname} {lname}, We’ve Found Plans in your Area!
@@ -33,7 +44,7 @@ const Congrats = ({fname, lname}) => {
 
             <div className="flex-a-cen keymain">
                 <div className='flex-a-cen'>
-                    <img src={location} alt="" /> &nbsp;&nbsp; {Cookies.get('city')},{Cookies.get('caller_state')}
+                    <img src={location} alt="" /> &nbsp;&nbsp; {zipCodeData['city']},{zipCodeData['caller_state']}
                 </div>
 
                 <img src={check} alt="" />
@@ -92,10 +103,14 @@ const End = ({number, fname, lname, sec, min}) => {
 }
 
 export const FormEnd = ({number, form,fname, lname}) => {
+    fname = sessionStorage.getItem(sessionStorageKeys.firstName);
+    lname = sessionStorage.getItem(sessionStorageKeys.lastName);
+
     const [min, setMin] = useState(3);
     const [sec, setSec] = useState(3);
     const [num, setNum] = useState();
     const [history, setHistory] = useSearchParams();
+    const [submitted, setSubmitted] = useState();
 
     const leadNode = window.document.getElementById(LEAD.id);
 
@@ -103,6 +118,13 @@ export const FormEnd = ({number, form,fname, lname}) => {
         if(leadNode){
             leadNode.remove()
         }
+    }
+
+    const navigate = useNavigate();
+
+    const checkPreviousPage = () =>{
+        const submitted = sessionStorage.getItem(sessionStorageKeys.submitSuccessful);
+        setSubmitted(submitted)
     }
 
     useEffect(()=>{
@@ -114,6 +136,7 @@ export const FormEnd = ({number, form,fname, lname}) => {
             'ad_id':  form['ADID'] || ""
         });
         removeLeadScript();
+        checkPreviousPage();
     },[form])
 
     useEffect(()=>{
@@ -121,6 +144,10 @@ export const FormEnd = ({number, form,fname, lname}) => {
     },[leadNode])
 
     useEffect(()=>{
+        const finalPreparedData =  sessionStorage.getItem(sessionStorageKeys.finalPreparedData);
+            if(!finalPreparedData) return
+            const parsed = JSON.parse(finalPreparedData);
+
         $(document).ready(function ($) {
             (function(e, d) {
             //Ringba.com phone number tracking
@@ -140,35 +167,36 @@ export const FormEnd = ({number, form,fname, lname}) => {
                 $("#form-end-contact").attr("href", "tel://" + window.pnumber);
                 $("#font-end-contact-number").text(window.pnumber);
             }
+            
             (window._rgba_tags = (window._rgba_tags || [])).push(
-                {userIp:Cookies.get('userIp')},
-                {user_agent:Cookies.get('user_agent')},
-                {zip:Cookies.get('zip')},
-                {city:Cookies.get('city')},
-                {state:Cookies.get('state')},
-                {firstName:Cookies.get('firstName')},
-                {lastName:Cookies.get('lastName')},
-                {email:Cookies.get('email')},
-                {lead_id:Cookies.get("JornayaToken")},
-                {utm_source:Cookies.get('utm_source')},
-                {ads_id: Cookies.get('Ads_Id')},
-                {cid: Cookies.get('cid')},
-                {adid: Cookies.get('adid')},
-                {fbclid: Cookies.get('fbclid')},
-                {fbc: Cookies.get('fbc')},
-                {caller_state : Cookies.get('caller_state')},
-                {fbp: Cookies.get('fbp')},
+                {userIp:parsed['userIp'] || ""},
+                {user_agent:parsed['user_agent'] || ""},
+                {zip: parsed['zip'] || ""},
+                {city: parsed['city'] || ""},
+                {state: parsed['state'] || ""},
+                {firstName: parsed['firstName'] || ""},
+                {lastName: parsed['lastName'] || ""},
+                {email: parsed['email'] || ""},
+                {lead_id: parsed["JornayaToken"] || ""},
+                {utm_source: parsed['utm_source'] || ""},
+                {ads_id: parsed['Adset_Name'] || ""},
+                {cid: parsed['Campaign_Name'] || ""},
+                {adid: parsed['Ad_Name'] || ""},
+                {fbclid: parsed['fbclid'] || ""},
+                {fbc: parsed['fbc'] || ""},
+                {caller_state : parsed['caller_state'] || ""},
+                {fbp: parsed['fbp'] || ""},
                 );
             $('.callnow').click(function() {window.fbqFunc('track', 'Contact');});
         });
         setHistory({
-            utm_source: Cookies.get('utm_source'), 
-            CID : Cookies.get('cid'),
-            ADS_ID : Cookies.get('Ads_Id'),
-            ADID : Cookies.get('adid'),
-            fbclid : Cookies.get('fbclid'),
-            fbc : Cookies.get('fbc'),
-            fbp : Cookies.get('fbp')
+            utm_source: parsed['utm_source'] || "", 
+            CID : parsed['Campaign_Name'] || "",
+            ADS_ID : parsed['Adset_Name'] || "",
+            ADID : parsed['Ad_Name'] || "",
+            fbclid : parsed['fbclid'] || "",
+            fbc : parsed['fbc'] || "",
+            fbp : parsed['fbp'] || ""
         });
         // history.replace({ pathname: location.pathname, search: params.toString() });
     },[]);
@@ -191,6 +219,9 @@ export const FormEnd = ({number, form,fname, lname}) => {
 
         return(
             <div>
+                {
+                    submitted === null ? <Navigate to="/" replace={true} /> : <></>
+                }
                 {
                     load? <End number={num} fname={fname} lname={lname} sec={sec} min={min} /> : <Congrats fname={fname} lname={lname} />
                 }

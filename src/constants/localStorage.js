@@ -12,5 +12,8 @@ export const sessionStorageKeys = {
     email: "email",
 
     zipCodeExtraValues: "zipCodeExtraValues",
-    utm_fbclid: "utm_fbclid"
+    utm_fbclid: "utm_fbclid",
+
+    submitSuccessful: "submitSuccessful",
+    finalPreparedData: 'finalPreparedData'
 }

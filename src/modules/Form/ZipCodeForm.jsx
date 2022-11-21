@@ -54,7 +54,6 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
     setLoading(true);
 
     const temp = document.getElementById("leadid_token").value;
-    console.log("leadid", temp);
 
     axios
       .get("https://api.zippopotam.us/us/" + zip, {
@@ -83,7 +82,6 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
       .catch((error) => {
         setLoading(false);
         setErrors({ zip: "Zip Code not valid" });
-        console.log("Zip Code not Valid", error);
       });
   };
 

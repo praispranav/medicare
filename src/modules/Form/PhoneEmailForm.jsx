@@ -37,7 +37,7 @@ const validationSchema = yup.object({
     .max(10),
 });
 
-export default function PhoneEmailForm({ setFormEnd }) {
+export default function PhoneEmailForm({ setFormEnd, setForm }) {
   const navigate = useNavigate();
   const [name, setName] = useState({ firstName: "", lastName: "" });
   const {
@@ -72,16 +72,19 @@ export default function PhoneEmailForm({ setFormEnd }) {
     const extraData = sessionStorage.getItem(sessionStorageKeys.zipCodeExtraValues);
     const utm_fbclid = sessionStorage.getItem(sessionStorageKeys.utm_fbclid);
 
+    const zipCodeDataParsed = JSON.parse(extraData);
+    const utmParsed = JSON.parse(utm_fbclid);
+
     const preparedData = {
       firstName,
       lastName,
       zip,
       ageAbove64,
       homePhone,
-      email, ...extraData, ...utm_fbclid
+      email, ...zipCodeDataParsed, ...utmParsed
     };
+    setForm(preparedData);
     save(preparedData);
-    // console.log(preparedData);
   };
 
   const updateLastSavedFormValues = (values) => {
@@ -127,11 +130,13 @@ export default function PhoneEmailForm({ setFormEnd }) {
       requestOptions
     )
       .then((response) => {
-        console.log("Response", response)
+        sessionStorage.setItem(sessionStorageKeys.finalPreparedData, JSON.stringify(formData));
         setFormEnd({
           fname: formData.firstName,
           lname: formData.lastName,
         });
+
+       sessionStorage.setItem(sessionStorageKeys.submitSuccessful, "yes")
       })
       .then((data) => {
         Cookies.set(
