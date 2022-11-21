@@ -248,7 +248,7 @@ export const Form = ({ setForm, setFormEnd }) => {
     >
       <div className="row-gap-20 flex-d-col">
         <div className="font-40 bold color-primary main-headline">
-          Medicare Open Enrollment Update
+          Medicare Annual Enrollment Benefits
         </div>
       </div>
 

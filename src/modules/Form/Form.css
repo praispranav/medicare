@@ -1,4 +1,5 @@
 .form {
+  min-height: 70vh;
   padding: 6.25rem 1.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
