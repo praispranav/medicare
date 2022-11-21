@@ -153,7 +153,7 @@ export const FormEnd = ({number, form,fname, lname}) => {
             //Ringba.com phone number tracking
             var ringba_com_tag="JSbfbe6e3aef084885af8a574bec4f8d45";
             var _sc = d.getElementsByTagName('script'), _s = _sc[_sc.length - 1];
-            e._rgba = e._rgba || { q: [] }; e._rgba.q.push({ tag: ringba_com_tag, cb: GetNumber, render: false, script: _s,displayFmt:'n-nnn-nnn-nnnn' });
+            e._rgba = e._rgba || { q: [] }; e._rgba.q.push({ tag: ringba_com_tag, cb: GetNumber, render: false, script: _s});
             if (!(e._rgba.loading = !!e._rgba.loading)) {
                 var sc = d.createElement('script'); sc.type = 'text/javascript'; sc.async = true;
                 sc.src = '//js.callcdn.com/js_v3/min/ringba.com.js';
