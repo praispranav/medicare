@@ -205,7 +205,7 @@
 .form-button{
   margin-top: 1rem;
   width: 100%;
-  border: 0px;
+  border: 0px !important;
 }
 
 .form-error-2{
@@ -223,6 +223,14 @@
               -ms-flex-align: center;
                   align-items: center;
           margin-top: .5rem;
+}
+
+.margin-top-5px{
+  margin-top: 5px !important;
+}
+
+.loader{
+  margin-top: 2rem;
 }
 
 @-webkit-keyframes rotate {

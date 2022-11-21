@@ -8,20 +8,23 @@ import back from "../../assets/form/back.svg";
 import errorimg from "../../assets/form/error.svg";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Cookies from "js-cookie";
-import { localStorageKeys, sessionStorageKeys } from "../../constants/localStorage.js";
+import {
+  localStorageKeys,
+  sessionStorageKeys,
+} from "../../constants/localStorage.js";
 import { ROUTES } from "../../constants/routes";
 
 export const Form = ({ setForm, setFormEnd }) => {
   const [formState, setFormState] = useState(1);
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(false);
-  const [ziperror, setZipError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [phoneError, setPhoneError] = useState(false);
-  const [nameError, setNameError] = useState(false);
-  const nav = useNavigate();
-  const fbc = Cookies.get("_fbc") || "";
-  const fbp = Cookies.get("_fbp") || "";
+  // const [error, setError] = useState(false);
+  // const [ziperror, setZipError] = useState(false);
+  // const [emailError, setEmailError] = useState(false);
+  // const [phoneError, setPhoneError] = useState(false);
+  // const [nameError, setNameError] = useState(false);
+  // const nav = useNavigate();
+  // const fbc = Cookies.get("_fbc") || "";
+  // const fbp = Cookies.get("_fbp") || "";
   const [search] = useSearchParams();
 
   useEffect(() => {
@@ -40,21 +43,35 @@ export const Form = ({ setForm, setFormEnd }) => {
         );
 
         let userip = response.data["IPv4"];
+        // add dynamic
         let campaignname = search.get("CID");
         let adsetname = search.get("ADS_ID");
         let adname = search.get("ADID");
         let fbclid = search.get("fbclid");
         let utmsource = search.get("utm_source");
 
-        setFormData({
-          ...formData,
-          userIp: userip,
-          Campaign_Name: campaignname,
-          Adset_Name: adsetname,
-          Ad_Name: adname,
-          fbclid: fbclid,
-          utm_source: utmsource,
-        });
+        // setFormData({
+        //   ...formData,
+        //   userIp: userip,
+        //   Campaign_Name: campaignname,
+        //   Adset_Name: adsetname,
+        //   Ad_Name: adname,
+        //   fbclid: fbclid,
+        //   utm_source: utmsource,
+        // });
+
+        sessionStorage.setItem(
+          sessionStorageKeys.utm_fbclid,
+          JSON.stringify({
+            userIp: userip,
+            Campaign_Name: campaignname,
+            Adset_Name: adsetname,
+            Ad_Name: adname,
+            fbclid: fbclid,
+            utm_source: utmsource,
+          })
+        );
+
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           utm_source: utmsource,
@@ -63,16 +80,27 @@ export const Form = ({ setForm, setFormEnd }) => {
           ad_id: adname,
         });
       } catch (error) {
-        console.log(error);
-        setFormData({
-          ...formData,
-          userIp: response.data["IPv4"],
-          Campaign_Name: "",
-          Adset_Name: "",
-          Ad_Name: "",
-          fbclid: "",
-          utm_source: "",
-        });
+        // setFormData({
+        //   ...formData,
+        //   userIp: error.response.data ? error.response.data["IPv4"] : "",
+        //   Campaign_Name: "",
+        //   Adset_Name: "",
+        //   Ad_Name: "",
+        //   fbclid: "",
+        //   utm_source: "",
+        // });
+
+        sessionStorage.setItem(
+          sessionStorageKeys.utm_fbclid,
+          JSON.stringify({
+            userIp: error.response.data ? error.response.data["IPv4"] : "",
+            Campaign_Name: campaignname,
+            Adset_Name: adsetname,
+            Ad_Name: adname,
+            fbclid: fbclid,
+            utm_source: utmsource,
+          })
+        );
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -87,9 +115,9 @@ export const Form = ({ setForm, setFormEnd }) => {
   }, []);
 
   const navigate = useNavigate();
-  
+
   const incFormState = () => {
-    navigate(ROUTES.zipCodeForm)
+    navigate(ROUTES.zipCodeForm);
     // if (!emailError && !phoneError) {
     //   if(formState === 1){
     //     navigate(ROUTES.zipCodeForm)
@@ -98,167 +126,117 @@ export const Form = ({ setForm, setFormEnd }) => {
     // }
   };
 
-  const incZipFormState = () => {
-    if (!error) {
-      const temp = document.getElementById("leadid_token").value;
-      axios
-        .get("https://api.zippopotam.us/us/" + formData["zip"], {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          mode: "no-cors",
-        })
-        .then((response) => {
-          setFormData({
-            ...formData,
-            user_agent: navigator.userAgent,
-            fbc: fbc,
-            fbp: fbp,
-            city: response.data["places"][0]["place name"],
-            state: response.data["places"][0]["state"],
-            caller_state: response.data["places"][0]["state abbreviation"],
-            JornayaToken: temp,
-          });
-        })
-        .then((data) => setFormState(formState + 1))
-        .catch((error) => {
-          setZipError(true);
-        });
-    }
-  };
+  // const incZipFormState = () => {
+  //   if (!error) {
+  //     const temp = document.getElementById("leadid_token").value;
+  //     axios
+  //       .get("https://api.zippopotam.us/us/" + formData["zip"], {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         mode: "no-cors",
+  //       })
+  //       .then((response) => {
+  //         setFormData({
+  //           ...formData,
+  //           user_agent: navigator.userAgent,
+  //           fbc: fbc,
+  //           fbp: fbp,
+  //           city: response.data["places"][0]["place name"],
+  //           state: response.data["places"][0]["state"],
+  //           caller_state: response.data["places"][0]["state abbreviation"],
+  //           JornayaToken: temp,
+  //         });
+  //       })
+  //       .then((data) => setFormState(formState + 1))
+  //       .catch((error) => {
+  //         setZipError(true);
+  //       });
+  //   }
+  // };
 
-  const incName = () => {
-    if (
-      formData.firstName === undefined ||
-      formData.lastName === undefined ||
-      !formData.firstName.match(/^[A-Za-z]+$/) ||
-      !formData.lastName.match(/^[A-Za-z]+$/)
-    ) {
-      setNameError(true);
-    } else {
-      setNameError(false);
-      incFormState();
-    }
-  };
+  // const incName = () => {
+  //   if (
+  //     formData.firstName === undefined ||
+  //     formData.lastName === undefined ||
+  //     !formData.firstName.match(/^[A-Za-z]+$/) ||
+  //     !formData.lastName.match(/^[A-Za-z]+$/)
+  //   ) {
+  //     setNameError(true);
+  //   } else {
+  //     setNameError(false);
+  //     incFormState();
+  //   }
+  // };
 
-  const decFormState = () => {
-    setFormState(formState - 1);
-  };
+  // const decFormState = () => {
+  //   setFormState(formState - 1);
+  // };
 
-  const checkZip = (e) => {
-    const v = e.target.value;
-    setFormData({ ...formData, zip: v });
-    if (v.length < 5) {
-      setError(true);
-      setZipError(false);
-    } else {
-      setFormData({ ...formData, zip: v });
-      setError(false);
-    }
-  };
+  // const checkZip = (e) => {
+  //   const v = e.target.value;
+  //   setFormData({ ...formData, zip: v });
+  //   if (v.length < 5) {
+  //     setError(true);
+  //     setZipError(false);
+  //   } else {
+  //     setFormData({ ...formData, zip: v });
+  //     setError(false);
+  //   }
+  // };
 
-  const enterZip = (e) => {
-    if (e.key === "Enter") {
-      incZipFormState();
-    }
-  };
+  // const enterZip = (e) => {
+  //   if (e.key === "Enter") {
+  //     incZipFormState();
+  //   }
+  // };
 
-  const checkEmail = (e) => {
-    var validRegex =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    const v = e.target.value;
+  // const checkEmail = (e) => {
+  //   var validRegex =
+  //     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  //   const v = e.target.value;
 
-    setFormData({ ...formData, email: v });
-    if (v.match(validRegex)) {
-      setEmailError(false);
-    } else {
-      setEmailError(true);
-    }
-  };
+  //   setFormData({ ...formData, email: v });
+  //   if (v.match(validRegex)) {
+  //     setEmailError(false);
+  //   } else {
+  //     setEmailError(true);
+  //   }
+  // };
 
-  const checkPhone = (e) => {
-    const v = e.target.value;
-    setFormData({ ...formData, homePhone: v });
+  // const checkPhone = (e) => {
+  //   const v = e.target.value;
+  //   setFormData({ ...formData, homePhone: v });
 
-    if (v.length < 10 || !v.match(/^[0-9]+$/)) {
-      setPhoneError(true);
-    } else {
-      setPhoneError(false);
-    }
-  };
+  //   if (v.length < 10 || !v.match(/^[0-9]+$/)) {
+  //     setPhoneError(true);
+  //   } else {
+  //     setPhoneError(false);
+  //   }
+  // };
 
-  const updateLastSavedFormValues = (values) =>{
-    const currentFormValues = localStorage.getItem(localStorageKeys.lastSubmittedData);
-    values.createdDate = new Date();
-    let finalValue = [];
+  // const updateLastSavedFormValues = (values) =>{
+  //   const currentFormValues = localStorage.getItem(localStorageKeys.lastSubmittedData);
+  //   values.createdDate = new Date();
+  //   let finalValue = [];
 
-    if(currentFormValues){
-      const parsed = JSON.stringify(currentFormValues);
-      if(Array.isArray(parsed)){
-        const copyParsedValues = [...parsed];
-        copyParsedValues.push(values);
-        finalValue = copyParsedValues
-      } else {
-        localStorage.removeItem(localStorageKeys.lastSubmittedData)
-        finalValue = [values]
-      }
-    } else {      
-      finalValue = [values]
-    }
+  //   if(currentFormValues){
+  //     const parsed = JSON.stringify(currentFormValues);
+  //     if(Array.isArray(parsed)){
+  //       const copyParsedValues = [...parsed];
+  //       copyParsedValues.push(values);
+  //       finalValue = copyParsedValues
+  //     } else {
+  //       localStorage.removeItem(localStorageKeys.lastSubmittedData)
+  //       finalValue = [values]
+  //     }
+  //   } else {
+  //     finalValue = [values]
+  //   }
 
-    localStorage.setItem(localStorageKeys.lastSubmittedData, JSON.stringify(finalValue))
-  }
-
-  const submit = (e) => {
-    e.preventDefault();
-    if (!error && !emailError && !phoneError) {
-      updateLastSavedFormValues(formData)
-      const requestOptions = {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-          "Content-Length": formData.length,
-        },
-        body: JSON.stringify(formData),
-      };
-      fetch(
-        "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjIwNTZjMDYzMjA0MzY1MjY0NTUzMiI_3D_pc",
-        requestOptions
-      )
-        .then((response) => {
-          setFormEnd({
-            fname: formData.firstName,
-            lname: formData.lastName,
-          });
-        })
-        .then((data) => {
-          Cookies.set(
-            "full_name",
-            formData["firstName"] + " " + formData["lastName"]
-          );
-          Cookies.set("userIp", formData["userIp"]);
-          Cookies.set("user_agent", formData["user_agent"]);
-          Cookies.set("zip", formData["zip"]);
-          Cookies.set("city", formData["city"]);
-          Cookies.set("state", formData["state"]);
-          Cookies.set("firstName", formData["firstName"]);
-          Cookies.set("lastName", formData["lastName"]);
-          Cookies.set("email", formData["email"]);
-          Cookies.set("utm_source", formData["utm_source"]);
-          Cookies.set("Ads_Id", formData["Adset_Name"]);
-          Cookies.set("cid", formData["Campaign_Name"]);
-          Cookies.set("Adid", formData["Ad_Name"]);
-          Cookies.set("fbclid", formData["fbclid"]);
-          Cookies.set("fbp", formData["fbp"]);
-          Cookies.set("fbc", formData["fbc"]);
-          Cookies.set("caller_state", formData["caller_state"]);
-          Cookies.set("JornayaToken", formData["JornayaToken"]);
-          nav("congrats");
-        });
-    }
-  };
+  //   localStorage.setItem(localStorageKeys.lastSubmittedData, JSON.stringify(finalValue))
+  // }
 
   const blankEnter = (e) => {};
 
@@ -268,8 +246,6 @@ export const Form = ({ setForm, setFormEnd }) => {
       onSubmit={blankEnter}
       className="form row-gap-30 flex-d-col"
     >
-    
-
       <div className="row-gap-20 flex-d-col">
         <div className="font-40 bold color-primary main-headline">
           Medicare Open Enrollment Update
@@ -295,17 +271,17 @@ export const Form = ({ setForm, setFormEnd }) => {
               <div
                 onClick={() => {
                   // setFormData({ ...formData, ageAbove64: "yes" });
-                  sessionStorage.setItem(sessionStorageKeys.ageAbove64, "yes")
+                  sessionStorage.setItem(sessionStorageKeys.ageAbove64, "yes");
                   incFormState();
                 }}
                 className="form-age-option font-24 color-primary"
-                >
+              >
                 Yes
               </div>
               <div
                 onClick={() => {
                   // setFormData({ ...formData, ageAbove64: "no" });
-                  sessionStorage.setItem(sessionStorageKeys.ageAbove64, "no")
+                  sessionStorage.setItem(sessionStorageKeys.ageAbove64, "no");
                   incFormState();
                 }}
                 className="form-age-option font-24 color-primary"
@@ -373,7 +349,7 @@ export const Form = ({ setForm, setFormEnd }) => {
         </div>
       )} */}
 
-      {formState === 3 && (
+      {/* {formState === 3 && (
         <div className="flex-a-cen-j-cen flex-d-col row-gap-30 form-card-holder">
           <div className="form-completion">
             <div className="semi-bold font-16 color-accent-blue">
@@ -556,7 +532,7 @@ export const Form = ({ setForm, setFormEnd }) => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </form>
   );
 };

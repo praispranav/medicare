@@ -9,6 +9,9 @@ import "./Form.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
+import axios from "axios";
+import Cookies from "js-cookie";
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 const initialValues = {
   zip: "",
@@ -24,19 +27,65 @@ const validationSchema = yup.object({
 });
 
 export default function ZipCodeForm({ setForm, setFormEnd }) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const fbc = Cookies.get("_fbc") || "";
+  const fbp = Cookies.get("_fbp") || "";
 
-    const [loading, setLoading] = useState(false);
+  const {
+    handleSubmit,
+    touched,
+    setErrors,
+    errors,
+    setValues,
+    values,
+    handleChange,
+    handleBlur,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values, event) => {
+      sessionStorage.setItem(sessionStorageKeys.zip, String(values.zip));
+      incZipFormState(values.zip);
+    },
+  });
 
-  const { handleSubmit,touched, errors, setValues, values, handleChange, handleBlur } =
-    useFormik({
-      initialValues,
-      validationSchema,
-      onSubmit: (values, event) => {
-        sessionStorage.setItem(sessionStorageKeys.zip, String(values.zip));
-        alert(JSON.stringify(values, null, 2));
-      },
-    });
+  const incZipFormState = (zip) => {
+    setLoading(true);
+
+    const temp = document.getElementById("leadid_token").value;
+    console.log("leadid", temp);
+
+    axios
+      .get("https://api.zippopotam.us/us/" + zip, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors",
+      })
+      .then((response) => {
+        sessionStorage.setItem(
+          sessionStorageKeys.zipCodeExtraValues,
+          JSON.stringify({
+            user_agent: navigator.userAgent,
+            fbc: fbc,
+            fbp: fbp,
+            city: response.data["places"][0]["place name"],
+            state: response.data["places"][0]["state"],
+            caller_state: response.data["places"][0]["state abbreviation"],
+            JornayaToken: temp,
+          })
+        );
+        navigate("../" + ROUTES.nameForm);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setErrors({ zip: "Zip Code not valid" });
+        console.log("Zip Code not Valid", error);
+      });
+  };
 
   const onChangeZipValue = (e) => {
     const value = e.target.value;
@@ -46,15 +95,13 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
         value: String(value).slice(0, 5),
       },
     };
-    console.log("ValueChange", value);
-    console.log("ValueChange2", Number(String(value).slice(0, 5)));
     handleChange(obj);
   };
 
-  const checkPreviousPageData = () =>{
+  const checkPreviousPageData = () => {
     const data = sessionStorage.getItem(sessionStorageKeys.ageAbove64);
-    if(data === null) navigate(ROUTES.homePage)
-  }
+    if (data === null) navigate(ROUTES.homePage);
+  };
 
   useEffect(() => {
     checkPreviousPageData();
@@ -104,16 +151,10 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
               ) : (
                 ""
               )}
-              {/* {ziperror ? (
-                  <div className="form-error font-12">
-                    <img src={errorimg} alt="" /> &nbsp;&nbsp; Enter a valid US
-                    Zipcode
-                  </div>
-                ) : (
-                  ""
-                )} */}
               <button className="form-button form-option-continue color-white font-20 bold">
+                {loading ? <><PropagateLoader color="#2DA9C2" /> . </>: <>
                 Continue <img src={next} alt="" />
+                </> } 
               </button>
             </form>
           </div>

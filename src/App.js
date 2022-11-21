@@ -26,7 +26,6 @@ function App() {
         s.id = LEAD.id;
         s.type = LEAD.type;
         s.async = LEAD.async;
-        s.crossOrigin = LEAD.crossOrigin;
         s.src = LEAD.src;
         // "//create.lidstatic.com/campaign/1a1b4c75-9f48-ab0e-0d04-dbc113047fc3.js?snippet_version=2";
         <noscript>
