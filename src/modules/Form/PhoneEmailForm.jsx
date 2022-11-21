@@ -157,7 +157,6 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
         Cookies.set("fbclid", formData["fbclid"]);
         Cookies.set("fbp", formData["fbp"]);
         Cookies.set("fbc", formData["fbc"]);
-        Cookies.set("caller_state", formData["caller_state"]);
         Cookies.set("JornayaToken", formData["JornayaToken"]);
         navigate("../" + ROUTES.congrats);
       });

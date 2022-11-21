@@ -19,7 +19,7 @@ import { sessionStorageKeys } from "../../constants/localStorage"
 
 let load = 0;
 const Congrats = ({fname, lname}) => {
-    const [zipCodeData, setZipCodeData] = useState({ caller_state:"", city:"" })
+    const [zipCodeData, setZipCodeData] = useState({ state:"", city:"" })
 
     useEffect(()=>{
         const zipCodeExtraValues = sessionStorage.getItem(sessionStorageKeys.zipCodeExtraValues);
@@ -44,7 +44,7 @@ const Congrats = ({fname, lname}) => {
 
             <div className="flex-a-cen keymain">
                 <div className='flex-a-cen'>
-                    <img src={location} alt="" /> &nbsp;&nbsp; {zipCodeData['city']},{zipCodeData['caller_state']}
+                    <img src={location} alt="" /> &nbsp;&nbsp; {zipCodeData['city']},{zipCodeData['state']}
                 </div>
 
                 <img src={check} alt="" />
@@ -90,7 +90,7 @@ const End = ({number, fname, lname, sec, min}) => {
                 <div className="contact-btn">
                     <img src={call} alt="" />
                     <div id="font-end-contact-number" className="color-white font-24 bold toll-free">
-                        <span>{number || "1-855-688-1423"}</span>
+                        <span>{number || "1-866-790-0241"}</span>
                         <div className="tfn-cta">Click To Call Toll-Free</div>
                     </div>
                 </div>
@@ -151,7 +151,7 @@ export const FormEnd = ({number, form,fname, lname}) => {
         $(document).ready(function ($) {
             (function(e, d) {
             //Ringba.com phone number tracking
-            var ringba_com_tag="JS287f9e234b394dd6b7e29e2f6b98091c";
+            var ringba_com_tag="JSbfbe6e3aef084885af8a574bec4f8d45";
             var _sc = d.getElementsByTagName('script'), _s = _sc[_sc.length - 1];
             e._rgba = e._rgba || { q: [] }; e._rgba.q.push({ tag: ringba_com_tag, cb: GetNumber, render: false, script: _s,displayFmt:'n-nnn-nnn-nnnn' });
             if (!(e._rgba.loading = !!e._rgba.loading)) {
@@ -184,7 +184,6 @@ export const FormEnd = ({number, form,fname, lname}) => {
                 {adid: parsed['Ad_Name'] || ""},
                 {fbclid: parsed['fbclid'] || ""},
                 {fbc: parsed['fbc'] || ""},
-                {caller_state : parsed['caller_state'] || ""},
                 {fbp: parsed['fbp'] || ""},
                 );
             $('.callnow').click(function() {window.fbqFunc('track', 'Contact');});

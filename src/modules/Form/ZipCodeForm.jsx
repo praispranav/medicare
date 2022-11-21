@@ -71,8 +71,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
             fbc: fbc,
             fbp: fbp,
             city: response.data["places"][0]["place name"],
-            state: response.data["places"][0]["state"],
-            caller_state: response.data["places"][0]["state abbreviation"],
+            state: response.data["places"][0]["state abbreviation"],
             JornayaToken: temp,
           })
         );
