@@ -9,7 +9,9 @@
     flex-direction: column;
     padding: 40px 10%;
 }
-
+.footer img {
+    height: 30px;
+}
 .footer-horizontal-divider{
     height: 2px;
     width: 100%;
