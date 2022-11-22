@@ -10,7 +10,7 @@ import {
   localStorageKeys, sessionStorageKeys
 } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
-import "./Form.css";
+import "./Form.scss";
 
 const EMAIL_RX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PHONE_RX = /^[0-9]+$/;
@@ -181,12 +181,6 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
 
   return (
     <form onSubmit={handleSubmit} className="form row-gap-30 flex-d-col">
-      {/*<div className="row-gap-20 flex-d-col">
-        <div className="font-40 bold color-primary main-headline">
-        Medicare Annual Enrollment Benefits
-        </div>
-      </div>*/}
-
       <div className="form-card-holder flex-a-cen-j-cen flex-d-col row-gap-30">
         <div className="form-completion">
           <div className="semi-bold font-16 color-accent-blue">
@@ -243,11 +237,12 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
               )}
             </div>
             <button
-              //   onClick={submit}
               type="submit"
               className="bg-accent-green form-give-quote color-white font-20 bold"
             >
-              View My Quote <img src={next} alt="" />
+              <div className="d-flex">
+                View My Quote <img src={next} alt="" />
+              </div>
             </button>
             <div
               onClick={goBack}

@@ -9,7 +9,7 @@ import errorimg from "../../assets/form/error.svg";
 import next from "../../assets/form/next.svg";
 import { sessionStorageKeys } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
-import "./Form.css";
+import "./Form.scss";
 
 const initialValues = {
   zip: "",
@@ -141,8 +141,8 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
               ) : (
                 ""
               )}
-              <button className="form-button form-option-continue color-white font-20 bold">
-                {loading ? <><PropagateLoader color="#2DA9C2" /> . </>: <>
+              <button disabled={errors.zip} className="form-button form-option-continue color-white font-20 bold">
+                {loading ? <><PropagateLoader color="#2DA9C2" className="margin-loader" /> <p className="visibility-hidden">.</p> </> : <>
                 Continue <img src={next} alt="" />
                 </> } 
               </button>

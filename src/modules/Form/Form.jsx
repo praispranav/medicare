@@ -1,8 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-
-import "./Form.css";
-
+import "./Form.scss";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   sessionStorageKeys

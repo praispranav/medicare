@@ -7,7 +7,7 @@ import errorimg from "../../assets/form/error.svg";
 import next from "../../assets/form/next.svg";
 import { sessionStorageKeys } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
-import "./Form.css";
+import "./Form.scss";
 
 const initialValues = {
   firstName: "",
@@ -62,12 +62,6 @@ export default function NameForm() {
   }, []);
   return (
     <form onSubmit={handleSubmit} className="form row-gap-30 flex-d-col">
-      {/*<div className="row-gap-20 flex-d-col">
-        <div className="font-40 bold color-primary main-headline">
-        Medicare Annual Enrollment Benefits
-        </div>
-      </div>*/}
-
       <div className="flex-a-cen-j-cen flex-d-col row-gap-30 form-card-holder">
         <div className="form-completion">
           <div className="semi-bold font-16 color-accent-blue">
@@ -113,7 +107,6 @@ export default function NameForm() {
               ""
             )}
             <button
-              //   onClick={incName}
               type="submit"
               className="form-button form-option-continue color-white font-20 bold margin-top-5px"
             >

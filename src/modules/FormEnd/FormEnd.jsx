@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import $ from 'jquery';
-import Cookies from "js-cookie";
-
 import './FormEnd.scss';
-
 import call from '../../assets/form/call.svg';
 import user from '../../assets/form/user.svg';
 import location from '../../assets/form/location.svg';
@@ -13,7 +10,7 @@ import agent from '../../assets/form/agent.svg';
 import check from '../../assets/form/check.svg';
 import reload from '../../assets/form/reload.svg';
 import { FormStart } from "../FormStart/FormStart";
-import { useNavigate, useSearchParams, Navigate } from "react-router-dom";
+import { useSearchParams, Navigate } from "react-router-dom";
 import { LEAD } from "../../constants/lead";
 import { sessionStorageKeys } from "../../constants/localStorage";
 import { FloatingCard } from "../FloatingCard/FloatingCard";
@@ -121,8 +118,6 @@ export const FormEnd = ({number, form,fname, lname}) => {
         }
     }
 
-    const navigate = useNavigate();
-
     const checkPreviousPage = () =>{
         const submitted = sessionStorage.getItem(sessionStorageKeys.submitSuccessful);
         setSubmitted(submitted)
@@ -202,7 +197,6 @@ export const FormEnd = ({number, form,fname, lname}) => {
             fbc : parsed['fbc'] || "",
             fbp : parsed['fbp'] || ""
         });
-        // history.replace({ pathname: location.pathname, search: params.toString() });
     },[]);
 
     while(true) {

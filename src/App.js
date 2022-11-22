@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import "./App.css";
+import "./App.scss";
 import { AppStart } from "./modules/AppStart/AppStart";
 import { localStorageKeys } from "./constants/localStorage";
 import { v4 as uuid } from "uuid";

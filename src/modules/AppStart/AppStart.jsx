@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Footer } from '../Footer/Footer';
 import { Navbar } from '../Navbar/Navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-import './AppStart';
+import './AppStart.scss';
 import { Form } from "../Form/Form";
 import { FormEnd } from "../FormEnd/FormEnd";
 import ZipCodeForm from "../Form/ZipCodeForm";
