@@ -29,7 +29,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "node build/index.html",
+    "start": "node server.js",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
