@@ -169,6 +169,7 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
   };
 
   useEffect(() => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
     checkPreviousPageData();
     const homePhone = sessionStorage.getItem(sessionStorageKeys.homePhone);
     const email = sessionStorage.getItem(sessionStorageKeys.email);

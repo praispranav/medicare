@@ -15,7 +15,8 @@ import reload from '../../assets/form/reload.svg';
 import { FormStart } from "../FormStart/FormStart";
 import { useNavigate, useSearchParams, Navigate } from "react-router-dom";
 import { LEAD } from "../../constants/lead";
-import { sessionStorageKeys } from "../../constants/localStorage"
+import { sessionStorageKeys } from "../../constants/localStorage";
+import { FloatingCard } from "../FloatingCard/FloatingCard";
 
 let load = 0;
 const Congrats = ({fname, lname}) => {
@@ -144,6 +145,10 @@ export const FormEnd = ({number, form,fname, lname}) => {
     },[leadNode])
 
     useEffect(()=>{
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    },[])
+
+    useEffect(()=>{
         const finalPreparedData =  sessionStorage.getItem(sessionStorageKeys.finalPreparedData);
             if(!finalPreparedData) return
             const parsed = JSON.parse(finalPreparedData);
@@ -224,6 +229,7 @@ export const FormEnd = ({number, form,fname, lname}) => {
                 {
                     load? <End number={num} fname={fname} lname={lname} sec={sec} min={min} /> : <Congrats fname={fname} lname={lname} />
                 }
+                <FloatingCard />
                 <FormStart />
             </div>
         )

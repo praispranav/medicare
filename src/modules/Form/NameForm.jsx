@@ -54,6 +54,7 @@ export default function NameForm() {
   };
 
   useEffect(() => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
     checkPreviousPageData();
     const firstName = sessionStorage.getItem(sessionStorageKeys.firstName);
     const lastName = sessionStorage.getItem(sessionStorageKeys.lastName);

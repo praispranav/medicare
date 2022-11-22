@@ -76,6 +76,7 @@ export const Form = ({ setForm, setFormEnd }) => {
   }
 
   useEffect(() => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
     getIpAdd();
   }, []);
 

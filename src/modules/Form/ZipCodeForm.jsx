@@ -43,8 +43,10 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
     initialValues,
     validationSchema,
     onSubmit: (values, event) => {
-      sessionStorage.setItem(sessionStorageKeys.zip, String(values.zip));
-      incZipFormState(values.zip);
+      if(!loading){
+        sessionStorage.setItem(sessionStorageKeys.zip, String(values.zip));
+        incZipFormState(values.zip);
+      }
     },
   });
 
@@ -77,8 +79,8 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
         setLoading(false);
       })
       .catch((error) => {
-        setLoading(false);
         setErrors({ zip: "Zip Code not valid" });
+        setLoading(false);
       });
   };
 
@@ -99,6 +101,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
   };
 
   useEffect(() => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
     checkPreviousPageData();
     const zipInitialValue = sessionStorage.getItem(sessionStorageKeys.zip);
     if (zipInitialValue) setValues({ zip: Number(zipInitialValue) });
@@ -106,12 +109,6 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
 
   return (
     <div className="form row-gap-30 flex-d-col">
-      {/*<div className="row-gap-20 flex-d-col">
-        <div className="font-40 bold color-primary main-headline">
-        Medicare Annual Enrollment Benefits
-        </div>
-      </div>*/}
-
       <div className="form-card-holder flex-a-cen-j-cen row-gap-30 flex-d-col">
         <div className="form-completion">
           <div className="semi-bold font-16 color-accent-blue">
@@ -126,7 +123,6 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
           <div className="form-options row-gap-30 flex-d-col">
             <form onSubmit={handleSubmit}>
               <input
-                //   onKeyPress={onChangeZipValue}
                 value={values.zip}
                 required
                 onChange={onChangeZipValue}
@@ -134,7 +130,6 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
                 maxLength={5}
                 max={99999}
                 type="number"
-                //   onChange={checkZip}
                 name="zip"
                 id="zip"
                 placeholder="Zip Code"
