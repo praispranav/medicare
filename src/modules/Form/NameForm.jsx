@@ -1,15 +1,13 @@
-import React from "react";
 import { useFormik } from "formik";
-import * as yup from "yup";
-import errorimg from "../../assets/form/error.svg";
-import { useEffect } from "react";
-import { sessionStorageKeys } from "../../constants/localStorage";
-import next from "../../assets/form/next.svg";
-import "./Form.css";
-import { useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 import back from "../../assets/form/back.svg";
+import errorimg from "../../assets/form/error.svg";
+import next from "../../assets/form/next.svg";
+import { sessionStorageKeys } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
+import "./Form.css";
 
 const initialValues = {
   firstName: "",

@@ -1,19 +1,16 @@
-import React from "react";
 import { useFormik } from "formik";
-import * as yup from "yup";
-import errorimg from "../../assets/form/error.svg";
-import { useEffect } from "react";
-import {
-  sessionStorageKeys,
-  localStorageKeys,
-} from "../../constants/localStorage";
-import next from "../../assets/form/next.svg";
-import "./Form.css";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import back from "../../assets/form/back.svg";
-import { ROUTES } from "../../constants/routes";
 import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import back from "../../assets/form/back.svg";
+import errorimg from "../../assets/form/error.svg";
+import next from "../../assets/form/next.svg";
+import {
+  localStorageKeys, sessionStorageKeys
+} from "../../constants/localStorage";
+import { ROUTES } from "../../constants/routes";
+import "./Form.css";
 
 const EMAIL_RX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PHONE_RX = /^[0-9]+$/;
@@ -120,12 +117,11 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
       mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
-        "Content-Length": formData.length,
       },
       body: JSON.stringify(formData),
     };
     fetch(
-      "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjIwNTZjMDYzMjA0MzY1MjY0NTUzMiI_3D_pc",
+      "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjIwNTY4MDYzNTA0MzI1MjZmNTUzYyI_3D_pc",
       requestOptions
     )
       .then((response) => {

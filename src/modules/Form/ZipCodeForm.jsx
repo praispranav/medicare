@@ -1,17 +1,15 @@
-import React from "react";
+import axios from "axios";
 import { useFormik } from "formik";
+import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import PropagateLoader from "react-spinners/PropagateLoader";
 import * as yup from "yup";
 import errorimg from "../../assets/form/error.svg";
-import { useEffect } from "react";
-import { sessionStorageKeys } from "../../constants/localStorage";
 import next from "../../assets/form/next.svg";
-import "./Form.css";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { sessionStorageKeys } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
-import axios from "axios";
-import Cookies from "js-cookie";
-import PropagateLoader from "react-spinners/PropagateLoader";
+import "./Form.css";
 
 const initialValues = {
   zip: "",
