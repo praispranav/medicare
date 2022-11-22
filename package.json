@@ -10,9 +10,11 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.1.2",
+    "express": "^4.18.2",
     "formik": "^2.2.9",
     "jquery": "^3.6.1",
     "js-cookie": "^3.0.1",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-configurable-carousel": "^1.3.1",
     "react-dom": "^18.2.0",
@@ -27,7 +29,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node build/index.html",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
