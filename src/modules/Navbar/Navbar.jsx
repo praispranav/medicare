@@ -11,7 +11,7 @@ export const Navbar = () => {
             <div className='logoholder'>
                 <img src={logo} alt="logo" />
             </div>
-            <a href="tel:18008148559">
+            <a href="tel:18008148552">
                 <div className="phone-icon">
                     <img src={phoneicon} alt="logo" />
                 </div>
