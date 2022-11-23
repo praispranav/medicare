@@ -14,6 +14,7 @@ import { useSearchParams, Navigate } from "react-router-dom";
 import { LEAD } from "../../constants/lead";
 import { sessionStorageKeys } from "../../constants/localStorage";
 import { FloatingCard } from "../FloatingCard/FloatingCard";
+import { useRingbaUser } from "../../constants/ringba";
 
 let load = 0;
 const Congrats = ({fname, lname}) => {
@@ -110,6 +111,8 @@ export const FormEnd = ({number, form,fname, lname}) => {
     const [history, setHistory] = useSearchParams();
     const [submitted, setSubmitted] = useState();
 
+    const ringbaKey = useRingbaUser()
+
     const leadNode = window.document.getElementById(LEAD.id);
 
     const removeLeadScript = () =>{
@@ -151,7 +154,7 @@ export const FormEnd = ({number, form,fname, lname}) => {
         $(document).ready(function ($) {
             (function(e, d) {
             //Ringba.com phone number tracking
-            var ringba_com_tag="JSbfbe6e3aef084885af8a574bec4f8d45";
+            var ringba_com_tag= ringbaKey;
             var _sc = d.getElementsByTagName('script'), _s = _sc[_sc.length - 1];
             e._rgba = e._rgba || { q: [] }; e._rgba.q.push({ tag: ringba_com_tag, cb: GetNumber, render: false, script: _s});
             if (!(e._rgba.loading = !!e._rgba.loading)) {
