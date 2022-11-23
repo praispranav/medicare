@@ -59,7 +59,7 @@ const Congrats = ({fname, lname}) => {
 
             <div className="flex-a-cen keymain">
                 <div className='flex-a-cen'>
-                    <img src={checkpoint} alt="" /> &nbsp;&nbsp; <p>New Medicare 2022 Plans</p>
+                    <img src={checkpoint} alt="" /> &nbsp;&nbsp; <p>New Medicare 2023 Plans</p>
                 </div>
 
                 <img src={check} alt="" />
@@ -85,7 +85,7 @@ const End = ({number, fname, lname, sec, min}) => {
             <div className="font-16 row-gap-15 color-primary flex-d-col congrats-text">
                 <p>You pre-qualify for up to <span>$5,100 grocery allowance plus $0 cost Vision & Dental coverage</span> with your Medicare plan. Call us now to secure your possible additional benefits & flex card.</p>
             </div>
-            <a href={`tel:+${number}`} id="form-end-contact" className="form-end-contact">
+            <a href={`tel:+1${number}`} id="form-end-contact" className="form-end-contact">
                 <div className="contact-btn">
                     <img src={call} alt="" />
                     <div id="font-end-contact-number" className="color-white font-24 bold toll-free">
