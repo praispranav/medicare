@@ -1,15 +1,15 @@
 .formHolder {
   min-height: 100vh;
   background-color: #f5fbff;
+  background-image: url("../../assets/mainback.png");
+  background-position: initial;
   .form {
     padding: 6.25rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     row-gap: 1.875rem;
-    background-color: #f5fbff;
-    background-image: url("../../assets/mainback.png");
-    background-position: initial;
+    //background-color: #f5fbff;
     min-height: 60vh;
     @media (min-width: 576px) {
       padding: 6.25rem 20%;
@@ -27,7 +27,7 @@
         .form-completion-bar {
           background-color: #e7e7e7;
           height: 0.625rem;
-          width: 18.75rem;
+          width: 25rem;
           border-radius: 0.625rem;
           position: relative;
           &.twenty-percent {
