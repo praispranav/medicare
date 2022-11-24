@@ -1,12 +1,20 @@
 import React from 'react';
 
-import './Footer.css';
+import './Footer.scss';
 
 import logo from '../../assets/logo.png';
 
 export const Footer = () => {
     return <div className="footer">
-        <img src={logo} alt="logo" />
+        <div className='logoholder'>
+            <div className='logo'>
+                <img src={logo} alt="logo" />
+                <div className='sitename'>
+                    <h1>QualifyQuotes.us</h1>
+                    <h2>a non-government medicare site</h2>
+                </div>
+            </div>
+        </div>
 
         <div className="footer-horizontal-divider"></div>
 

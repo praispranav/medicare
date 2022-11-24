@@ -21,13 +21,13 @@ export const Navbar = () => {
                 <div className="phone-icon">
                     <img src={phoneicon} alt="logo" />
                 </div>
-                <div class="flex flex-col items-center phone-number-holder">
-                    <div class="text-phone-number">CALL TOLL-FREE M-F 7AM-10PM CST</div>
-                    <div class="toll-free-number-holder">
-                        <div class="available-blinker"></div>
-                        <div class="toll-free-number">
-                            <span class="font-bold tracking-tighter">1-800-814-8559</span>
-                            <span class="font-semibold">(TTY 711)</span>
+                <div className="phone-number-holder">
+                    <div className="text-phone-number">CALL TOLL-FREE M-F 7AM-10PM CST</div>
+                    <div className="toll-free-number-holder">
+                        <div className="available-blinker"></div>
+                        <div className="toll-free-number">
+                            <span className="font-bold">1-800-814-8559</span>
+                            <span className="font-semibold">(TTY 711)</span>
                         </div>
                     </div>
                 </div>

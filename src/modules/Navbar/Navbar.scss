@@ -12,8 +12,99 @@
         align-items: center;
         justify-content: space-between;
         height: 4rem;
+        @media (min-width: 640px) {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        .logoholder {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            .logo {
+                display: flex;
+                align-items: center;
+                img {
+                    height: 2.5rem;
+                    display: block;
+                }
+                .sitename {
+                    display: none;
+                    margin: 0 0.5rem;
+                    text-align: left;
+                    @media (min-width: 768px) {
+                        display: block;
+                        h1 {
+                            font-size: 1.5rem;
+                        }
+                        h2 {
+                            font-weight: 600;
+                            letter-spacing: .1em;
+                            text-transform: uppercase;
+                            font-size: .75rem;
+                        }
+                    }
+                }
+            }
+        }
+        a {
+            color: #274066;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            .phone-icon {
+                display: none;
+                @media (min-width: 768px) {
+                    display: block;
+                }
+                img {
+                    width: 2rem;
+                    height: 2rem;
+                }
+            }
+            .phone-number-holder {
+                margin: 0 0.5rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .text-phone-number {
+                    color: rgb(55, 65, 81);
+                    letter-spacing: .1em;
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    font-size: .75rem;
+                }
+                .toll-free-number-holder {
+                    align-items: center;
+                    display: flex;
+                    position: relative;
+                    .available-blinker {
+                        display: block;
+                        width: .5rem;
+                        height: .5rem;
+                        margin-right: .625rem;
+                        border-radius: 9999px;
+                        background-color: rgb(74, 222, 128);
+                        @media (min-width: 768px) {
+                            display: none;
+                        }
+                    }
+                    .toll-free-number {
+                        display: flex;
+                        align-items: center;
+                        white-space: nowrap;
+                        font-size: 1.25rem;
+
+                        .font-bold {
+                            font-weight: 700;
+                            letter-spacing: -.05em;
+                        }
+                        .font-semibold {
+                            font-weight: 600;
+                            margin: 0 0.25em;
+                        }
+                    }
+                }
+            }
+        }
     }
-}
-.navbar img {
-    height: 30px;
 }
