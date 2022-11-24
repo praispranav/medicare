@@ -59,47 +59,49 @@ export const Form = ({ setForm, setFormEnd }) => {
   const blankEnter = (e) => {};
 
   return (
-    <form
-      action="POST"
-      onSubmit={blankEnter}
-      className="form row-gap-30 flex-d-col"
-    >
-      <div className="form-card-holder flex-a-cen-j-cen row-gap-30 flex-d-col">
-        <div className="form-completion">
-          <div className="semi-bold font-16 color-accent-blue">
-            20% Completed
-          </div>
-          <div className="form-completion-bar twenty-percent">
-            <div className="loadingbar"></div>
-          </div>
-        </div>
+    <div className="formHolder">
+      <form
+        action="POST"
+        onSubmit={blankEnter}
+        className="form row-gap-30 flex-d-col"
+      >
+          <div className="form-card-holder flex-a-cen-j-cen row-gap-30 flex-d-col">
+            <div className="form-completion">
+              <div className="semi-bold font-16 color-accent-blue">
+                20% Completed
+              </div>
+              <div className="form-completion-bar twenty-percent">
+                <div className="loadingbar"></div>
+              </div>
+            </div>
 
-        <div className="form-ques-card row-gap-30">
-          <div className="font-24 color-primary">
-            Are you over 64 years old?
-          </div>
-          <div className="form-options row-gap-20 flex-d-col flex-a-cen">
-            <div
-              onClick={() => {
-                sessionStorage.setItem(sessionStorageKeys.ageAbove64, "yes");
-                incFormState();
-              }}
-              className="form-age-option font-24 color-primary"
-            >
-              Yes
+            <div className="form-ques-card row-gap-30">
+              <div className="font-24 color-primary">
+                Are you over 64 years old?
+              </div>
+              <div className="form-options row-gap-20 flex-d-col flex-a-cen">
+                <div
+                  onClick={() => {
+                    sessionStorage.setItem(sessionStorageKeys.ageAbove64, "yes");
+                    incFormState();
+                  }}
+                  className="form-age-option font-24 color-primary"
+                >
+                  Yes
+                </div>
+                <div
+                  onClick={() => {
+                    sessionStorage.setItem(sessionStorageKeys.ageAbove64, "no");
+                    incFormState();
+                  }}
+                  className="form-age-option font-24 color-primary"
+                >
+                  No
+                </div>
+              </div>
             </div>
-            <div
-              onClick={() => {
-                sessionStorage.setItem(sessionStorageKeys.ageAbove64, "no");
-                incFormState();
-              }}
-              className="form-age-option font-24 color-primary"
-            >
-              No
-            </div>
           </div>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
