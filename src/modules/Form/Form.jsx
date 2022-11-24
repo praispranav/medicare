@@ -5,9 +5,33 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { sessionStorageKeys } from "../../constants/localStorage.js";
 import { ROUTES } from "../../constants/routes";
 import { REDIRECT_AND_STORAGE_KEYS } from "../../constants/queryStrings";
+import { useRgbaHook } from '../../hooks/rgba'
 
 export const Form = ({ setForm, setFormEnd }) => {
   const [search] = useSearchParams();
+  const { storeRgbaData } = useRgbaHook();
+
+  const pushInitialData = (userIp) =>{
+    const redirectQueries = {
+      userIp,
+    };
+
+    REDIRECT_AND_STORAGE_KEYS.forEach(
+      (obj) =>{
+        redirectQueries[obj.storageKey] = search.get(obj.redirectString) || "";
+        storeRgbaData(obj.ringbaKey, search.get(obj.redirectString)) 
+      }
+    );
+    storeRgbaData('userIp', userIp)
+
+    sessionStorage.setItem(
+      sessionStorageKeys.utm_fbclid,
+      JSON.stringify(redirectQueries)
+    );
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(redirectQueries);
+  }
 
   const getIpAdd = async () => {
     let userIp;
@@ -26,23 +50,7 @@ export const Form = ({ setForm, setFormEnd }) => {
 
       userIp = response.data["IPv4"];
     } catch (error) {}
-
-    const redirectQueries = {
-      userIp,
-    };
-
-    REDIRECT_AND_STORAGE_KEYS.forEach(
-      (obj) =>
-        (redirectQueries[obj.storageKey] = search.get(obj.redirectString) || "")
-    );
-
-    sessionStorage.setItem(
-      sessionStorageKeys.utm_fbclid,
-      JSON.stringify(redirectQueries)
-    );
-
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push(redirectQueries);
+    pushInitialData(userIp)
   };
 
   useEffect(() => {

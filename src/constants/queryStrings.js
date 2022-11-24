@@ -2,32 +2,32 @@ export const REDIRECT_AND_STORAGE_KEYS = [
     {
         redirectString:"CID",
         storageKey: "Campaign_Name",
-        finalPageKey:""
+        ringbaKey:"cid"
     },
     {
         redirectString:"ADS_ID",
         storageKey: "Adset_Name",
-        finalPageKey:""
+        ringbaKey:"ads_id"
     },
     {
         redirectString:"ADID",
         storageKey: "Ad_Name",
-        finalPageKey:""
+        ringbaKey:"adid"
     },
     {
         redirectString:"fbclid",
         storageKey: "fbclid",
-        finalPageKey:""
+        ringbaKey:"fbclid"
     },
     {
         redirectString:"utm_source",
         storageKey: "utm_source",
-        finalPageKey:""
+        ringbaKey:"utm_source"
     },
     {
         redirectString:"generator",
-        storageKey: "internal1",
-        finalPageKey:""
+        storageKey: "generator",
+        ringbaKey:"generator"
     },
 
 ]

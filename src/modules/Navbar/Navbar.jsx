@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './Navbar.scss';
 
 import logo from '../../assets/logo.png';
 import phoneicon from '../../assets/phone.svg';
+import { useInitRingba } from '../../hooks/rgba';
 
 export const Navbar = () => {
+    
+    const {number, staticNumber} = useInitRingba();
+    
     return <div className="navbar">
         <nav>
             <div className='logoholder'>
@@ -26,7 +30,7 @@ export const Navbar = () => {
                     <div className="toll-free-number-holder">
                         <div className="available-blinker"></div>
                         <div className="toll-free-number">
-                            <span className="font-bold">1-800-814-8559</span>
+                            <span className="font-bold">{ number || staticNumber } </span>
                             <span className="font-semibold">(TTY 711)</span>
                         </div>
                     </div>
