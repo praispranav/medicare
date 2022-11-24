@@ -187,123 +187,125 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className="form row-gap-30 flex-d-col">
-      <div className="form-card-holder flex-a-cen-j-cen flex-d-col row-gap-30">
-        <div className="form-completion">
-          <div className="semi-bold font-16 color-accent-blue">
-            100% Completed
-          </div>
-          <div className="form-completion-bar hundred-percent">
-            <div className="loadingbar"></div>
-          </div>
-        </div>
-        <div className="form-ques-card row-gap-30 flex-d-col">
-          <div className="font-24 color-primary">
-            Thanks{" "}
-            <strong>
-              {name.firstName} {name.lastName}
-            </strong>
-            , We’ve Found Plans in your Area.
-          </div>
-          <div className="form-options row-gap-20 flex-d-col">
-            <div>
-              <input
-                value={values.email}
-                onChange={handleChange}
-                type={"email"}
-                name="email"
-                id="email"
-                placeholder="Email"
-                required
-              />
-              {errors.email && touched.homePhone ? (
-                <div className="form-error font-12">
-                  <img src={errorimg} alt="" /> &nbsp;&nbsp; {errors.email}
-                </div>
-              ) : (
-                ""
-              )}
+    <div className="formHolder">
+      <form onSubmit={handleSubmit} className="form row-gap-30 flex-d-col">
+        <div className="form-card-holder flex-a-cen-j-cen flex-d-col row-gap-30">
+          <div className="form-completion">
+            <div className="semi-bold font-16 color-accent-blue">
+              100% Completed
             </div>
-            <div>
-              <input
-                maxLength={10}
-                value={values.homePhone}
-                onChange={handleChange}
-                type="text"
-                name="homePhone"
-                id="homePhone"
-                placeholder="Phone Number"
-                required
-              />
-              {errors.homePhone && touched.homePhone ? (
-                <div className="form-error font-12">
-                  <img src={errorimg} alt="" /> &nbsp;&nbsp; {errors.homePhone}
-                </div>
-              ) : (
-                ""
-              )}
+            <div className="form-completion-bar hundred-percent">
+              <div className="loadingbar"></div>
             </div>
-            <button
-              type="submit"
-              className="bg-accent-green form-give-quote color-white font-20 bold" id="viewmyQuote"
-            >
-              <div className="d-flex">
-                View My Quote <img src={next} alt="" />
+          </div>
+          <div className="form-ques-card row-gap-30 flex-d-col">
+            <div className="font-24 color-primary">
+              Thanks{" "}
+              <strong>
+                {name.firstName} {name.lastName}
+              </strong>
+              , We’ve Found Plans in your Area.
+            </div>
+            <div className="form-options row-gap-20 flex-d-col">
+              <div>
+                <input
+                  value={values.email}
+                  onChange={handleChange}
+                  type={"email"}
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                  required
+                />
+                {errors.email && touched.homePhone ? (
+                  <div className="form-error font-12">
+                    <img src={errorimg} alt="" /> &nbsp;&nbsp; {errors.email}
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
-            </button>
-            <div
-              onClick={goBack}
-              className="form-option-back color-primary font-20 bold"
-            >
-              <img src={back} alt="" /> &nbsp; Back
+              <div>
+                <input
+                  maxLength={10}
+                  value={values.homePhone}
+                  onChange={handleChange}
+                  type="text"
+                  name="homePhone"
+                  id="homePhone"
+                  placeholder="Phone Number"
+                  required
+                />
+                {errors.homePhone && touched.homePhone ? (
+                  <div className="form-error font-12">
+                    <img src={errorimg} alt="" /> &nbsp;&nbsp; {errors.homePhone}
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+              <button
+                type="submit"
+                className="bg-accent-green form-give-quote color-white font-20 bold" id="viewmyQuote"
+              >
+                <div className="d-flex">
+                  View My Quote <img src={next} alt="" />
+                </div>
+              </button>
+              <div
+                onClick={goBack}
+                className="form-option-back color-primary font-20 bold"
+              >
+                <img src={back} alt="" /> &nbsp; Back
+              </div>
+            </div>
+
+            <div className="font-13 color-dark-grey tcpa">
+              <label>
+                By pressing the "View My Quote" (1) I provide my express written
+                consent via electronic signature to receive emails, telephone
+                calls, text messages (SMS), artificial or pre-recorded messages
+                from Senior Assistant its Affiliates, And/Or Any{" "}
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href="//seniorhealthbenefits.co/partner-list.html"
+                >
+                  {" "}
+                  Third-Party Partners{" "}
+                </a>{" "}
+                (or their service provider partners on their behalf) regarding
+                their products and services (Including Medicare Advantage plans,
+                Medicare Part D Prescription Drug Plans or Medicare Supplement
+                Insurance Plans, Final Expense Plans) at the email address and
+                telephone number provided, including my wireless phone number (if
+                provided). utilizing an automated telephone dialing system and I
+                understand that I am not required to grant this consent as a
+                condition of purchasing and property, goods or services from the
+                foregoing companies and my consent can be revoked at any time. (2)
+                I agree to this websites{" "}
+                <a
+                  rel="noreferrer"
+                  target="_blank"
+                  href="//seniorhealthbenefits.co/privacy-policy.html"
+                >
+                  Privacy Policy
+                </a>{" "}
+                and{" "}
+                <a href="//seniorhealthbenefits.co/terms.html">Terms of Use</a>.
+                (3) I understand that this is a solicitation for insurance. Plans
+                are insured or covered by a Medicare Advantage organization with a
+                Medicare contract and/or a Medicare-approved Part D sponsor.
+                Enrollment in the plan depends on the plan’s contract renewal with
+                Medicare. We do not offer every plan available in your area. Any
+                information we provide is limited to those plans we do offer in
+                your area. Please contact Medicare.gov or 1–800 MEDICARE to get
+                information on all of your options
+              </label>
             </div>
           </div>
-
-          <div className="font-13 color-dark-grey tcpa">
-            <label>
-              By pressing the "View My Quote" (1) I provide my express written
-              consent via electronic signature to receive emails, telephone
-              calls, text messages (SMS), artificial or pre-recorded messages
-              from Senior Assistant its Affiliates, And/Or Any{" "}
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href="//seniorhealthbenefits.co/partner-list.html"
-              >
-                {" "}
-                Third-Party Partners{" "}
-              </a>{" "}
-              (or their service provider partners on their behalf) regarding
-              their products and services (Including Medicare Advantage plans,
-              Medicare Part D Prescription Drug Plans or Medicare Supplement
-              Insurance Plans, Final Expense Plans) at the email address and
-              telephone number provided, including my wireless phone number (if
-              provided). utilizing an automated telephone dialing system and I
-              understand that I am not required to grant this consent as a
-              condition of purchasing and property, goods or services from the
-              foregoing companies and my consent can be revoked at any time. (2)
-              I agree to this websites{" "}
-              <a
-                rel="noreferrer"
-                target="_blank"
-                href="//seniorhealthbenefits.co/privacy-policy.html"
-              >
-                Privacy Policy
-              </a>{" "}
-              and{" "}
-              <a href="//seniorhealthbenefits.co/terms.html">Terms of Use</a>.
-              (3) I understand that this is a solicitation for insurance. Plans
-              are insured or covered by a Medicare Advantage organization with a
-              Medicare contract and/or a Medicare-approved Part D sponsor.
-              Enrollment in the plan depends on the plan’s contract renewal with
-              Medicare. We do not offer every plan available in your area. Any
-              information we provide is limited to those plans we do offer in
-              your area. Please contact Medicare.gov or 1–800 MEDICARE to get
-              information on all of your options
-            </label>
-          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }

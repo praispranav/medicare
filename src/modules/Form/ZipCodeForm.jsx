@@ -119,58 +119,60 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
   }, []);
 
   return (
-    <div className="form row-gap-30 flex-d-col">
-      <div className="form-card-holder flex-a-cen-j-cen row-gap-30 flex-d-col">
-        <div className="form-completion">
-          <div className="semi-bold font-16 color-accent-blue">
-            50% Completed
+    <div className="formHolder">
+      <div className="form row-gap-30 flex-d-col">
+        <div className="form-card-holder flex-a-cen-j-cen row-gap-30 flex-d-col">
+          <div className="form-completion">
+            <div className="semi-bold font-16 color-accent-blue">
+              50% Completed
+            </div>
+            <div className="form-completion-bar fifty-percent">
+              <div className="loadingbar"></div>
+            </div>
           </div>
-          <div className="form-completion-bar fifty-percent">
-            <div className="loadingbar"></div>
-          </div>
-        </div>
-        <div className="form-ques-card row-gap-30">
-          <div className="font-24 color-primary">What's your Zip Code?</div>
-          <div className="form-options row-gap-30 flex-d-col">
-            <form onSubmit={handleSubmit}>
-              <input
-                value={values.zip}
-                required
-                onChange={onChangeZipValue}
-                onBlur={handleBlur}
-                maxLength={5}
-                max={99999}
-                type="number"
-                name="zip"
-                id="zip"
-                placeholder="Zip Code"
-              />
-              {errors.zip && touched.zip ? (
-                <div className="form-error font-12 form-error-2">
-                  <img src={errorimg} alt="" /> &nbsp;&nbsp; {errors.zip}
-                </div>
-              ) : (
-                ""
-              )}
-              <button
-                disabled={errors.zip}
-                className="form-button form-option-continue color-white font-20 bold"
-              >
-                {loading ? (
-                  <>
-                    <PropagateLoader
-                      color="#2DA9C2"
-                      className="margin-loader"
-                    />{" "}
-                    <p className="visibility-hidden">.</p>{" "}
-                  </>
+          <div className="form-ques-card row-gap-30">
+            <div className="font-24 color-primary">What's your Zip Code?</div>
+            <div className="form-options row-gap-30 flex-d-col">
+              <form onSubmit={handleSubmit}>
+                <input
+                  value={values.zip}
+                  required
+                  onChange={onChangeZipValue}
+                  onBlur={handleBlur}
+                  maxLength={5}
+                  max={99999}
+                  type="number"
+                  name="zip"
+                  id="zip"
+                  placeholder="Zip Code"
+                />
+                {errors.zip && touched.zip ? (
+                  <div className="form-error font-12 form-error-2">
+                    <img src={errorimg} alt="" /> &nbsp;&nbsp; {errors.zip}
+                  </div>
                 ) : (
-                  <>
-                    Continue <img src={next} alt="" />
-                  </>
+                  ""
                 )}
-              </button>
-            </form>
+                <button
+                  disabled={errors.zip}
+                  className="form-button form-option-continue color-white font-20 bold"
+                >
+                  {loading ? (
+                    <>
+                      <PropagateLoader
+                        color="#2DA9C2"
+                        className="margin-loader"
+                      />{" "}
+                      <p className="visibility-hidden">.</p>{" "}
+                    </>
+                  ) : (
+                    <>
+                      Continue <img src={next} alt="" />
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
