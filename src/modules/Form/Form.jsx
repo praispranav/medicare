@@ -67,7 +67,7 @@ export const Form = ({ setForm, setFormEnd }) => {
   const blankEnter = (e) => {};
 
   return (
-    <div className="">
+    <div className="formHolder">
       <form
         action="POST"
         onSubmit={blankEnter}
