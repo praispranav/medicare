@@ -1,11 +1,25 @@
+import { useEffect, useState } from "react";
+
+export const GENERATOR_QUERY = "generator";
+
+export const RINGBA_SCRIPT_ID = "rgba_script"
+
 const RINGBA_COM_TAGS = [
-  { key: "JSbfbe6e3aef084885af8a574bec4f8d45", user: "user1" },
+  {
+    key: "JSbfbe6e3aef084885af8a574bec4f8d45",
+    user: "internal1",
+    number: "1-866-790-0241",
+  },
 ];
 
-export const activeUser = "user1";
+export function useRingbaUser(hist) {
+  const [generator, setGenerator] = useState("");
+  const activeUserKeyObj = RINGBA_COM_TAGS.find((i) => i.user === generator);
 
-export function useRingbaUser() {
-  const activeUserKeyObj = RINGBA_COM_TAGS.find((i) => i.user === activeUser);
-  if (activeUserKeyObj) return activeUserKeyObj.key;
-  else return "";
+  useEffect(() => {
+    setGenerator(hist.get(GENERATOR_QUERY));
+  }, [hist && hist.get(GENERATOR_QUERY)]);
+
+  if (activeUserKeyObj) return activeUserKeyObj;
+  else return { key: "", user: "", number: "" };
 }

@@ -76,7 +76,7 @@ const Congrats = ({fname, lname}) => {
     </div>
 }
 
-const End = ({number, fname, lname, sec, min}) => {
+const End = ({number, fname, lname, sec, min, staticNumber}) => {
     return <div className="form-end">
         <div className="congrats-message">
             <div className="font-32 bold color-accent-blue congrats-headline-cta">
@@ -89,7 +89,7 @@ const End = ({number, fname, lname, sec, min}) => {
                 <div className="contact-btn">
                     <img src={call} alt="" />
                     <div id="font-end-contact-number" className="color-white font-24 bold toll-free">
-                        <span>{number || "1-866-790-0241"}</span>
+                        <span>{number || staticNumber}</span>
                         <div className="tfn-cta">Click To Call Toll-Free</div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ export const FormEnd = ({number, form,fname, lname}) => {
     const [history, setHistory] = useSearchParams();
     const [submitted, setSubmitted] = useState();
 
-    const ringbaKey = useRingbaUser()
+    const ringbaKey = useRingbaUser(history)
 
     const leadNode = window.document.getElementById(LEAD.id);
 
@@ -147,59 +147,7 @@ export const FormEnd = ({number, form,fname, lname}) => {
     },[])
 
     useEffect(()=>{
-        const finalPreparedData =  sessionStorage.getItem(sessionStorageKeys.finalPreparedData);
-            if(!finalPreparedData) return
-            const parsed = JSON.parse(finalPreparedData);
-
-        $(document).ready(function ($) {
-            (function(e, d) {
-            //Ringba.com phone number tracking
-            var ringba_com_tag= ringbaKey;
-            var _sc = d.getElementsByTagName('script'), _s = _sc[_sc.length - 1];
-            e._rgba = e._rgba || { q: [] }; e._rgba.q.push({ tag: ringba_com_tag, cb: GetNumber, render: false, script: _s});
-            if (!(e._rgba.loading = !!e._rgba.loading)) {
-                var sc = d.createElement('script'); sc.type = 'text/javascript'; sc.async = true;
-                sc.src = '//js.callcdn.com/js_v3/min/ringba.com.js';
-                var s = d.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sc, s);
-                e._rgba.loading = true;
-            }
-            })(window, document);
-            function GetNumber(number, tagId, firstTime) {
-                window.pnumber = number;
-                setNum(number);
-                $("#form-end-contact").attr("href", "tel://" + window.pnumber);
-                $("#font-end-contact-number").text(window.pnumber);
-            }
-            
-            (window._rgba_tags = (window._rgba_tags || [])).push(
-                {userIp:parsed['userIp'] || ""},
-                {user_agent:parsed['user_agent'] || ""},
-                {zip: parsed['zip'] || ""},
-                {city: parsed['city'] || ""},
-                {state: parsed['state'] || ""},
-                {firstName: parsed['firstName'] || ""},
-                {lastName: parsed['lastName'] || ""},
-                {email: parsed['email'] || ""},
-                {lead_id: parsed["JornayaToken"] || ""},
-                {utm_source: parsed['utm_source'] || ""},
-                {ads_id: parsed['Adset_Name'] || ""},
-                {cid: parsed['Campaign_Name'] || ""},
-                {adid: parsed['Ad_Name'] || ""},
-                {fbclid: parsed['fbclid'] || ""},
-                {fbc: parsed['fbc'] || ""},
-                {fbp: parsed['fbp'] || ""},
-                );
-            $('.callnow').click(function() {window.fbqFunc('track', 'Contact');});
-        });
-        setHistory({
-            utm_source: parsed['utm_source'] || "", 
-            CID : parsed['Campaign_Name'] || "",
-            ADS_ID : parsed['Adset_Name'] || "",
-            ADID : parsed['Ad_Name'] || "",
-            fbclid : parsed['fbclid'] || "",
-            fbc : parsed['fbc'] || "",
-            fbp : parsed['fbp'] || ""
-        });
+        
     },[]);
 
     while(true) {
@@ -224,7 +172,7 @@ export const FormEnd = ({number, form,fname, lname}) => {
                     submitted === null ? <Navigate to="/" replace={true} /> : <></>
                 }
                 {
-                    load? <End number={num} fname={fname} lname={lname} sec={sec} min={min} /> : <Congrats fname={fname} lname={lname} />
+                    load? <End number={num} staticNumber={ringbaKey.number} fname={fname} lname={lname} sec={sec} min={min}  /> : <Congrats fname={fname} lname={lname} />
                 }
                 <FloatingCard />
                 <FormStart />

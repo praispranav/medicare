@@ -15,5 +15,7 @@ export const sessionStorageKeys = {
     utm_fbclid: "utm_fbclid",
 
     submitSuccessful: "submitSuccessful",
-    finalPreparedData: 'finalPreparedData'
+    finalPreparedData: 'finalPreparedData',
+
+    rgba:"rgba",
 }
