@@ -94,7 +94,6 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
           city: response.data["places"][0]["place name"],
           state: response.data["places"][0]["state abbreviation"],
         });
-        console.log(response);
         sessionStorage.setItem(
           sessionStorageKeys.zipCodeExtraValues,
           JSON.stringify({

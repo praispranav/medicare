@@ -14,13 +14,11 @@ export function useDataLayer() {
         JSON.stringify(parsed)
       );
       window.dataLayer[last] = parsed;
-      console.log(window.dataLayer)
     } else {
       const obj = {};
       obj[key] = value;
       sessionStorage.setItem(sessionStorageKeys.dataLayer, JSON.stringify(obj));
       window.dataLayer[last] = obj;
-      console.log(window.dataLayer)
     }
   };
 
@@ -35,7 +33,6 @@ export function useDataLayer() {
 
   const get = () => {
     const result = sessionStorage.getItem(sessionStorageKeys.dataLayer);
-    console.log(result);
     if (result) return JSON.parse(result);
     else return null;
   };
