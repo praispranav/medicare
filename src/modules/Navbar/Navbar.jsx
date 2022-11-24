@@ -21,7 +21,7 @@ export const Navbar = () => {
                     </div>
                 </div>
             </div>
-            <a href="tel:18008148552">
+            <a href={`tel:${number || staticNumber}`} id="form-end-contact">
                 <div className="phone-icon">
                     <img src={phoneicon} alt="logo" />
                 </div>
@@ -30,7 +30,7 @@ export const Navbar = () => {
                     <div className="toll-free-number-holder">
                         <div className="available-blinker"></div>
                         <div className="toll-free-number">
-                            <span className="font-bold">{ number || staticNumber } </span>
+                            <span id="font-end-contact-number" className="font-bold">{ number || staticNumber } </span>
                             <span className="font-semibold">(TTY 711)</span>
                         </div>
                     </div>

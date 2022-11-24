@@ -61,6 +61,18 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
 
   const incZipFormState = (zip) => {
     setLoading(true);
+    setResponse({ city:"", state: "" })
+    sessionStorage.setItem(
+      sessionStorageKeys.zipCodeExtraValues,
+      JSON.stringify({
+        user_agent: navigator.userAgent,
+        fbc: "",
+        fbp: "",
+        city: "",
+        state: "",
+        JornayaToken: JornayaToken,
+      })
+    );
     const JornayaToken = document.getElementById("leadid_token").value;
     axios
       .get("https://api.zippopotam.us/us/" + zip, {
@@ -75,6 +87,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
           city: response.data["places"][0]["place name"],
           state: response.data["places"][0]["state abbreviation"],
         });
+        console.log(response);
         sessionStorage.setItem(
           sessionStorageKeys.zipCodeExtraValues,
           JSON.stringify({
