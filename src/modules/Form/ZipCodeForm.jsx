@@ -10,7 +10,8 @@ import errorimg from "../../assets/form/error.svg";
 import next from "../../assets/form/next.svg";
 import { sessionStorageKeys } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
-import { useRgbaHook } from '../../hooks/rgba'
+import { useRgbaHook } from "../../hooks/rgba";
+import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
 
 const initialValues = {
   zip: "",
@@ -28,11 +29,12 @@ const validationSchema = yup.object({
 export default function ZipCodeForm({ setForm, setFormEnd }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const generatorQuery = useGeneratorQuery();
   const { storeRgbaData } = useRgbaHook();
   const [response, setResponse] = useState({});
   const fbc = Cookies.get("_fbc") || "";
   const fbp = Cookies.get("_fbp") || "";
-  
+
   const {
     handleSubmit,
     touched,
@@ -60,8 +62,9 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
   });
 
   const incZipFormState = (zip) => {
+    const JornayaToken = document.getElementById("leadid_token").value;
     setLoading(true);
-    setResponse({ city:"", state: "" })
+    setResponse({ city: "", state: "" });
     sessionStorage.setItem(
       sessionStorageKeys.zipCodeExtraValues,
       JSON.stringify({
@@ -73,7 +76,6 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
         JornayaToken: JornayaToken,
       })
     );
-    const JornayaToken = document.getElementById("leadid_token").value;
     axios
       .get("https://api.zippopotam.us/us/" + zip, {
         method: "GET",
@@ -99,7 +101,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
             JornayaToken: JornayaToken,
           })
         );
-        navigate("../" + ROUTES.nameForm);
+        navigate({ pathname: ROUTES.nameForm, search: generatorQuery.get() });
         setLoading(false);
       })
       .catch((error) => {
@@ -121,7 +123,8 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
 
   const checkPreviousPageData = () => {
     const data = sessionStorage.getItem(sessionStorageKeys.ageAbove64);
-    if (data === null) navigate(ROUTES.homePage);
+    if (data === null)
+      navigate({ pathname: ROUTES.homePage, search: generatorQuery.get() });
   };
 
   useEffect(() => {

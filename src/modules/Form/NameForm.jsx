@@ -9,6 +9,7 @@ import next from "../../assets/form/next.svg";
 import { sessionStorageKeys } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
 import { useRgbaHook } from "../../hooks/rgba";
+import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
 
 const initialValues = {
   firstName: "",
@@ -23,6 +24,7 @@ const validationSchema = yup.object({
 export default function NameForm() {
   const navigate = useNavigate();
   const { storeRgbaData } = useRgbaHook();
+  const generatorQuery = useGeneratorQuery();
 
   const {
     handleSubmit,
@@ -46,15 +48,19 @@ export default function NameForm() {
       );
       storeRgbaData("firstName", values.firstName);
       storeRgbaData("lastName", values.lastName);
-      navigate("../" + ROUTES.phoneEmailForm);
+      navigate({
+        pathname: ROUTES.phoneEmailForm,
+        search: generatorQuery.get(),
+      });
     },
   });
 
-  const goBack = () => navigate("../" + ROUTES.zipCodeForm);
+  const goBack = () =>
+    navigate({ pathname: ROUTES.zipCodeForm, search: generatorQuery.get() });
 
   const checkPreviousPageData = () => {
     const data = sessionStorage.getItem(sessionStorageKeys.zip);
-    if (data === null) navigate("../" + ROUTES.zipCodeForm);
+    if (data === null) goBack();
   };
 
   useEffect(() => {

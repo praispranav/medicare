@@ -18,4 +18,5 @@ export const sessionStorageKeys = {
     finalPreparedData: 'finalPreparedData',
 
     rgba:"rgba",
+    generatorName: "generatorName"
 }

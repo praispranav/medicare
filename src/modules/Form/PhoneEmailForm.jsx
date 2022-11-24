@@ -12,6 +12,7 @@ import {
 } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
 import { useRgbaHook } from '../../hooks/rgba'
+import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
 
 const EMAIL_RX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PHONE_RX = /^[0-9]+$/;
@@ -37,6 +38,7 @@ const validationSchema = yup.object({
 export default function PhoneEmailForm({ setFormEnd, setForm }) {
   const navigate = useNavigate();
   const { storeRgbaData } = useRgbaHook();
+  const generatorQuery = useGeneratorQuery();
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState({ firstName: "", lastName: "" });
   const {
@@ -161,18 +163,17 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
         Cookies.set("fbp", formData["fbp"]);
         Cookies.set("fbc", formData["fbc"]);
         Cookies.set("JornayaToken", formData["JornayaToken"]);
-        navigate("../" + ROUTES.congrats);
+        navigate({ pathname: ROUTES.congrats, search: generatorQuery.get() });
       });
   };
 
-  const goBack = () => navigate("../" + ROUTES.nameForm);
+  const goBack = () => navigate({ pathname:ROUTES.nameForm, search: generatorQuery.get()});
 
   const checkPreviousPageData = () => {
     const firstName = sessionStorage.getItem(sessionStorageKeys.firstName);
     const lastName = sessionStorage.getItem(sessionStorageKeys.lastName);
     setName({ firstName, lastName });
-    if (firstName === null || lastName === null)
-      navigate("../" + ROUTES.nameForm);
+    if (firstName === null || lastName === null) goBack();
   };
 
   useEffect(() => {

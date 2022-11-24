@@ -20,5 +20,5 @@ export function useRingbaUser(hist) {
   }, [hist && hist.get(GENERATOR_QUERY)]);
 
   if (activeUserKeyObj) return activeUserKeyObj;
-  else return { key: "", user: "", number: "" };
+  else return RINGBA_COM_TAGS[0]
 }
