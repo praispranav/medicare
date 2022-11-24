@@ -29,5 +29,10 @@ export const REDIRECT_AND_STORAGE_KEYS = [
         storageKey: "generator",
         ringbaKey:"generator"
     },
+    {
+        redirectString:"interest",
+        storageKey: "interest",
+        ringbaKey:"interest"
+    },
 
 ]

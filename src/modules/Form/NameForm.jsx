@@ -1,4 +1,3 @@
-import "./Form.scss";
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +8,9 @@ import next from "../../assets/form/next.svg";
 import { sessionStorageKeys } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
 import { useRgbaHook } from "../../hooks/rgba";
+import { useDataLayer } from "../../hooks/useDataLayer";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
+import "./Form.scss";
 
 const initialValues = {
   firstName: "",
@@ -25,6 +26,7 @@ export default function NameForm() {
   const navigate = useNavigate();
   const { storeRgbaData } = useRgbaHook();
   const generatorQuery = useGeneratorQuery();
+  const dataLayer = useDataLayer();
 
   const {
     handleSubmit,
@@ -64,6 +66,8 @@ export default function NameForm() {
   };
 
   useEffect(() => {
+    dataLayer.update();
+
     window.scrollTo({ top: 0, behavior: "smooth" });
     checkPreviousPageData();
     const firstName = sessionStorage.getItem(sessionStorageKeys.firstName);

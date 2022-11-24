@@ -2,16 +2,21 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import "./Form.scss";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { sessionStorageKeys } from "../../constants/localStorage.js";
+import {
+  localStorageKeys,
+  sessionStorageKeys,
+} from "../../constants/localStorage.js";
 import { ROUTES } from "../../constants/routes";
 import { REDIRECT_AND_STORAGE_KEYS } from "../../constants/queryStrings";
 import { useRgbaHook } from "../../hooks/rgba";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
+import { useDataLayer } from "../../hooks/useDataLayer";
 
 export const Form = ({ setForm, setFormEnd }) => {
   const [search] = useSearchParams();
   const generatorQuery = useGeneratorQuery();
   const { storeRgbaData } = useRgbaHook();
+  const dataLayer = useDataLayer();
 
   const pushInitialData = (userIp) => {
     const redirectQueries = {
@@ -30,9 +35,18 @@ export const Form = ({ setForm, setFormEnd }) => {
     );
 
     generatorQuery.set(search.get("generator"));
-
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push(redirectQueries);
+    const currentDataLayerData = dataLayer.get();
+    if (currentDataLayerData) dataLayer.getAndSetFromSession(currentDataLayerData);
+    else {
+      dataLayer.set("interest", search.get("interest"));
+      dataLayer.set("language", search.get("language"));
+      dataLayer.set("device_model", window.navigator.userAgent);
+      dataLayer.set("country", "us");
+      dataLayer.set(
+        "visitor_id",
+        localStorage.getItem(localStorageKeys.visitorId)
+      ); // add it in ringba
+    }
   };
 
   const getIpAdd = async () => {

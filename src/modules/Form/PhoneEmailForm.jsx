@@ -1,4 +1,3 @@
-import "./Form.scss";
 import { useFormik } from "formik";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
@@ -8,13 +7,17 @@ import back from "../../assets/form/back.svg";
 import errorimg from "../../assets/form/error.svg";
 import next from "../../assets/form/next.svg";
 import {
-  localStorageKeys, sessionStorageKeys
+  localStorageKeys,
+  sessionStorageKeys
 } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
-import { useRgbaHook } from '../../hooks/rgba'
+import { useRgbaHook } from "../../hooks/rgba";
+import { useDataLayer } from "../../hooks/useDataLayer";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
+import "./Form.scss";
 
-const EMAIL_RX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EMAIL_RX =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PHONE_RX = /^[0-9]+$/;
 
 const initialValues = {
@@ -39,6 +42,8 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
   const navigate = useNavigate();
   const { storeRgbaData } = useRgbaHook();
   const generatorQuery = useGeneratorQuery();
+  const dataLayer = useDataLayer();
+
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState({ firstName: "", lastName: "" });
   const {
@@ -58,7 +63,7 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
         sessionStorageKeys.homePhone,
         String(values.homePhone)
       );
-      storeRgbaData('email', values.email)
+      storeRgbaData("email", values.email);
       onSubmit();
     },
   });
@@ -71,7 +76,9 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
     const homePhone = sessionStorage.getItem(sessionStorageKeys.homePhone);
     const email = sessionStorage.getItem(sessionStorageKeys.email);
 
-    const extraData = sessionStorage.getItem(sessionStorageKeys.zipCodeExtraValues);
+    const extraData = sessionStorage.getItem(
+      sessionStorageKeys.zipCodeExtraValues
+    );
     const utm_fbclid = sessionStorage.getItem(sessionStorageKeys.utm_fbclid);
 
     const zipCodeDataParsed = JSON.parse(extraData);
@@ -83,14 +90,15 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
       zip,
       ageAbove64,
       homePhone,
-      email, ...zipCodeDataParsed, ...utmParsed
+      email,
+      ...zipCodeDataParsed,
+      ...utmParsed,
     };
     setForm(preparedData);
     save(preparedData);
   };
 
   const updateLastSavedFormValues = (values) => {
-    
     const currentFormValues = localStorage.getItem(
       localStorageKeys.lastSubmittedData
     );
@@ -134,13 +142,16 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
     )
       .then((response) => {
         setLoading(false);
-        sessionStorage.setItem(sessionStorageKeys.finalPreparedData, JSON.stringify(formData));
+        sessionStorage.setItem(
+          sessionStorageKeys.finalPreparedData,
+          JSON.stringify(formData)
+        );
         setFormEnd({
           fname: formData.firstName,
           lname: formData.lastName,
         });
 
-       sessionStorage.setItem(sessionStorageKeys.submitSuccessful, "yes")
+        sessionStorage.setItem(sessionStorageKeys.submitSuccessful, "yes");
       })
       .then((data) => {
         Cookies.set(
@@ -167,7 +178,8 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
       });
   };
 
-  const goBack = () => navigate({ pathname:ROUTES.nameForm, search: generatorQuery.get()});
+  const goBack = () =>
+    navigate({ pathname: ROUTES.nameForm, search: generatorQuery.get() });
 
   const checkPreviousPageData = () => {
     const firstName = sessionStorage.getItem(sessionStorageKeys.firstName);
@@ -177,7 +189,9 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
   };
 
   useEffect(() => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    dataLayer.update();
+
     checkPreviousPageData();
     const homePhone = sessionStorage.getItem(sessionStorageKeys.homePhone);
     const email = sessionStorage.getItem(sessionStorageKeys.email);
@@ -239,7 +253,8 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
                 />
                 {errors.homePhone && touched.homePhone ? (
                   <div className="form-error font-12">
-                    <img src={errorimg} alt="" /> &nbsp;&nbsp; {errors.homePhone}
+                    <img src={errorimg} alt="" /> &nbsp;&nbsp;{" "}
+                    {errors.homePhone}
                   </div>
                 ) : (
                   ""
@@ -247,7 +262,8 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
               </div>
               <button
                 type="submit"
-                className="bg-accent-green form-give-quote color-white font-20 bold" id="viewmyQuote"
+                className="bg-accent-green form-give-quote color-white font-20 bold"
+                id="viewmyQuote"
               >
                 <div className="d-flex">
                   View My Quote <img src={next} alt="" />
@@ -279,12 +295,12 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
                 their products and services (Including Medicare Advantage plans,
                 Medicare Part D Prescription Drug Plans or Medicare Supplement
                 Insurance Plans, Final Expense Plans) at the email address and
-                telephone number provided, including my wireless phone number (if
-                provided). utilizing an automated telephone dialing system and I
-                understand that I am not required to grant this consent as a
-                condition of purchasing and property, goods or services from the
-                foregoing companies and my consent can be revoked at any time. (2)
-                I agree to this websites{" "}
+                telephone number provided, including my wireless phone number
+                (if provided). utilizing an automated telephone dialing system
+                and I understand that I am not required to grant this consent as
+                a condition of purchasing and property, goods or services from
+                the foregoing companies and my consent can be revoked at any
+                time. (2) I agree to this websites{" "}
                 <a
                   rel="noreferrer"
                   target="_blank"
@@ -294,14 +310,15 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
                 </a>{" "}
                 and{" "}
                 <a href="//seniorhealthbenefits.co/terms.html">Terms of Use</a>.
-                (3) I understand that this is a solicitation for insurance. Plans
-                are insured or covered by a Medicare Advantage organization with a
-                Medicare contract and/or a Medicare-approved Part D sponsor.
-                Enrollment in the plan depends on the plan’s contract renewal with
-                Medicare. We do not offer every plan available in your area. Any
-                information we provide is limited to those plans we do offer in
-                your area. Please contact Medicare.gov or 1–800 MEDICARE to get
-                information on all of your options
+                (3) I understand that this is a solicitation for insurance.
+                Plans are insured or covered by a Medicare Advantage
+                organization with a Medicare contract and/or a Medicare-approved
+                Part D sponsor. Enrollment in the plan depends on the plan’s
+                contract renewal with Medicare. We do not offer every plan
+                available in your area. Any information we provide is limited to
+                those plans we do offer in your area. Please contact
+                Medicare.gov or 1–800 MEDICARE to get information on all of your
+                options
               </label>
             </div>
           </div>

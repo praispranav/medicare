@@ -1,4 +1,3 @@
-import "./Form.scss";
 import axios from "axios";
 import { useFormik } from "formik";
 import Cookies from "js-cookie";
@@ -11,7 +10,9 @@ import next from "../../assets/form/next.svg";
 import { sessionStorageKeys } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
 import { useRgbaHook } from "../../hooks/rgba";
+import { useDataLayer } from "../../hooks/useDataLayer";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
+import "./Form.scss";
 
 const initialValues = {
   zip: "",
@@ -31,6 +32,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
   const [loading, setLoading] = useState(false);
   const generatorQuery = useGeneratorQuery();
   const { storeRgbaData } = useRgbaHook();
+  const dataLayer = useDataLayer();
   const [response, setResponse] = useState({});
   const fbc = Cookies.get("_fbc") || "";
   const fbp = Cookies.get("_fbp") || "";
@@ -57,6 +59,9 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
         storeRgbaData("state", response.state);
         storeRgbaData("lead_id", JornayaToken);
         storeRgbaData("user_agent", window.navigator.userAgent);
+
+        dataLayer.set("state", response.state);
+        dataLayer.set("city", response.city);
       }
     },
   });
@@ -118,6 +123,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
         value: String(value).slice(0, 5),
       },
     };
+    dataLayer.set("zip", value);
     handleChange(obj);
   };
 
@@ -129,6 +135,9 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    dataLayer.update();
+
     checkPreviousPageData();
     const zipInitialValue = sessionStorage.getItem(sessionStorageKeys.zip);
     if (zipInitialValue) setValues({ zip: Number(zipInitialValue) });

@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
-import $ from "jquery";
-import "./FormEnd.scss";
-import call from "../../assets/form/call.svg";
-import user from "../../assets/form/user.svg";
-import location from "../../assets/form/location.svg";
-import list from "../../assets/form/list.svg";
-import checkpoint from "../../assets/form/checkpoint.svg";
+import { Navigate, useSearchParams } from "react-router-dom";
 import agent from "../../assets/form/agent.svg";
+import call from "../../assets/form/call.svg";
 import check from "../../assets/form/check.svg";
+import checkpoint from "../../assets/form/checkpoint.svg";
+import list from "../../assets/form/list.svg";
+import location from "../../assets/form/location.svg";
 import reload from "../../assets/form/reload.svg";
-import { FormStart } from "../FormStart/FormStart";
-import { useSearchParams, Navigate } from "react-router-dom";
+import user from "../../assets/form/user.svg";
 import { LEAD } from "../../constants/lead";
 import { sessionStorageKeys } from "../../constants/localStorage";
-import { FloatingCard } from "../FloatingCard/FloatingCard";
 import { useRingbaUser } from "../../constants/ringba";
-import { useInitRingba } from "../../hooks/rgba"
+import { useInitRingba } from "../../hooks/rgba";
+import { useDataLayer } from "../../hooks/useDataLayer";
+import { FloatingCard } from "../FloatingCard/FloatingCard";
+import { FormStart } from "../FormStart/FormStart";
+import "./FormEnd.scss";
 
 let load = 0;
+const PAGE_TITLE = "Congratulations - Qualify Benefits";
 
 const Congrats = ({ fname, lname }) => {
   const [zipCodeData, setZipCodeData] = useState({ state: "", city: "" });
@@ -134,9 +135,9 @@ export const FormEnd = ({ number, form, fname, lname }) => {
   fname = sessionStorage.getItem(sessionStorageKeys.firstName);
   lname = sessionStorage.getItem(sessionStorageKeys.lastName);
 
+  const dataLayer = useDataLayer();
   const [min, setMin] = useState(3);
   const [sec, setSec] = useState(3);
-  // const [num, setNum] = useState();
   const [history, setHistory] = useSearchParams();
   const [submitted, setSubmitted] = useState();
 
@@ -158,14 +159,19 @@ export const FormEnd = ({ number, form, fname, lname }) => {
     setSubmitted(submitted);
   };
 
+  const addDataLayerAndQuery = () => {
+    // window.dataLayer[0].utm_source = form["utm_source"] || "";
+    // window.dataLayer[0].campaign_id = form["CID"] || "";
+    // window.dataLayer[0].utm_source = form["ADS_ID"] || "";
+    // window.dataLayer[0].utm_source = form["ADID"] || "";
+
+    setHistory({ ...dataLayer.get() });
+  };
+
   useEffect(() => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      utm_source: form["utm_source"] || "",
-      campaign_id: form["CID"] || "",
-      adset_id: form["ADS_ID"] || "",
-      ad_id: form["ADID"] || "",
-    });
+    window.document.title = PAGE_TITLE;
+    addDataLayerAndQuery();
+
     removeLeadScript();
     checkPreviousPage();
   }, [form]);
