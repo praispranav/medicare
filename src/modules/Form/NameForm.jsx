@@ -1,3 +1,4 @@
+import "./Form.scss";
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +8,7 @@ import errorimg from "../../assets/form/error.svg";
 import next from "../../assets/form/next.svg";
 import { sessionStorageKeys } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
-import "./Form.scss";
+import { useRgbaHook } from "../../hooks/rgba";
 
 const initialValues = {
   firstName: "",
@@ -21,6 +22,7 @@ const validationSchema = yup.object({
 
 export default function NameForm() {
   const navigate = useNavigate();
+  const { storeRgbaData } = useRgbaHook();
 
   const {
     handleSubmit,
@@ -42,7 +44,9 @@ export default function NameForm() {
         sessionStorageKeys.lastName,
         String(values.lastName)
       );
-        navigate("../" + ROUTES.phoneEmailForm)
+      storeRgbaData("firstName", values.firstName);
+      storeRgbaData("lastName", values.lastName);
+      navigate("../" + ROUTES.phoneEmailForm);
     },
   });
 
@@ -54,11 +58,14 @@ export default function NameForm() {
   };
 
   useEffect(() => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: "smooth" });
     checkPreviousPageData();
     const firstName = sessionStorage.getItem(sessionStorageKeys.firstName);
     const lastName = sessionStorage.getItem(sessionStorageKeys.lastName);
-    setValues({ lastName: lastName ? lastName: "", firstName: firstName ? firstName : "" });
+    setValues({
+      lastName: lastName ? lastName : "",
+      firstName: firstName ? firstName : "",
+    });
   }, []);
   return (
     <form onSubmit={handleSubmit} className="form row-gap-30 flex-d-col">
@@ -101,7 +108,8 @@ export default function NameForm() {
             {(errors.lastName && touched.lastName) ||
             (errors.firstName && touched.firstName) ? (
               <div className="form-error font-12 flex-a-cen color-error">
-                <img src={errorimg} alt="" /> &nbsp;&nbsp; {errors.firstName || errors.lastName}
+                <img src={errorimg} alt="" /> &nbsp;&nbsp;{" "}
+                {errors.firstName || errors.lastName}
               </div>
             ) : (
               ""

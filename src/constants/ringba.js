@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 export const GENERATOR_QUERY = "generator";
-
 export const RINGBA_SCRIPT_ID = "rgba_script"
 
 const RINGBA_COM_TAGS = [

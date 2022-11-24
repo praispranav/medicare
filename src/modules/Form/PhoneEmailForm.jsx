@@ -1,3 +1,4 @@
+import "./Form.scss";
 import { useFormik } from "formik";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
@@ -10,7 +11,7 @@ import {
   localStorageKeys, sessionStorageKeys
 } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
-import "./Form.scss";
+import { useRgbaHook } from '../../hooks/rgba'
 
 const EMAIL_RX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PHONE_RX = /^[0-9]+$/;
@@ -35,6 +36,8 @@ const validationSchema = yup.object({
 
 export default function PhoneEmailForm({ setFormEnd, setForm }) {
   const navigate = useNavigate();
+  const { storeRgbaData } = useRgbaHook();
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState({ firstName: "", lastName: "" });
   const {
     handleSubmit,
@@ -53,6 +56,7 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
         sessionStorageKeys.homePhone,
         String(values.homePhone)
       );
+      storeRgbaData('email', values.email)
       onSubmit();
     },
   });
@@ -84,6 +88,7 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
   };
 
   const updateLastSavedFormValues = (values) => {
+    
     const currentFormValues = localStorage.getItem(
       localStorageKeys.lastSubmittedData
     );
@@ -111,6 +116,7 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
   };
 
   const save = (formData) => {
+    setLoading(true);
     updateLastSavedFormValues(formData);
     const requestOptions = {
       method: "POST",
@@ -125,6 +131,7 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
       requestOptions
     )
       .then((response) => {
+        setLoading(false);
         sessionStorage.setItem(sessionStorageKeys.finalPreparedData, JSON.stringify(formData));
         setFormEnd({
           fname: formData.firstName,

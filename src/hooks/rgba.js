@@ -28,7 +28,6 @@ export function useInitRingba() {
   const [num, setNum] = useState();
 
   const ringbaScript = window.document.getElementById(RINGBA_SCRIPT_ID);
-  console.log("RingbaScript",ringbaScript);
   if (ringbaScript) {
   } else {
     $(document).ready(function ($) {
@@ -59,7 +58,6 @@ export function useInitRingba() {
       function GetNumber(number, tagId, firstTime) {
         window.pnumber = number;
         setNum(number);
-        console.log("Number Init ringba", number);
         $("#form-end-contact").attr("href", "tel://" + window.pnumber);
         $("#font-end-contact-number").text(window.pnumber);
       }
@@ -73,23 +71,26 @@ export function useInitRingba() {
       }
       //   .push(
       //     {user_agent:parsed['user_agent'] || ""},
+      //     {userIp:parsed['userIp'] || ""},
+      //     {fbp: parsed['fbp'] || ""},
+      //     {fbc: parsed['fbc'] || ""},
 
       //     {zip: parsed['zip'] || ""},
       //     {city: parsed['city'] || ""},
       //     {state: parsed['state'] || ""},
+
       //     {firstName: parsed['firstName'] || ""},
       //     {lastName: parsed['lastName'] || ""},
+      
       //     {email: parsed['email'] || ""},
-      //     {lead_id: parsed["JornayaToken"] || ""},
-      //     {fbc: parsed['fbc'] || ""},
-      //     {fbp: parsed['fbp'] || ""},
 
+      //     {lead_id: parsed["JornayaToken"] || ""},
+      
+      //     {utm_source: parsed['utm_source'] || ""},
+      //     {fbclid: parsed['fbclid'] || ""},
       //     {adid: parsed['Ad_Name'] || ""},
       //     {ads_id: parsed['Adset_Name'] || ""},
-      //     {utm_source: parsed['utm_source'] || ""},
-      //     {userIp:parsed['userIp'] || ""},
       //     {cid: parsed['Campaign_Name'] || ""},
-      //     {fbclid: parsed['fbclid'] || ""},
       //     );
       $(".callnow").click(function () {
         window.fbqFunc("track", "Contact");

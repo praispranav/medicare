@@ -1,3 +1,4 @@
+import "./Form.scss";
 import axios from "axios";
 import { useFormik } from "formik";
 import Cookies from "js-cookie";
@@ -9,7 +10,7 @@ import errorimg from "../../assets/form/error.svg";
 import next from "../../assets/form/next.svg";
 import { sessionStorageKeys } from "../../constants/localStorage";
 import { ROUTES } from "../../constants/routes";
-import "./Form.scss";
+import { useRgbaHook } from '../../hooks/rgba'
 
 const initialValues = {
   zip: "",
@@ -27,9 +28,11 @@ const validationSchema = yup.object({
 export default function ZipCodeForm({ setForm, setFormEnd }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { storeRgbaData } = useRgbaHook();
+  const [response, setResponse] = useState({});
   const fbc = Cookies.get("_fbc") || "";
   const fbp = Cookies.get("_fbp") || "";
-
+  
   const {
     handleSubmit,
     touched,
@@ -43,18 +46,22 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
     initialValues,
     validationSchema,
     onSubmit: (values, event) => {
-      if(!loading){
+      if (!loading) {
+        const JornayaToken = document.getElementById("leadid_token").value;
         sessionStorage.setItem(sessionStorageKeys.zip, String(values.zip));
         incZipFormState(values.zip);
+        storeRgbaData("zip", values.zip);
+        storeRgbaData("city", response.city);
+        storeRgbaData("state", response.state);
+        storeRgbaData("lead_id", JornayaToken);
+        storeRgbaData("user_agent", window.navigator.userAgent);
       }
     },
   });
 
   const incZipFormState = (zip) => {
     setLoading(true);
-
-    const temp = document.getElementById("leadid_token").value;
-
+    const JornayaToken = document.getElementById("leadid_token").value;
     axios
       .get("https://api.zippopotam.us/us/" + zip, {
         method: "GET",
@@ -64,6 +71,10 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
         mode: "no-cors",
       })
       .then((response) => {
+        setResponse({
+          city: response.data["places"][0]["place name"],
+          state: response.data["places"][0]["state abbreviation"],
+        });
         sessionStorage.setItem(
           sessionStorageKeys.zipCodeExtraValues,
           JSON.stringify({
@@ -72,7 +83,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
             fbp: fbp,
             city: response.data["places"][0]["place name"],
             state: response.data["places"][0]["state abbreviation"],
-            JornayaToken: temp,
+            JornayaToken: JornayaToken,
           })
         );
         navigate("../" + ROUTES.nameForm);
@@ -101,7 +112,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
   };
 
   useEffect(() => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: "smooth" });
     checkPreviousPageData();
     const zipInitialValue = sessionStorage.getItem(sessionStorageKeys.zip);
     if (zipInitialValue) setValues({ zip: Number(zipInitialValue) });
@@ -141,10 +152,23 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
               ) : (
                 ""
               )}
-              <button disabled={errors.zip} className="form-button form-option-continue color-white font-20 bold">
-                {loading ? <><PropagateLoader color="#2DA9C2" className="margin-loader" /> <p className="visibility-hidden">.</p> </> : <>
-                Continue <img src={next} alt="" />
-                </> } 
+              <button
+                disabled={errors.zip}
+                className="form-button form-option-continue color-white font-20 bold"
+              >
+                {loading ? (
+                  <>
+                    <PropagateLoader
+                      color="#2DA9C2"
+                      className="margin-loader"
+                    />{" "}
+                    <p className="visibility-hidden">.</p>{" "}
+                  </>
+                ) : (
+                  <>
+                    Continue <img src={next} alt="" />
+                  </>
+                )}
               </button>
             </form>
           </div>
