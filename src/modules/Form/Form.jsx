@@ -35,7 +35,6 @@ export const Form = ({ setForm, setFormEnd }) => {
     );
     
     for (const entry of search.entries()) {
-      console.log(entry);
       generatorQuery.set(entry[0], entry[1]);
     }
 
@@ -49,8 +48,9 @@ export const Form = ({ setForm, setFormEnd }) => {
       dataLayer.set(
         "visitor_id",
         localStorage.getItem(localStorageKeys.visitorId)
-      ); // add it in ringba
+      );
     }
+    storeRgbaData("visitor_id", localStorage.getItem(localStorageKeys.visitorId));
   };
 
   const getIpAdd = async () => {

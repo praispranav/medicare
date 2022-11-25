@@ -10,12 +10,7 @@ import { ROUTES } from "../../constants/routes";
 
 export const Navbar = () => {
   const location = useLocation();
-  const { number, staticNumber, setInitialValue } = useInitRingba();
-
-  useEffect(()=>{
-    setInitialValue()
-  },[])
-  console.log(location);
+  const { number, staticNumber } = useInitRingba();
   return (
     <div className="navbar">
       <nav>

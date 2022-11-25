@@ -25,11 +25,10 @@ export function useGeneratorQuery() {
       let finalQuery = "?";
       entries.forEach((keyValuePair) => {
         finalQuery += keyValuePair[0];
-        finalQuery += "=" + keyValuePair[1] + '&';
+        finalQuery += "=" + keyValuePair[1] + "&";
       });
-      return finalQuery
-    }
-    else return``;
+      return finalQuery;
+    } else return ``;
   };
   return { get, set };
 }
