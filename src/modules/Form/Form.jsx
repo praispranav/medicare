@@ -33,8 +33,12 @@ export const Form = ({ setForm, setFormEnd }) => {
       sessionStorageKeys.utm_fbclid,
       JSON.stringify(redirectQueries)
     );
+    
+    for (const entry of search.entries()) {
+      console.log(entry);
+      generatorQuery.set(entry[0], entry[1]);
+    }
 
-    generatorQuery.set(search.get("generator"));
     const currentDataLayerData = dataLayer.get();
     if (currentDataLayerData) dataLayer.getAndSetFromSession(currentDataLayerData);
     else {

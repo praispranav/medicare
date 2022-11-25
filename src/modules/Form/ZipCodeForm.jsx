@@ -55,8 +55,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
         sessionStorage.setItem(sessionStorageKeys.zip, String(values.zip));
         incZipFormState(values.zip);
         storeRgbaData("zip", values.zip);
-        storeRgbaData("city", response.city);
-        storeRgbaData("state", response.state);
+        
         storeRgbaData("lead_id", JornayaToken);
         storeRgbaData("user_agent", window.navigator.userAgent);
 
@@ -94,6 +93,8 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
           city: response.data["places"][0]["place name"],
           state: response.data["places"][0]["state abbreviation"],
         });
+        storeRgbaData("city", response.data["places"][0]["place name"]);
+        storeRgbaData("state", response.data["places"][0]["state abbreviation"]);
         sessionStorage.setItem(
           sessionStorageKeys.zipCodeExtraValues,
           JSON.stringify({

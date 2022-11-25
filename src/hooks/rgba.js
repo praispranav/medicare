@@ -13,11 +13,6 @@ export function useRgbaHook() {
     } else {
       window._rgba_tags = [rgbaPattern];
     }
-
-    sessionStorage.setItem(
-      sessionStorageKeys.rgba,
-      JSON.stringify(window._rgba_tags)
-    );
   };
   return { storeRgbaData };
 }
@@ -27,9 +22,6 @@ export function useInitRingba() {
   const ringbaKey = useRingbaUser(history);
   const [num, setNum] = useState();
 
-  const ringbaScript = window.document.getElementById(RINGBA_SCRIPT_ID);
-  if (ringbaScript) {
-  } else {
     $(document).ready(function ($) {
       (function (e, d) {
         //Ringba.com phone number tracking
@@ -63,40 +55,43 @@ export function useInitRingba() {
       }
 
       window._rgba_tags = window._rgba_tags || [];
-
-      const existingValues = sessionStorage.getItem(sessionStorageKeys.rgba);
-      if (existingValues) {
-        const parsed = JSON.parse(existingValues);
-        if (Array.isArray(parsed)) return (window._rgba_tags = parsed);
-      }
-      //   .push(
-      //     {user_agent:parsed['user_agent'] || ""},
-      //     {userIp:parsed['userIp'] || ""},
-      //     {fbp: parsed['fbp'] || ""},
-      //     {fbc: parsed['fbc'] || ""},
-
-      //     {zip: parsed['zip'] || ""},
-      //     {city: parsed['city'] || ""},
-      //     {state: parsed['state'] || ""},
-
-      //     {firstName: parsed['firstName'] || ""},
-      //     {lastName: parsed['lastName'] || ""},
       
-      //     {email: parsed['email'] || ""},
 
-      //     {lead_id: parsed["JornayaToken"] || ""},
-      
-      //     {utm_source: parsed['utm_source'] || ""},
-      //     {fbclid: parsed['fbclid'] || ""},
-      //     {adid: parsed['Ad_Name'] || ""},
-      //     {ads_id: parsed['Adset_Name'] || ""},
-      //     {cid: parsed['Campaign_Name'] || ""},
-      //     );
       $(".callnow").click(function () {
         window.fbqFunc("track", "Contact");
       });
     });
-  }
 
-  return { number:num, staticNumber: ringbaKey.number };
+    const setInitialValue = () =>{
+      // window._rgba_tags.push(
+      //   { user_agent: "" },
+      //   { userIp: "" },
+      //   { fbp: "" },
+      //   { fbc: "" },
+
+      //   { zip: "" },
+      //   { city: "" },
+      //   { state: "" },
+
+      //   { firstName: "" },
+      //   { lastName: "" },
+
+      //   { email: "" },
+
+      //   { lead_id: "" },
+
+      //   { utm_source: "" },
+      //   { fbclid: "" },
+      //   { adid: "" },
+      //   { ads_id: "" },
+      //   { cid: "" }
+      // );
+      // const existingValues = sessionStorage.getItem(sessionStorageKeys.rgba);
+      // if (existingValues) {
+      //   const parsed = JSON.parse(existingValues);
+      //   if (Array.isArray(parsed)) return (window._rgba_tags = parsed);
+      // }
+    }
+
+  return { number: num, staticNumber: ringbaKey.number, setInitialValue };
 }

@@ -115,7 +115,7 @@ const End = ({ number, fname, lname, sec, min, staticNumber }) => {
               id="font-end-contact-number"
               className="color-white font-24 bold toll-free"
             >
-              <span>{number || staticNumber}</span>
+              <span>{window.pnumber || staticNumber}</span>
               <div className="tfn-cta">Click To Call Toll-Free</div>
             </div>
           </div>
@@ -165,7 +165,7 @@ export const FormEnd = ({ number, form, fname, lname }) => {
     // window.dataLayer[0].utm_source = form["ADS_ID"] || "";
     // window.dataLayer[0].utm_source = form["ADID"] || "";
 
-    setHistory({ ...dataLayer.get() });
+    // setHistory({ ...dataLayer.get() });
   };
 
   useEffect(() => {
