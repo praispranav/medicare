@@ -5,7 +5,7 @@ export const RINGBA_SCRIPT_ID = "rgba_script"
 
 const RINGBA_COM_TAGS = [
   {
-    key: "JSbfbe6e3aef084885af8a574bec4f8d45",
+    //key: "JSbfbe6e3aef084885af8a574bec4f8d45",
     user: "internal1", // make default
     number: "1-866-790-0241",
   },
