@@ -89,6 +89,9 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
         mode: "no-cors",
       })
       .then((response) => {
+        const obj = response.data;
+        const keys = Object.keys(obj);
+        if(keys.length === 0) return setErrors({ zip: "Zip Code not valid" });
         setResponse({
           city: response.data["places"][0]["place name"],
           state: response.data["places"][0]["state abbreviation"],

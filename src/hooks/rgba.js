@@ -4,10 +4,12 @@ import { sessionStorageKeys } from "../constants/localStorage";
 import { RINGBA_SCRIPT_ID } from "../constants/ringba";
 import { useSearchParams } from "react-router-dom";
 import { useRingbaUser } from "../constants/ringba";
+import { RINGBA_COM_TAGS } from "../constants/ringba"
 
 export function useRgbaHook() {
   const storeRgbaData = (key, value) => {
-    const rgbaPattern = { [key]: value || "" };
+    let rgbaPattern = { [key]: value || "" };
+    if(key === 'generator') rgbaPattern = { [key]: value || RINGBA_COM_TAGS[0].user };
     if (Array.isArray(window._rgba_tags)) {
       window._rgba_tags.push(rgbaPattern);
     } else {

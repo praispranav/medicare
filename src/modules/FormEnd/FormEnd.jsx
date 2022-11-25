@@ -147,9 +147,9 @@ export const FormEnd = ({ number, form, fname, lname }) => {
   const leadNode = window.document.getElementById(LEAD.id);
 
   const removeLeadScript = () => {
-    if (leadNode) {
-      leadNode.remove();
-    }
+    if (leadNode) leadNode.remove();
+    const leadWrapper = window.document.getElementById(LEAD.wrapperId)
+    if(leadWrapper) leadWrapper.remove();
   };
 
   const checkPreviousPage = () => {
