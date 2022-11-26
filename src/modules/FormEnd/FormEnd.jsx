@@ -131,7 +131,7 @@ const End = ({ number, fname, lname, sec, min, staticNumber }) => {
   );
 };
 
-export const FormEnd = ({ number, form, fname, lname }) => {
+const FormEnd = ({ number, form, fname, lname }) => {
   fname = sessionStorage.getItem(sessionStorageKeys.firstName);
   lname = sessionStorage.getItem(sessionStorageKeys.lastName);
 
@@ -220,3 +220,5 @@ export const FormEnd = ({ number, form, fname, lname }) => {
     );
   }
 };
+
+export default FormEnd;

@@ -4,7 +4,7 @@ export const GENERATOR_QUERY = "generator";
 export const RINGBA_SCRIPT_ID = "rgba_script"
 
 
-const RINGBA_COM_TAGS = [
+export const RINGBA_COM_TAGS = [
   {
     key: "JSbfbe6e3aef084885af8a574bec4f8d45",
     user: "internal1",
