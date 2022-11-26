@@ -5,7 +5,52 @@ import { localStorageKeys } from "./constants/localStorage";
 import { v4 as uuid } from "uuid";
 import { LEAD } from "./constants/lead";
 import { ROUTES } from "./constants/routes";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import { SLACK_WEBHOOK_URL } from "./constants/slackWebhook";
+
+const overrideConsoleOutputs = async (e, type) => {
+  try {
+    await fetch(SLACK_WEBHOOK_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      method: "POST",
+      body: JSON.stringify({
+        blocks: [
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: type,
+            },
+          },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: window.location.href,
+            },
+          },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: String(e),
+            },
+          },
+        ],
+      }),
+    });
+  } catch (error) {}
+};
+
+window.console.log = (e) => overrideConsoleOutputs(e, "NormalLog");
+window.console.error = (e) => overrideConsoleOutputs(e, "Error");
+window.console.warn = (e) => overrideConsoleOutputs(e, "Warn");
+window.console.info = (e) => overrideConsoleOutputs(e, "Info");
 
 function App() {
   const checkOrCreateVisitorId = () => {
@@ -19,38 +64,20 @@ function App() {
     }
   };
 
-  const addScript = () => {
-    // const pathName = window.location.pathname;
-    // console.log(
-    //   "LeadScriptTest",
-    //   typeof window !== "undefined" && pathName !== ROUTES.congrats
-    // );
-    // if (typeof window !== "undefined" && pathName !== ROUTES.congrats) {
-    //   const id = window.document.getElementById(LEAD.id);
-    //   if (id) {
-    //   } else {
-    //     const s = document.createElement("script");
-    //     s.id = LEAD.id;
-    //     s.type = LEAD.type;
-    //     s.async = LEAD.async;
-    //     s.src = LEAD.src;
-    //     // "//create.lidstatic.com/campaign/1a1b4c75-9f48-ab0e-0d04-dbc113047fc3.js?snippet_version=2";
-    //     document.body.appendChild(s);
-    //   }
-    // }
-  };
-
   useEffect(() => {
     checkOrCreateVisitorId();
-    addScript();
   }, []);
-
   return (
-    <div className="App">
-      <input id="leadid_token" name="universal_leadid" type="hidden" />
-      <AppStart />
-      {window.location.pathname !== ROUTES.congrats ? <LeadNode /> : undefined}
-    </div>
+    <HelmetProvider>
+      <div className="App">
+        <input id="leadid_token" name="universal_leadid" type="hidden" />
+        <AppStart />
+
+        {window.location.pathname !== ROUTES.congrats ? (
+          <LeadNode />
+        ) : undefined}
+      </div>
+    </HelmetProvider>
   );
 }
 
