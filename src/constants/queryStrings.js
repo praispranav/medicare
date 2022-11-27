@@ -69,4 +69,34 @@ export const REDIRECT_AND_STORAGE_KEYS = [
         storageKey: "utm_term",
         ringbaKey:"utm_term"
     },
+    {
+        redirectString:"site",
+        storageKey: "site",
+        ringbaKey:"site"
+    },
+    {
+        redirectString:"utm_site_id",
+        storageKey: "utm_site_id",
+        ringbaKey:"utm_site_id"
+    },
+    {
+        redirectString:"utm_title",
+        storageKey: "utm_title",
+        ringbaKey:"utm_title"
+    },
+    {
+        redirectString:"platform",
+        storageKey: "platform",
+        ringbaKey:"platform"
+    },
+    {
+        redirectString:"utm_campaign_item_id",
+        storageKey: "utm_campaign_item_id",
+        ringbaKey:"utm_campaign_item_id"
+    },
+    {
+        redirectString:"thumbnail",
+        storageKey: "thumbnail",
+        ringbaKey:"thumbnail"
+    },
 ]
