@@ -99,4 +99,9 @@ export const REDIRECT_AND_STORAGE_KEYS = [
         storageKey: "thumbnail",
         ringbaKey:"thumbnail"
     },
+    {
+        redirectString:"clkid",
+        storageKey: "clkid",
+        ringbaKey:"clkid"
+    },
 ]
