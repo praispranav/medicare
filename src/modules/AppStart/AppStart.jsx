@@ -5,19 +5,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./AppStart.scss";
 import { ROUTES } from "../../constants/routes";
 import { Form } from "../Form/Form";
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 const FormEnd = React.lazy(() => import("../FormEnd/FormEnd"));
 const ZipCodeForm = React.lazy(() => import("../Form/ZipCodeForm"));
 const NameForm = React.lazy(() => import("../Form/NameForm"));
 const PhoneEmailForm = React.lazy(() => import("../Form/PhoneEmailForm"));
 
-// const Loading = () =>{
-//   return (
-//     <div className="">
-
-//     </div>
-//   )
-// }
+const Loading = () => {
+  return (
+    <div className="loading-container">
+      <PropagateLoader color="#2DA9C2" />
+    </div>
+  );
+};
 
 export const AppStart = () => {
   const [formEnd, setFormEnd] = useState({});
@@ -26,7 +27,6 @@ export const AppStart = () => {
     <div className="app-start">
       <BrowserRouter>
         <Navbar />
-
         <Routes>
           <Route
             path={ROUTES.homePage}
@@ -35,7 +35,7 @@ export const AppStart = () => {
           <Route
             path={ROUTES.zipCodeForm}
             element={
-              <React.Suspense fallback={<>...</>}>
+              <React.Suspense fallback={<Loading />}>
                 <ZipCodeForm setForm={setForm} setFormEnd={setFormEnd} />
               </React.Suspense>
             }
@@ -43,7 +43,7 @@ export const AppStart = () => {
           <Route
             path={ROUTES.nameForm}
             element={
-              <React.Suspense fallback={<>...</>}>
+              <React.Suspense fallback={<Loading />}>
                 <NameForm setForm={setForm} setFormEnd={setFormEnd} />
               </React.Suspense>
             }
@@ -51,7 +51,7 @@ export const AppStart = () => {
           <Route
             path={ROUTES.phoneEmailForm}
             element={
-              <React.Suspense fallback={<>...</>}>
+              <React.Suspense fallback={<Loading />}>
                 <PhoneEmailForm setForm={setForm} setFormEnd={setFormEnd} />
               </React.Suspense>
             }
@@ -67,7 +67,7 @@ export const AppStart = () => {
           <Route
             path={ROUTES.congrats}
             element={
-              <React.Suspense fallback={<>...</>}>
+              <React.Suspense fallback={<Loading />}>
                 <FormEnd
                   form={form}
                   fname={formEnd["fname"]}
@@ -77,7 +77,6 @@ export const AppStart = () => {
             }
           />
         </Routes>
-
         <Footer />
       </BrowserRouter>
     </div>

@@ -3,3 +3,14 @@
 .app-start > .form{
     transition: 1s;
 }
+
+.loading-container {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5fbff;
+    background-image: url("../../assets/mainback.png");
+    background-position: initial;
+}
