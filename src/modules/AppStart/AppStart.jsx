@@ -11,6 +11,14 @@ const ZipCodeForm = React.lazy(() => import("../Form/ZipCodeForm"));
 const NameForm = React.lazy(() => import("../Form/NameForm"));
 const PhoneEmailForm = React.lazy(() => import("../Form/PhoneEmailForm"));
 
+// const Loading = () =>{
+//   return (
+//     <div className="">
+
+//     </div>
+//   )
+// }
+
 export const AppStart = () => {
   const [formEnd, setFormEnd] = useState({});
   const [form, setForm] = useState({});

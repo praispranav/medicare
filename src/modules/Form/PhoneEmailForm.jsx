@@ -85,6 +85,7 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
     const utmParsed = JSON.parse(utm_fbclid);
 
     const preparedData = {
+      visitorId: localStorage.getItem(localStorageKeys.visitorId),
       firstName,
       lastName,
       zip,
