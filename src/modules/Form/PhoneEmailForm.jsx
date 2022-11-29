@@ -15,6 +15,7 @@ import { useRgbaHook } from "../../hooks/rgba";
 import { useDataLayer } from "../../hooks/useDataLayer";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
 import "./Form.scss";
+import moment from "moment-timezone";
 
 const EMAIL_RX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -103,7 +104,9 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
     const currentFormValues = localStorage.getItem(
       localStorageKeys.lastSubmittedData
     );
-    values.createdDate = new Date();
+    
+    values.createdDate = moment().tz("America/Los_Angeles").format("YYYY-MM-DD HH:MM:SS");
+     
     let finalValue = [];
 
     if (currentFormValues) {
