@@ -1,8 +1,38 @@
 export const REDIRECT_AND_STORAGE_KEYS = [
     {
+        redirectString:"generator",
+        storageKey: "generator",
+        ringbaKey:"generator"
+    },
+    {
+        redirectString:"click_id",
+        storageKey: "click_id",
+        ringbaKey:"click_id"
+    },
+    {
+        redirectString:"utm_source",
+        storageKey: "utm_source",
+        ringbaKey:"utm_source"
+    },
+    {
+        redirectString:"utm_medium",
+        storageKey: "utm_medium",
+        ringbaKey:"utm_medium"
+    },
+    {
+        redirectString:"language",
+        storageKey: "language",
+        ringbaKey:"language"
+    },
+    {
         redirectString:"device",
         storageKey: "device",
         ringbaKey:"device"
+    },
+    {
+        redirectString:"interest",
+        storageKey: "interest",
+        ringbaKey:"interest"
     },
     {
         redirectString:"fbclid",
@@ -13,95 +43,5 @@ export const REDIRECT_AND_STORAGE_KEYS = [
         redirectString:"gclid",
         storageKey: "gclid",
         ringbaKey:"gclid"
-    },
-    {
-        redirectString:"utm_aceid",
-        storageKey: "utm_aceid",
-        ringbaKey:"utm_aceid"
-    },
-    {
-        redirectString:"generator",
-        storageKey: "generator",
-        ringbaKey:"generator"
-    },
-    {
-        redirectString:"interest",
-        storageKey: "interest",
-        ringbaKey:"interest"
-    },
-    {
-        redirectString:"utm_adset",
-        storageKey: "utm_adset",
-        ringbaKey:"utm_adset"
-    },
-    {
-        redirectString:"utm_campaign",
-        storageKey: "utm_campaign",
-        ringbaKey:"utm_campaign"
-    },
-    {
-        redirectString:"utm_content",
-        storageKey: "utm_content",
-        ringbaKey:"utm_content"
-    },
-    {
-        redirectString:"utm_id",
-        storageKey: "utm_id",
-        ringbaKey:"utm_id"
-    },
-    {
-        redirectString:"utm_medium",
-        storageKey: "utm_medium",
-        ringbaKey:"utm_medium"
-    },
-    {
-        redirectString:"utm_placement",
-        storageKey: "utm_placement",
-        ringbaKey:"utm_placement"
-    },
-    {
-        redirectString:"utm_source",
-        storageKey: "utm_source",
-        ringbaKey:"utm_source"
-    },
-    {
-        redirectString:"utm_term",
-        storageKey: "utm_term",
-        ringbaKey:"utm_term"
-    },
-    {
-        redirectString:"site",
-        storageKey: "site",
-        ringbaKey:"site"
-    },
-    {
-        redirectString:"utm_site_id",
-        storageKey: "utm_site_id",
-        ringbaKey:"utm_site_id"
-    },
-    {
-        redirectString:"utm_title",
-        storageKey: "utm_title",
-        ringbaKey:"utm_title"
-    },
-    {
-        redirectString:"platform",
-        storageKey: "platform",
-        ringbaKey:"platform"
-    },
-    {
-        redirectString:"utm_campaign_item_id",
-        storageKey: "utm_campaign_item_id",
-        ringbaKey:"utm_campaign_item_id"
-    },
-    {
-        redirectString:"thumbnail",
-        storageKey: "thumbnail",
-        ringbaKey:"thumbnail"
-    },
-    {
-        redirectString:"click_id",
-        storageKey: "click_id",
-        ringbaKey:"click_id"
     },
 ]
