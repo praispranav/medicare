@@ -286,11 +286,11 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
                 By pressing the "View My Quote" (1) I provide my express written
                 consent via electronic signature to receive emails, telephone
                 calls, text messages (SMS), artificial or pre-recorded messages
-                from Senior Assistant its Affiliates, And/Or Any{" "}
+                from Qualify Benefits its Affiliates, And/Or Any{" "}
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  href="//seniorhealthbenefits.co/partner-list.html"
+                  href="//qualifybenefits.co/partner-list.html"
                 >
                   {" "}
                   Third-Party Partners{" "}
@@ -308,12 +308,12 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
                 <a
                   rel="noreferrer"
                   target="_blank"
-                  href="//seniorhealthbenefits.co/privacy-policy.html"
+                  href="//qualifybenefits.co/privacy-policy.html"
                 >
                   Privacy Policy
                 </a>{" "}
                 and{" "}
-                <a href="//seniorhealthbenefits.co/terms.html">Terms of Use</a>.
+                <a href="//qualifybenefits.co/terms.html">Terms of Use</a>.
                 (3) I understand that this is a solicitation for insurance.
                 Plans are insured or covered by a Medicare Advantage
                 organization with a Medicare contract and/or a Medicare-approved
