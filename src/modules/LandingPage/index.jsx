@@ -63,7 +63,7 @@ export default function LandingPage() {
           <div className="row">
             <div className="section2head">
               <input type="hidden" name="click_id_store" id="click_id_store" />
-              <h1>
+              <h1 className="title-h1">
                 <span>$5,100/Year</span> Grocery Allowance Could be Yours with
                 Incredible New Medicare Plan
               </h1>
