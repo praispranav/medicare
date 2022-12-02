@@ -156,7 +156,7 @@ export default function LandingPage() {
                 <ul className="agegroup">
                   <li>
                     <Link
-                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}`}
                       id="landerclick"
                     >
                       Below 64
@@ -164,7 +164,7 @@ export default function LandingPage() {
                   </li>
                   <li>
                   <Link
-                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}`}
                       id="landerclick"
                     >
                       65 - 70
@@ -172,7 +172,7 @@ export default function LandingPage() {
                   </li>
                   <li>
                   <Link
-                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}`}
                       id="landerclick"
                     >
                       71 - 75
@@ -180,7 +180,7 @@ export default function LandingPage() {
                   </li>
                   <li>
                   <Link
-                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}`}
                       id="landerclick"
                     >
                       76 - 80
@@ -188,7 +188,7 @@ export default function LandingPage() {
                   </li>
                   <li>
                   <Link
-                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}`}
                       id="landerclick"
                     >
                       81 - 85
@@ -196,7 +196,7 @@ export default function LandingPage() {
                   </li>
                   <li>
                   <Link
-                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}`}
                       id="landerclick"
                     >
                       86+
