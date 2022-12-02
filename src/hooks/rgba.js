@@ -7,6 +7,8 @@ import { useRingbaUser } from "../constants/ringba";
 import { RINGBA_COM_TAGS } from "../constants/ringba"
 import Cookies from "js-cookie";
 
+export const CLICK_ID = "vl-cid"
+
 export function useRgbaHook() {
   const storeRgbaData = (key, value) => {
     let rgbaPattern = { [key]: value || "" };
@@ -26,7 +28,6 @@ export function useInitRingba() {
   const [num, setNum] = useState();
   const [clickId, setClickId] = useState()
 
-  const init = () =>{
     $(document).ready(function ($) {
       (function (e, d) {
         //Ringba.com phone number tracking
@@ -55,25 +56,25 @@ export function useInitRingba() {
       function GetNumber(number, tagId, firstTime) {
         window.pnumber = number;
         setNum(number);
-        const urlParams = new URLSearchParams(window.location.search);
-        const generator_var = urlParams.get('generator');
-        const type_var = urlParams.get('type');
-        const device_var = urlParams.get('device');
-        const fbclid_var = urlParams.get('fbclid');
-        const gclid_var = urlParams.get('gclid');
-        const interest_var = urlParams.get('interest');
-        const utm_medium_var = urlParams.get('utm_medium');
-        const language_var = urlParams.get('language');
-        const utm_source_var = urlParams.get('utm_source');
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const generator_var = urlParams.get('generator');
+        // const type_var = urlParams.get('type');
+        // const device_var = urlParams.get('device');
+        // const fbclid_var = urlParams.get('fbclid');
+        // const gclid_var = urlParams.get('gclid');
+        // const interest_var = urlParams.get('interest');
+        // const utm_medium_var = urlParams.get('utm_medium');
+        // const language_var = urlParams.get('language');
+        // const utm_source_var = urlParams.get('utm_source');
         //const click_id_var = click_id_store;
-        const click_id_var = "";
-        var obj = { generator: generator_var, type: type_var, device: device_var, fbclid: fbclid_var, gclid: gclid_var, interest: interest_var, utm_medium: utm_medium_var, language: language_var, utm_source: utm_source_var, click_id: click_id_var};
+        // const click_id_var = clickId
+        // var obj = { click_id: click_id_var};
         
-        console.log("Obj", obj)
+        // console.log("Obj", obj)
         
         $("#form-end-contact").attr("href", "tel://" + window.pnumber);
         $("#font-end-contact-number").text(window.pnumber);
-        $("a#landerclick").attr("href", "https://quotes.qualifybenefits.co/?" + $.param(obj));
+        // $("a#landerclick").attr("href", "https://quotes.qualifybenefits.co/?" + $.param(obj));
       }
 
       window._rgba_tags = window._rgba_tags || [];
@@ -83,15 +84,10 @@ export function useInitRingba() {
         window.fbqFunc("track", "Contact");
       });
     });
-  }
 
-    useEffect(()=>{
-      if(Cookies.get('vl-cid') && !clickId){
-        setClickId(clickId)
-        init(clickId)
-      }
-      console.log("Click Id", Cookies.get('vl-cid'))
-    },[Cookies.get('vl-cid')])
+  useEffect(()=>{
+      setClickId(Cookies.get(CLICK_ID))
+  },[Cookies.get(CLICK_ID)])
 
     const setInitialValue = () =>{
       // window._rgba_tags.push(
@@ -124,5 +120,5 @@ export function useInitRingba() {
       // }
     }
 
-  return { number: num, staticNumber: ringbaKey.number, setInitialValue };
+  return { number: num, staticNumber: ringbaKey.number, setInitialValue, clickId };
 }

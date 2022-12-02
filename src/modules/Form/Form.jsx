@@ -16,7 +16,6 @@ export const Form = ({ setForm, setFormEnd }) => {
   const [search] = useSearchParams();
   const generatorQuery = useGeneratorQuery();
   const { storeRgbaData } = useRgbaHook();
-  const dataLayer = useDataLayer();
 
   const pushInitialData = (userIp) => {
     const redirectQueries = {
@@ -34,22 +33,7 @@ export const Form = ({ setForm, setFormEnd }) => {
       JSON.stringify(redirectQueries)
     );
     
-    for (const entry of search.entries()) {
-      generatorQuery.set(entry[0], entry[1]);
-    }
-
-    const currentDataLayerData = dataLayer.get();
-    if (currentDataLayerData) dataLayer.getAndSetFromSession(currentDataLayerData);
-    else {
-      dataLayer.set("interest", search.get("interest"));
-      dataLayer.set("language", search.get("language"));
-      dataLayer.set("device_model", window.navigator.userAgent);
-      dataLayer.set("country", "us");
-      dataLayer.set(
-        "visitor_id",
-        localStorage.getItem(localStorageKeys.visitorId)
-      );
-    }
+  
     storeRgbaData("visitor_id", localStorage.getItem(localStorageKeys.visitorId));
   };
 
