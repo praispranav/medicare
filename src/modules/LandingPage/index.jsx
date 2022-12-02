@@ -1,8 +1,9 @@
 import Cookies from "js-cookie";
 import React, { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import HEADER_IMAGE from "../../assets/header-image.jpeg";
 import { localStorageKeys } from "../../constants/localStorage";
+import { ROUTES } from "../../constants/routes";
 import { CLICK_ID, useRgbaHook } from "../../hooks/rgba";
 import { useDataLayer } from "../../hooks/useDataLayer";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
@@ -27,13 +28,14 @@ export default function LandingPage() {
     storeRgbaData("utm_medium_var", search.get("utm_medium"));
     storeRgbaData("language_var", search.get("language"));
     storeRgbaData("utm_source_var", search.get("utm_source"));
-    storeRgbaData("click_id_var", Cookies.get(''));
+    storeRgbaData("click_id_var", Cookies.get(""));
     for (const entry of search.entries()) {
       generatorQuery.set(entry[0], entry[1]);
     }
 
     const currentDataLayerData = dataLayer.get();
-    if (currentDataLayerData) dataLayer.getAndSetFromSession(currentDataLayerData);
+    if (currentDataLayerData)
+      dataLayer.getAndSetFromSession(currentDataLayerData);
     else {
       dataLayer.set("interest", search.get("interest"));
       dataLayer.set("language", search.get("language"));
@@ -46,14 +48,14 @@ export default function LandingPage() {
     }
   };
 
-  useEffect(()=>{
-    if(Cookies.get(CLICK_ID)){
-      storeRgbaData('click_id_var', Cookies.get(CLICK_ID));
-      setInitialData()
-      console.log(Cookies.get(CLICK_ID))
+  useEffect(() => {
+    if (Cookies.get(CLICK_ID)) {
+      storeRgbaData("click_id_var", Cookies.get(CLICK_ID));
+      setInitialData();
+      console.log(Cookies.get(CLICK_ID));
     }
-  },[Cookies.get(CLICK_ID)])
-  
+  }, [Cookies.get(CLICK_ID)]);
+
   return (
     <div className="main">
       <div className="section2">
@@ -153,52 +155,52 @@ export default function LandingPage() {
               <div className="linkbox">
                 <ul className="agegroup">
                   <li>
-                    <a
-                      href={`http://quotes.qualifybenefits.co/?${generatorQuery.get()}}`}
+                    <Link
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
                       id="landerclick"
                     >
                       Below 64
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-href={`http://quotes.qualifybenefits.co/?${generatorQuery.get()}}`}
+                  <Link
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
                       id="landerclick"
                     >
                       65 - 70
-                    </a>
+                      </Link>
                   </li>
                   <li>
-                    <a
-                    href={`http://quotes.qualifybenefits.co/?${generatorQuery.get()}}`}
+                  <Link
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
                       id="landerclick"
                     >
                       71 - 75
-                    </a>
+                      </Link>
                   </li>
                   <li>
-                    <a
-                      href={`http://quotes.qualifybenefits.co/?${generatorQuery.get()}}`}
+                  <Link
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
                       id="landerclick"
                     >
                       76 - 80
-                    </a>
+                      </Link>
                   </li>
                   <li>
-                    <a
-                      href={`http://quotes.qualifybenefits.co/?${generatorQuery.get()}}`}
+                  <Link
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
                       id="landerclick"
                     >
                       81 - 85
-                    </a>
+                      </Link>
                   </li>
                   <li>
-                    <a
-                      href={`http://quotes.qualifybenefits.co/?${generatorQuery.get()}}`}
+                  <Link
+                      to={ ROUTES.homePage + `/?${generatorQuery.get()}}`}
                       id="landerclick"
                     >
                       86+
-                    </a>
+                      </Link>
                   </li>
                 </ul>
                 <div className="link-href">
