@@ -134,7 +134,7 @@ export default function LandingPage() {
                 </a>{" "}
                 "Give us a call to see if you qualify!"
               </p>
-              <h2>Check your Eligibility with these 3 Quick Steps:</h2>
+              <h2 className="title-h1">Check your Eligibility with these 3 Quick Steps:</h2>
               <ul className="adv-list">
                 <li>
                   <strong>Step 1: </strong> Click the corresponding box below to
