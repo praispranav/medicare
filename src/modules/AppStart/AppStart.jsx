@@ -49,8 +49,8 @@ const DefaultNavigation = () =>{
         "visitor_id",
         localStorage.getItem(localStorageKeys.visitorId)
       );
-      setLoading(false)
     }
+    setLoading(false)
   }
 
   useEffect(()=>{
