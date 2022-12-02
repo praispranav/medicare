@@ -1,5 +1,6 @@
 export const ROUTES = {
-    homePage: "/",
+    landing: "/",
+    homePage: "/age",
     zipCodeForm: "/zipcode",
     nameForm:"/name",
     phoneEmailForm: "/phoneemail",

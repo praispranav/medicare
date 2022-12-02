@@ -6,6 +6,7 @@ import "./AppStart.scss";
 import { ROUTES } from "../../constants/routes";
 import { Form } from "../Form/Form";
 import PropagateLoader from "react-spinners/PropagateLoader";
+import LandingPage from "../LandingPage";
 
 const FormEnd = React.lazy(() => import("../FormEnd/FormEnd"));
 const ZipCodeForm = React.lazy(() => import("../Form/ZipCodeForm"));
@@ -28,6 +29,11 @@ export const AppStart = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
+
+          <Route
+            path={ROUTES.landing}
+            element={<LandingPage />}
+          />
           <Route
             path={ROUTES.homePage}
             element={<Form setForm={setForm} setFormEnd={setFormEnd} />}
