@@ -124,9 +124,13 @@
     </script>
     <noscript><link href="https://track.qualifybenefits.co/d/.js?noscript=true&ourl=" rel="stylesheet"/></noscript>
     <script type="text/javascript">
+      try{
         var clickId;
         dtpCallback(() => {
             clickId = dtpCallback.getClickID();
         });
+      } catch(error){
+        console.log("Error", clickId, error)
+      }
     </script>
 </html>
