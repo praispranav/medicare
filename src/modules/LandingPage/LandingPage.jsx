@@ -46,7 +46,7 @@ export default function LandingPage({ Content, scriptPath }) {
     }
   };
 
-  const addScript = () => {
+  const addScript = async () => {
     const scriptId = "trackScript";
     const element = window.document.getElementById(scriptId);
     if (element) return;
@@ -66,7 +66,6 @@ export default function LandingPage({ Content, scriptPath }) {
     if (Cookies.get(CLICK_ID)) {
       storeRgbaData("click_id_var", Cookies.get(CLICK_ID));
       setInitialData();
-      console.log(Cookies.get(CLICK_ID));
     }
   }, [Cookies.get(CLICK_ID)]);
 

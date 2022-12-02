@@ -50,7 +50,6 @@ function init(c, a, f, q, b, m, r, g, h, k, d, n, e, p) {
 }
 
 try{
-  console.log("Init Called")
   init(
     window,
     document,
