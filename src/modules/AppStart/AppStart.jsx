@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Footer } from "../Footer/Footer";
 import { Navbar } from "../Navbar/Navbar";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useSearchParams } from "react-router-dom";
 import "./AppStart.scss";
 import { ROUTES } from "../../constants/routes";
 import { Form } from "../Form/Form";
@@ -9,6 +9,9 @@ import PropagateLoader from "react-spinners/PropagateLoader";
 import LandingPage from "../LandingPage";
 import Landing1 from "../LandingPage/components/landing1";
 import Landing2 from "../LandingPage/components/landing2";
+import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
+import { useDataLayer } from "../../hooks/useDataLayer";
+import { localStorageKeys } from "../../constants/localStorage";
 
 const FormEnd = React.lazy(() => import("../FormEnd/FormEnd"));
 const ZipCodeForm = React.lazy(() => import("../Form/ZipCodeForm"));
@@ -22,6 +25,43 @@ const Loading = () => {
     </div>
   );
 };
+
+const DefaultNavigation = () =>{
+  const generatorQuery = useGeneratorQuery();
+  const [loading, setLoading] = useState(true);
+  const dataLayer = useDataLayer();
+  const [search] = useSearchParams();
+
+  const init = () =>{
+    for (const entry of search.entries()) {
+      generatorQuery.set(entry[0], entry[1]);
+    }
+
+    const currentDataLayerData = dataLayer.get();
+    if (currentDataLayerData)
+      dataLayer.getAndSetFromSession(currentDataLayerData);
+    else {
+      dataLayer.set("interest", search.get("interest"));
+      dataLayer.set("language", search.get("language"));
+      dataLayer.set("device_model", window.navigator.userAgent);
+      dataLayer.set("country", "us");
+      dataLayer.set(
+        "visitor_id",
+        localStorage.getItem(localStorageKeys.visitorId)
+      );
+      setLoading(false)
+    }
+  }
+
+  useEffect(()=>{
+    init();
+  },[])
+
+  if(loading) return null
+  return(
+    <Navigate to={ROUTES.landing1 + '?' + generatorQuery.get() } />
+  )
+}
 
 export const AppStart = () => {
   const [formEnd, setFormEnd] = useState({});
@@ -88,7 +128,7 @@ export const AppStart = () => {
               </React.Suspense>
             }
           />
-          <Route path="" element={<Navigate to={ROUTES.landing1} />} />
+          <Route path="" element={<DefaultNavigation />} />
         </Routes>
         <Footer />
     </div>
