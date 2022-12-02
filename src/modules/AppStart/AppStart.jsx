@@ -28,7 +28,6 @@ export const AppStart = () => {
   const [form, setForm] = useState({});
   return (
     <div className="app-start">
-      <BrowserRouter>
         <Navbar />
         <Routes>
           <Route
@@ -92,7 +91,6 @@ export const AppStart = () => {
           <Route path="" element={<Navigate to={ROUTES.landing1} />} />
         </Routes>
         <Footer />
-      </BrowserRouter>
     </div>
   );
 };

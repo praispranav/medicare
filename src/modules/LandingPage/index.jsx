@@ -1,17 +1,9 @@
-import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
-import HEADER_IMAGE from "../../assets/header-image.jpeg";
-import { localStorageKeys } from "../../constants/localStorage";
-import { ROUTES } from "../../constants/routes";
+import { useLocation } from "react-router-dom";
 import { TRACK_SCRIPT } from "../../constants/track";
-import { CLICK_ID, useRgbaHook } from "../../hooks/rgba";
-import { useDataLayer } from "../../hooks/useDataLayer";
-import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
-import useSmartLook from "../../hooks/useSmartLook";
-import LandingPage from "./LandingPage";
 import "./index.scss";
+import LandingPage from "./LandingPage";
 
 export default function LandingPageWrapper() {
   const location = useLocation();

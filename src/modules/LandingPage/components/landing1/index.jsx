@@ -1,9 +1,10 @@
 import React from "react";
 import { useGeneratorQuery } from "../../../../hooks/useGeneratorQuery";
 import "./index.scss";
-import HEADER_IMAGE from "../../../../assets/header-image.jpeg";
 import { ROUTES } from "../../../../constants/routes";
 import { Link } from "react-router-dom";
+
+const HEADER_IMAGE = '/assets/images/header-image.jpeg'
 
 export default function Landing1() {
   const generatorQuery = useGeneratorQuery();
