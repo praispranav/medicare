@@ -2,8 +2,10 @@ import React from "react";
 import "./index.scss";
 import HEADER_IMAGE from "../../assets/header-image.jpeg";
 import useSmartLook from "../../hooks/useSmartLook";
+import { useRgbaHook } from "../../hooks/rgba";
 
 export default function LandingPage() {
+  const { storeRgbaData } = useRgbaHook();
   useSmartLook();
   return (
     <div className="main">
@@ -105,7 +107,7 @@ export default function LandingPage() {
                 <ul className="agegroup">
                   <li>
                     <a
-                      href="http://quotes.qualifybenefits.co/"
+                      href={`http://quotes.qualifybenefits.co/?{}`}
                       id="landerclick"
                     >
                       Below 64
