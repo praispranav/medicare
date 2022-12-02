@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Footer } from "../Footer/Footer";
 import { Navbar } from "../Navbar/Navbar";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./AppStart.scss";
 import { ROUTES } from "../../constants/routes";
 import { Form } from "../Form/Form";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import LandingPage from "../LandingPage";
+import Landing1 from "../LandingPage/components/landing1";
+import Landing2 from "../LandingPage/components/landing2";
 
 const FormEnd = React.lazy(() => import("../FormEnd/FormEnd"));
 const ZipCodeForm = React.lazy(() => import("../Form/ZipCodeForm"));
@@ -29,11 +31,16 @@ export const AppStart = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route
+            path={ROUTES.landing1}
+            element={<LandingPage Content={<Landing1 />} />}
+          />
 
           <Route
-            path={ROUTES.landing}
-            element={<LandingPage />}
+            path={ROUTES.landing2}
+            element={<LandingPage Content={<Landing2 />} />}
           />
+
           <Route
             path={ROUTES.homePage}
             element={<Form setForm={setForm} setFormEnd={setFormEnd} />}
@@ -82,6 +89,7 @@ export const AppStart = () => {
               </React.Suspense>
             }
           />
+          <Route path="" element={<Navigate to={ROUTES.landing1} />} />
         </Routes>
         <Footer />
       </BrowserRouter>
