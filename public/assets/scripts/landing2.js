@@ -59,6 +59,10 @@ function init(c, a, f, q, b, m, r, g, h, k, d, n, e, p) {
       "https://track.qualifybenefits.co/d/.js",
       "savedCid"
     );
+    var clickId;
+    dtpCallback(() => {
+        clickId = dtpCallback.getClickID();
+    });
     
   } catch(error){
     console.log("Error", error)
