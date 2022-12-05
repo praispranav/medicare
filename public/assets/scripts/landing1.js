@@ -1,66 +1,10 @@
-function init(c, a, f, q, b, m, r, g, h, k, d, n, e, p) {
-    p = "https:" === c.location.protocol ? "secure; " : "";
-    c[b] ||
-      ((c[b] = function (a) {
-        c[b].state.callbackQueue.push(a);
-      }),
-      (c[b].state = { callbackQueue: [] }),
-      (c[b].registerConversion = function (a) {
-        c[b].state.callbackQueue.push(a);
-      }),
-      (function () {
-        (k = /[?&]cpid(=([^&#]*)|&|#|$)/.exec(c.location.href)) &&
-          k[2] &&
-          ((d = k[2]),
-          (n = a.cookie.match(new RegExp("(^| )vl-" + d + "=([^;]+)"))));
-        var b = a.cookie.match(/(^| )vl-cid=([^;]+)/),
-          l;
-        "savedCid" !== r ||
-          !b ||
-          (d && "undefined" !== typeof d) ||
-          (l = b.pop());
-        g = a.createElement("script");
-        h = a.scripts[0];
-        g.src =
-          m +
-          (-1 === m.indexOf("?") ? "?" : "&") +
-          "oref=" +
-          f(a.referrer) +
-          "&ourl=" +
-          f(location[q]) +
-          "&opt=" +
-          f(a.title) +
-          "&vtm=" +
-          new Date().getTime() +
-          (l ? "&cid=" + l : "") +
-          (n ? "&uw=no" : "");
-        h.parentNode.insertBefore(g, h);
-        d &&
-          ((e = new Date()),
-          e.setTime(e.getTime() + 864e5),
-          (a.cookie =
-            "vl-" +
-            d +
-            "=1; " +
-            p +
-            "samesite=Strict; expires=" +
-            e.toGMTString() +
-            "; path=/"));
-      })());
-  }
-  
-  try{
-    init(
-      window,
-      document,
-      encodeURIComponent,
-      "href",
-      "dtpCallback",
-      "https://track.qualifybenefits.co/d/.js",
-      "savedCid"
-    );
-    
-  } catch(error){
-    console.log("Error", error)
-  }
-  
+(function(b,c,l,q,r,e,t,y,d,m,u,z,a,n,g,f,p,v,h,w){function x(){for(var a=c.querySelectorAll(".dtpcnt"),b=0,d=a.length;b<d;b++)a[b][t]=a[b][t].replace(/(^|\s+)dtpcnt($|\s+)/g,"")}w="https:"===b.location.protocol?"secure; ":"";b[d]||(b[d]=function(){(b[d].q=b[d].q||[]).push(arguments)},g=c[q],c[q]=function(){g&&g.apply(this,arguments);if(b[d]&&!b[d].hasOwnProperty("params")&&/loaded|interactive|complete/.test(c.readyState))for(;a=c[r][m++];)/\/?click\/?($|(\/[0-9]+)?$)/.test(a.pathname)&&(a[e]="javascrip"+
+b.postMessage.toString().slice(4,5)+":"+d+'.l="'+a[e]+'",void 0')},setTimeout(function(){(p=/[?&]cpid(=([^&#]*)|&|#|$)/.exec(b.location.href))&&p[2]&&(f=p[2],v=c.cookie.match(new RegExp("(^| )vl-"+f+"=([^;]+)")));var d=c.cookie.match(/(^| )vl-cep=([^;]+)/),k=location[e];if("savedCep"===z&&d&&(!f||"undefined"===typeof f)&&0>k.indexOf("cep=")){var g=-1<k.indexOf("?")?"&":"?";k+=g+d.pop()}a=c.createElement("script");n=c.scripts[0];a.defer=1;a.src=u+(-1===u.indexOf("?")?"?":"&")+"lpref="+l(c.referrer)+
+"&lpurl="+l(k)+"&lpt="+l(c.title)+"&vtm="+(new Date).getTime()+(v?"&uw=no":"");a[y]=function(){for(m=0;a=c[r][m++];)/dtpCallback\.l/.test(a[e])&&(a[e]=decodeURIComponent(a[e]).match(/dtpCallback\.l="([^"]+)/)[1]);x()};n.parentNode.insertBefore(a,n);f&&(h=new Date,h.setTime(h.getTime()+864E5),c.cookie="vl-"+f+"=1; "+w+"samesite=Strict; expires="+h.toGMTString()+"; path=/")},0),setTimeout(x,7E3))})
+(window,document,encodeURIComponent,"onreadystatechange","links","href","className","onerror","dtpCallback",
+0,"https://track.qualifybenefits.co/d/.js","savedCep");
+var clickId;
+dtpCallback(() => {
+  clickId = dtpCallback.getClickID();
+  sessionStorage.setItem('clickId', clickId)
+});
