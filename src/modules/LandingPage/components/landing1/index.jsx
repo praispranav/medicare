@@ -2,11 +2,25 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLanderPageQueries } from "../../../../hooks/useLanderPageQueries";
 import "./index.scss";
+import { useRingbaUser } from "../../../../constants/ringba"
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const HEADER_IMAGE = "/assets/images/header-image.jpeg";
 
 export default function Landing1() {
+  const [history] = useSearchParams();
   const { redirect } = useLanderPageQueries();
+  const ringbaKey = useRingbaUser(history);
+
+  const [number, setNumber] = useState(ringbaKey.number);
+
+  useEffect(()=>{
+    if(window.pnumber){
+      setNumber(window.pnumber);
+    }
+  },[window.pnumber])
   return (
     <div className="main">
       <div className="section2">
@@ -56,11 +70,11 @@ export default function Landing1() {
                   A Hotline opened to help Americans check if they qualify. The
                   phone number is:{" "}
                   <a
-                    href="tel:(866) 790-0241"
+                    href={`tel:${ringbaKey.number}`}
                     id="prelander_call"
                     className="callnow"
                   >
-                    <span className="display-number">(866) 790-0241</span>
+                    <span className="display-number">{number}</span>
                   </a>
                   .
                 </p>
@@ -77,11 +91,11 @@ export default function Landing1() {
                 deliveries, and even more! Our free, private, and confidential
                 hotline number is{" "}
                 <a
-                  href="tel:(866) 790-0241"
+                  href={`tel:${number}`}
                   id="prelander_call"
                   className="callnow"
                 >
-                  <span className="display-number">(866) 790-0241</span>
+                  <span className="display-number">{number}</span>
                 </a>{" "}
                 "Give us a call to see if you qualify!"
               </p>
@@ -139,10 +153,9 @@ export default function Landing1() {
                   </li>
                 </ul>
                 <div className="link-href">
-                  <a href="http://quotes.qualifybenefits.co/" id="landerclick">
-                    {" "}
+                  <Link to={redirect} id="landerclick">
                     Get priority access to the medicare plans
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
