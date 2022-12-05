@@ -122,9 +122,9 @@ export default function Landing1() {
               <div className="linkbox">
                 <ul className="agegroup">
                   <li>
-                    <Link to={redirect} id="landerclick">
+                    <a href="https://track.qualifybenefits.co/click" id="landerclick">
                       Below 64
-                    </Link>
+                    </a>
                   </li>
                   <li>
                     <Link to={redirect} id="landerclick">
