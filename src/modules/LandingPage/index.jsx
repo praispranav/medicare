@@ -13,7 +13,6 @@ export default function LandingPageWrapper() {
 
   const findScript = (pathName) => {
     const result = TRACK_SCRIPT.find((i) => i.pageUrl == pathName);
-    console.log("FIndScript", result, pathName)
     setScript(result);
     setLoading(false);
   };

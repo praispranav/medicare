@@ -23,7 +23,7 @@ export const Navbar = () => {
             </div>
           </div>
         </div>
-        {location.pathname !== ROUTES.congrats ? (
+        {location.pathname !== ROUTES.call.children.homePage && location.pathname !== ROUTES.short.children.congrats && location.pathname !== ROUTES.full.children.congrats  ? (
           <a href={`tel:${number || staticNumber}`} id="form-end-contact">
             <div className="phone-icon">
               <img src={phoneicon} alt="logo" />

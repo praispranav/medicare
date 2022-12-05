@@ -12,7 +12,7 @@ import { ROUTES } from "../../constants/routes";
 import { useRgbaHook } from "../../hooks/rgba";
 import { useDataLayer } from "../../hooks/useDataLayer";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
-import "./Form.scss";
+import "../../assets/styles/Form.scss";
 
 const initialValues = {
   zip: "",
@@ -109,7 +109,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
             JornayaToken: JornayaToken,
           })
         );
-        navigate({ pathname: ROUTES.nameForm, search: generatorQuery.get() });
+        navigate({ pathname: ROUTES.full.children.nameForm, search: generatorQuery.get() });
         setLoading(false);
       })
       .catch((error) => {

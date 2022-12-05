@@ -70,7 +70,6 @@ export function useInitRingba() {
         // const click_id_var = clickId
         // var obj = { click_id: click_id_var};
         
-        // console.log("Obj", obj)
         
         $("#form-end-contact").attr("href", "tel://" + window.pnumber);
         $("#font-end-contact-number").text(window.pnumber);

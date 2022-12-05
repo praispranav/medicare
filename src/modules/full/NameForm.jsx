@@ -10,7 +10,7 @@ import { ROUTES } from "../../constants/routes";
 import { useRgbaHook } from "../../hooks/rgba";
 import { useDataLayer } from "../../hooks/useDataLayer";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
-import "./Form.scss";
+import "../../assets/styles/Form.scss";
 
 const initialValues = {
   firstName: "",
@@ -51,7 +51,7 @@ export default function NameForm() {
       storeRgbaData("firstName", values.firstName);
       storeRgbaData("lastName", values.lastName);
       navigate({
-        pathname: ROUTES.phoneEmailForm,
+        pathname: ROUTES.full.children.phoneEmailForm,
         search: generatorQuery.get(),
       });
     },

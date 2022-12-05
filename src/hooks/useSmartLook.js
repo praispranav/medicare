@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-export default function useSmartLook() {
+export function useSmartLook() {
   useEffect(() => {
     window.smartlook ||
       (function (d) {
@@ -23,3 +23,5 @@ export default function useSmartLook() {
 
   return {};
 }
+
+export default useSmartLook

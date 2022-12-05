@@ -92,6 +92,14 @@
     <!-- End Google Tag Manager -->
 
     <style>.dtpcnt{opacity: 0;}</style>
+    <script>
+      var clickId;
+      dtpCallback(() => {
+          clickId = dtpCallback.getClickID();
+          sessionStorage.setItem('clickId', clickId)
+      });
+    
+    </script>
 
   </head>
   <body>

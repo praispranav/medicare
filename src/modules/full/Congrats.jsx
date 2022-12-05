@@ -13,9 +13,9 @@ import { sessionStorageKeys } from "../../constants/localStorage";
 import { useRingbaUser } from "../../constants/ringba";
 import { useInitRingba } from "../../hooks/rgba";
 import { useDataLayer } from "../../hooks/useDataLayer";
-import { FloatingCard } from "../FloatingCard/FloatingCard";
+import { FloatingCard } from "../../components/FloatingCard/FloatingCard";
 import { FormStart } from "../FormStart/FormStart";
-import "./FormEnd.scss";
+import "../../assets/styles/Congrats.scss";
 
 let load = 0;
 const PAGE_TITLE = "Congratulations - Qualify Benefits";
@@ -131,7 +131,7 @@ const End = ({ number, fname, lname, sec, min, staticNumber }) => {
   );
 };
 
-const FormEnd = ({ number, form, fname, lname }) => {
+const CongratsPage = ({ fname, lname }) => {
   fname = sessionStorage.getItem(sessionStorageKeys.firstName);
   lname = sessionStorage.getItem(sessionStorageKeys.lastName);
 
@@ -174,7 +174,7 @@ const FormEnd = ({ number, form, fname, lname }) => {
 
     removeLeadScript();
     checkPreviousPage();
-  }, [form]);
+  }, []);
 
   useEffect(() => {
     removeLeadScript();
@@ -221,4 +221,4 @@ const FormEnd = ({ number, form, fname, lname }) => {
   }
 };
 
-export default FormEnd;
+export default CongratsPage;

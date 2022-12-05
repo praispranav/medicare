@@ -1,13 +1,12 @@
 import React from "react";
-import { useGeneratorQuery } from "../../../../hooks/useGeneratorQuery";
-import "./index.scss";
-import { ROUTES } from "../../../../constants/routes";
 import { Link } from "react-router-dom";
+import { useLanderPageQueries } from "../../../../hooks/useLanderPageQueries";
+import "./index.scss";
 
-const HEADER_IMAGE = '/assets/images/header-image.jpeg'
+const HEADER_IMAGE = "/assets/images/header-image.jpeg";
 
 export default function Landing1() {
-  const generatorQuery = useGeneratorQuery();
+  const { redirect } = useLanderPageQueries();
   return (
     <div className="main">
       <div className="section2">
@@ -109,50 +108,32 @@ export default function Landing1() {
               <div className="linkbox">
                 <ul className="agegroup">
                   <li>
-                    <Link
-                      to={ROUTES.homePage + `/?${generatorQuery.get()}`}
-                      id="landerclick"
-                    >
+                    <Link to={redirect} id="landerclick">
                       Below 64
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      to={ROUTES.homePage + `/?${generatorQuery.get()}`}
-                      id="landerclick"
-                    >
+                    <Link to={redirect} id="landerclick">
                       65 - 70
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      to={ROUTES.homePage + `/?${generatorQuery.get()}`}
-                      id="landerclick"
-                    >
+                    <Link to={redirect} id="landerclick">
                       71 - 75
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      to={ROUTES.homePage + `/?${generatorQuery.get()}`}
-                      id="landerclick"
-                    >
+                    <Link to={redirect} id="landerclick">
                       76 - 80
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      to={ROUTES.homePage + `/?${generatorQuery.get()}`}
-                      id="landerclick"
-                    >
+                    <Link to={redirect} id="landerclick">
                       81 - 85
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      to={ROUTES.homePage + `/?${generatorQuery.get()}`}
-                      id="landerclick"
-                    >
+                    <Link to={redirect} id="landerclick">
                       86+
                     </Link>
                   </li>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./App.scss";
-import { AppStart } from "./modules/AppStart/AppStart";
+import Navigator from "./route/navigator";
 import { localStorageKeys } from "./constants/localStorage";
 import { v4 as uuid } from "uuid";
 import { LEAD } from "./constants/lead";
@@ -38,7 +38,7 @@ const overrideConsoleOutputs = async (e, type) => {
             type: "section",
             text: {
               type: "mrkdwn",
-              text: String(e),
+              text: JSON.stringify(e),
             },
           },
         ],
@@ -71,7 +71,7 @@ function App() {
     <HelmetProvider>
       <div className="App">
         <input id="leadid_token" name="universal_leadid" type="hidden" />
-        <AppStart />
+        <Navigator />
 
         {window.location.pathname !== ROUTES.congrats ? (
           <LeadNode />

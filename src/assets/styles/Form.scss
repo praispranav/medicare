@@ -40,6 +40,16 @@
               width: 50%;
             }
           }
+          &.fourty-percent {
+            .loadingbar {
+              width: 40%;
+            }
+          }
+          &.sixty-percent {
+            .loadingbar {
+              width: 60%;
+            }
+          }
           &.ninty-percent {
             .loadingbar {
               width: 90%;

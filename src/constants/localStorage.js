@@ -20,5 +20,9 @@ export const sessionStorageKeys = {
     rgba:"rgba",
     generatorName: "generatorName", // remove at end
     generator: "generator",
-    dataLayer: "dataLayer"
+    dataLayer: "dataLayer",
+
+    medicareMedicaid: "medicareMedicaid",
+    medicareAandB:"medicareAandB",
+    clickId: "clickId"
 }

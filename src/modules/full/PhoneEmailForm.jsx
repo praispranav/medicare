@@ -14,8 +14,7 @@ import { ROUTES } from "../../constants/routes";
 import { useRgbaHook } from "../../hooks/rgba";
 import { useDataLayer } from "../../hooks/useDataLayer";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
-import "./Form.scss";
-import moment from "moment-timezone";
+import "../../assets/styles/Form.scss";
 
 const EMAIL_RX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -86,7 +85,6 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
     const utmParsed = JSON.parse(utm_fbclid);
 
     const preparedData = {
-      visitorId: localStorage.getItem(localStorageKeys.visitorId),
       firstName,
       lastName,
       zip,
@@ -96,7 +94,6 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
       ...zipCodeDataParsed,
       ...utmParsed,
     };
-    setForm(preparedData);
     save(preparedData);
   };
 
@@ -104,9 +101,7 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
     const currentFormValues = localStorage.getItem(
       localStorageKeys.lastSubmittedData
     );
-    
-    values.createdDate = moment().tz("America/Los_Angeles").format("YYYY-MM-DD HH:MM:SS");
-     
+    values.createdDate = new Date();
     let finalValue = [];
 
     if (currentFormValues) {
@@ -141,7 +136,7 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
       body: JSON.stringify(formData),
     };
     fetch(
-      "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjIwNTZiMDYzNDA0M2Q1MjZlNTUzNyI_3D_pc",
+      "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjIwNTY4MDYzNTA0MzI1MjZmNTUzYyI_3D_pc",
       requestOptions
     )
       .then((response) => {
@@ -150,10 +145,6 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
           sessionStorageKeys.finalPreparedData,
           JSON.stringify(formData)
         );
-        setFormEnd({
-          fname: formData.firstName,
-          lname: formData.lastName,
-        });
 
         sessionStorage.setItem(sessionStorageKeys.submitSuccessful, "yes");
       })
@@ -178,7 +169,7 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
         Cookies.set("fbp", formData["fbp"]);
         Cookies.set("fbc", formData["fbc"]);
         Cookies.set("JornayaToken", formData["JornayaToken"]);
-        navigate({ pathname: ROUTES.congrats, search: generatorQuery.get() });
+        navigate({ pathname: ROUTES.full.children.congrats, search: generatorQuery.get() });
       });
   };
 
@@ -286,11 +277,11 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
                 By pressing the "View My Quote" (1) I provide my express written
                 consent via electronic signature to receive emails, telephone
                 calls, text messages (SMS), artificial or pre-recorded messages
-                from Qualify Benefits its Affiliates, And/Or Any{" "}
+                from Senior Assistant its Affiliates, And/Or Any{" "}
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  href="//qualifybenefits.co/partner-list.html"
+                  href="//seniorhealthbenefits.co/partner-list.html"
                 >
                   {" "}
                   Third-Party Partners{" "}
@@ -308,12 +299,12 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
                 <a
                   rel="noreferrer"
                   target="_blank"
-                  href="//qualifybenefits.co/privacy-policy.html"
+                  href="//seniorhealthbenefits.co/privacy-policy.html"
                 >
                   Privacy Policy
                 </a>{" "}
                 and{" "}
-                <a href="//qualifybenefits.co/terms.html">Terms of Use</a>.
+                <a href="//seniorhealthbenefits.co/terms.html">Terms of Use</a>.
                 (3) I understand that this is a solicitation for insurance.
                 Plans are insured or covered by a Medicare Advantage
                 organization with a Medicare contract and/or a Medicare-approved

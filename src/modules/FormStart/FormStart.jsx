@@ -11,7 +11,7 @@ import image3 from "../../assets/ratings/image3.svg";
 import image4 from "../../assets/ratings/image4.svg";
 import image5 from "../../assets/ratings/image5.svg";
 import image6 from "../../assets/ratings/image6.svg";
-import { FloatingCard } from "../FloatingCard/FloatingCard";
+import { FloatingCard } from "../../components/FloatingCard/FloatingCard";
 
 export const PreForm = ({ setForm }) => {
   let nav = useNavigate();
