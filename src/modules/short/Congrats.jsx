@@ -140,14 +140,6 @@ const CongratsPage = ({ fname, lname }) => {
   const ringbaKey = useRingbaUser(history);
   const { number: num } = useInitRingba();
 
-  const leadNode = window.document.getElementById(LEAD.id);
-
-  const removeLeadScript = () => {
-    if (leadNode) leadNode.remove();
-    const leadWrapper = window.document.getElementById(LEAD.wrapperId)
-    if(leadWrapper) leadWrapper.remove();
-  };
-
   const checkPreviousPage = () => {
     const submitted = sessionStorage.getItem(
       sessionStorageKeys.submitSuccessful
@@ -168,13 +160,9 @@ const CongratsPage = ({ fname, lname }) => {
     window.document.title = PAGE_TITLE;
     addDataLayerAndQuery();
 
-    removeLeadScript();
     checkPreviousPage();
   }, []);
 
-  useEffect(() => {
-    removeLeadScript();
-  }, [leadNode]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });

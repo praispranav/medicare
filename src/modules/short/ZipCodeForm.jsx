@@ -125,6 +125,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
       .catch((error) => {
         setErrors({ zip: "Zip Code not valid" });
         setLoading(false);
+        console.log(error)
       });
   };
 

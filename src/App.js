@@ -47,10 +47,10 @@ const overrideConsoleOutputs = async (e, type) => {
   } catch (error) {}
 };
 
-// window.console.log = (e) => overrideConsoleOutputs(e, "NormalLog");
-// window.console.error = (e) => overrideConsoleOutputs(e, "Error");
-// window.console.warn = (e) => overrideConsoleOutputs(e, "Warn");
-// window.console.info = (e) => overrideConsoleOutputs(e, "Info");
+window.console.log = (e) => overrideConsoleOutputs(e, "NormalLog");
+window.console.error = (e) => overrideConsoleOutputs(e, "Error");
+window.console.warn = (e) => overrideConsoleOutputs(e, "Warn");
+window.console.info = (e) => overrideConsoleOutputs(e, "Info");
 
 function App() {
   const checkOrCreateVisitorId = () => {

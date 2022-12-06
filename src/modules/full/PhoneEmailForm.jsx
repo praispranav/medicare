@@ -179,7 +179,10 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
         Cookies.set("fbc", formData["fbc"]);
         Cookies.set("JornayaToken", formData["JornayaToken"]);
         navigate({ pathname: ROUTES.full.children.congrats, search: generatorQuery.get() });
-      });
+      })
+      .catch((error)=>{
+        console.error(error)
+      })
   };
 
   const goBack = () =>

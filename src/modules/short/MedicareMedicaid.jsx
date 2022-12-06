@@ -78,7 +78,9 @@ const MedicareMedicaidForm = ({ setForm, setFormEnd }) => {
       );
 
       userIp = response.data["IPv4"];
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
     pushInitialData(userIp);
   };
 

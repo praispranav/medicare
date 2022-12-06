@@ -54,7 +54,9 @@ const AgeForm = ({ setForm, setFormEnd }) => {
       );
 
       userIp = response.data["IPv4"];
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
     pushInitialData(userIp);
   };
 

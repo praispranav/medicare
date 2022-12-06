@@ -14,10 +14,6 @@ import "../assets/styles/Navigator.scss";
 import { ROUTES } from "../constants/routes";
 import { MODULE_TYPE } from "../constants/moduleType";
 import PropagateLoader from "react-spinners/PropagateLoader";
-import { useGeneratorQuery } from "../hooks/useGeneratorQuery";
-import { useDataLayer } from "../hooks/useDataLayer";
-import { localStorageKeys } from "../constants/localStorage";
-import LandingPage from "../modules/LandingPage";
 
 const TypeFullAgeForm = React.lazy(() => import("../modules/full/AgeForm"));
 const TypeFullCongrats = React.lazy(() => import("../modules/full/Congrats"));
@@ -29,7 +25,6 @@ const TypeFullPhoneEmailForm = React.lazy(() =>
   import("../modules/full/PhoneEmailForm")
 );
 
-const TypeShortHomePage = React.lazy(() => import("../modules/short/HomePage"));
 const TypeShortMedicareMedicaid = React.lazy(() =>
   import("../modules/short/MedicareMedicaid")
 );
@@ -50,41 +45,6 @@ const Loading = () => {
       <PropagateLoader color="#2DA9C2" />
     </div>
   );
-};
-
-const DefaultNavigation = () => {
-  const generatorQuery = useGeneratorQuery();
-  const [loading, setLoading] = useState(true);
-  const dataLayer = useDataLayer();
-  const [search] = useSearchParams();
-
-  const init = () => {
-    for (const entry of search.entries()) {
-      generatorQuery.set(entry[0], entry[1]);
-    }
-
-    const currentDataLayerData = dataLayer.get();
-    if (currentDataLayerData)
-      dataLayer.getAndSetFromSession(currentDataLayerData);
-    else {
-      dataLayer.set("interest", search.get("interest"));
-      dataLayer.set("language", search.get("language"));
-      dataLayer.set("device_model", window.navigator.userAgent);
-      dataLayer.set("country", "us");
-      dataLayer.set(
-        "visitor_id",
-        localStorage.getItem(localStorageKeys.visitorId)
-      );
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    init();
-  }, []);
-
-  if (loading) return null;
-  return <Navigate to={ROUTES.landing1 + "?" + generatorQuery.get()} />;
 };
 
 const ModuleTypeNavigator = () => {
@@ -228,7 +188,6 @@ const Navigator = () => {
           </Route>
 
           <Route path={"/"} element={<ModuleTypeNavigator />}></Route>
-          <Route path="" element={<DefaultNavigation />} />
         </Routes>
 
         <Footer />
