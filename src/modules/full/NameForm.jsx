@@ -58,7 +58,7 @@ export default function NameForm() {
   });
 
   const goBack = () =>
-    navigate({ pathname: ROUTES.zipCodeForm, search: generatorQuery.get() });
+    navigate({ pathname: ROUTES.full.children.zipCodeForm, search: generatorQuery.get() });
 
   const checkPreviousPageData = () => {
     const data = sessionStorage.getItem(sessionStorageKeys.zip);

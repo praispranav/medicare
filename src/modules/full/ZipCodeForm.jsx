@@ -133,7 +133,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
   const checkPreviousPageData = () => {
     const data = sessionStorage.getItem(sessionStorageKeys.ageAbove64);
     if (data === null)
-      navigate({ pathname: ROUTES.homePage, search: generatorQuery.get() });
+      navigate({ pathname: ROUTES.full.children.homePage, search: generatorQuery.get() });
   };
 
   useEffect(() => {

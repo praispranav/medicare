@@ -72,26 +72,8 @@ function App() {
       <div className="App">
         <input id="leadid_token" name="universal_leadid" type="hidden" />
         <Navigator />
-
-        {window.location.pathname !== ROUTES.congrats ? (
-          <LeadNode />
-        ) : undefined}
       </div>
     </HelmetProvider>
-  );
-}
-
-function LeadNode() {
-  return (
-    <Helmet>
-      <script
-        id={LEAD.id}
-        type={LEAD.type}
-        async={LEAD.async}
-        src={LEAD.src}
-      ></script>
-      <noscript> Fail to load javascript </noscript>
-    </Helmet>
   );
 }
 

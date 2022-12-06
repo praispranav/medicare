@@ -1,24 +1,22 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import "../../assets/styles/Form.scss";
+import { Helmet } from "react-helmet-async";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   localStorageKeys,
-  sessionStorageKeys,
+  sessionStorageKeys
 } from "../../constants/localStorage.js";
-import { ROUTES } from "../../constants/routes";
 import { REDIRECT_AND_STORAGE_KEYS } from "../../constants/queryStrings";
-import { useRgbaHook, CLICK_ID } from "../../hooks/rgba";
+import { ROUTES } from "../../constants/routes";
+import { useRgbaHook } from "../../hooks/rgba";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
-import { useDataLayer } from "../../hooks/useDataLayer";
-import useSmartLook from "../../hooks/useSmartLook";
-import Cookies from "js-cookie";
+import "../../assets/styles/Form.scss";
+import { LEAD } from "../../constants/lead";
 
 const AgeForm = ({ setForm, setFormEnd }) => {
   const [search] = useSearchParams();
   const generatorQuery = useGeneratorQuery();
   const { storeRgbaData } = useRgbaHook();
-  const dataLayer = useDataLayer();
 
   const pushInitialData = (userIp) => {
     const redirectQueries = {
@@ -35,28 +33,9 @@ const AgeForm = ({ setForm, setFormEnd }) => {
       sessionStorageKeys.utm_fbclid,
       JSON.stringify(redirectQueries)
     );
-
-    for (const entry of search.entries()) {
-      generatorQuery.set(entry[0], entry[1]);
-    }
-
-    const currentDataLayerData = dataLayer.get();
-    if (currentDataLayerData)
-      dataLayer.getAndSetFromSession(currentDataLayerData);
-    else {
-      dataLayer.set("interest", search.get("interest"));
-      dataLayer.set("language", search.get("language"));
-      dataLayer.set("device_model", window.navigator.userAgent);
-      dataLayer.set("country", "us");
-      dataLayer.set(
-        "visitor_id",
-        localStorage.getItem(localStorageKeys.visitorId)
-      );
-    }
-    storeRgbaData(
-      "visitor_id",
-      localStorage.getItem(localStorageKeys.visitorId)
-    );
+    
+  
+    storeRgbaData("visitor_id", localStorage.getItem(localStorageKeys.visitorId));
   };
 
   const getIpAdd = async () => {
@@ -78,60 +57,27 @@ const AgeForm = ({ setForm, setFormEnd }) => {
     } catch (error) {}
     pushInitialData(userIp);
   };
-  
-  useSmartLook();
-
-  const setInitialData = () => {
-    storeRgbaData("generator_var", search.get("generator"));
-    storeRgbaData("type_var", search.get("type"));
-    storeRgbaData("device_var", search.get("device"));
-    storeRgbaData("fbclid_var", search.get("fbclid"));
-    storeRgbaData("gclid_var", search.get("gclid"));
-    storeRgbaData("interest_var", search.get("interest"));
-    storeRgbaData("utm_medium_var", search.get("utm_medium"));
-    storeRgbaData("language_var", search.get("language"));
-    storeRgbaData("utm_source_var", search.get("utm_source"));
-
-    for (const entry of search.entries()) {
-      generatorQuery.set(entry[0], entry[1]);
-    }
-
-    const currentDataLayerData = dataLayer.get();
-    if (currentDataLayerData)
-      dataLayer.getAndSetFromSession(currentDataLayerData);
-    else {
-      dataLayer.set("interest", search.get("interest"));
-      dataLayer.set("language", search.get("language"));
-      dataLayer.set("device_model", window.navigator.userAgent);
-      dataLayer.set("country", "us");
-      dataLayer.set(
-        "visitor_id",
-        localStorage.getItem(localStorageKeys.visitorId)
-      );
-    }
-  };
-
-  useEffect(() => {
-    if(Cookies.get(CLICK_ID) ? Cookies.get(CLICK_ID) : window.clickId){
-      storeRgbaData("click_id_var", Cookies.get(CLICK_ID) ? Cookies.get(CLICK_ID) : window.clickId );
-    }
-  }, [Cookies.get(CLICK_ID), window.clickId]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     getIpAdd();
-    setInitialData();
   }, []);
 
   const navigate = useNavigate();
 
   const incFormState = () => {
-    navigate({ pathname: ROUTES.full.children.zipCodeForm, search: generatorQuery.get() });
+    navigate({ pathname: ROUTES.zipCodeForm, search: generatorQuery.get() });
   };
 
   const blankEnter = (e) => {};
 
   return (
+    <>
+     {window.location.pathname !== ROUTES.congrats ? (
+          <LeadNode />
+        ) : undefined}
+
+
     <div className="formHolder">
       <form
         action="POST"
@@ -176,7 +122,22 @@ const AgeForm = ({ setForm, setFormEnd }) => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 
-export default AgeForm;
+function LeadNode() {
+  return (
+    <Helmet>
+      <script
+        id={LEAD.id}
+        type={LEAD.type}
+        async={LEAD.async}
+        src={LEAD.src}
+      ></script>
+      <noscript> Fail to load javascript </noscript>
+    </Helmet>
+  );
+}
+
+export default AgeForm

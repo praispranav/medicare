@@ -16,6 +16,8 @@ import { useDataLayer } from "../../hooks/useDataLayer";
 import { FloatingCard } from "../../components/FloatingCard/FloatingCard";
 import { FormStart } from "../FormStart/FormStart";
 import "../../assets/styles/Congrats.scss";
+import { ROUTES } from "../../constants/routes";
+import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
 
 let load = 0;
 const PAGE_TITLE = "Congratulations - Qualify Benefits";
@@ -140,6 +142,7 @@ const CongratsPage = ({ fname, lname }) => {
   const [sec, setSec] = useState(3);
   const [history, setHistory] = useSearchParams();
   const [submitted, setSubmitted] = useState();
+  const generatorQuery = useGeneratorQuery();
 
   const ringbaKey = useRingbaUser(history);
   const { number: num } = useInitRingba();
@@ -201,7 +204,7 @@ const CongratsPage = ({ fname, lname }) => {
 
     return (
       <div>
-        {submitted === null ? <Navigate to="/" replace={true} /> : <></>}
+        {submitted === null ? <Navigate to={{ pathname: ROUTES.full.route, search: generatorQuery.get() }} replace={true} /> : <></>}
         {load ? (
           <End
             number={num}

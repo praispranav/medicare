@@ -129,10 +129,7 @@ const Navigator = () => {
         <Navbar />
 
         <Routes>
-          <Route path={ROUTES.landing1} element={<LandingPage />} />
-          <Route path={ROUTES.landing2} element={<LandingPage />} />
-
-          <Route path={"/"} element={<ModuleTypeNavigator />}></Route>
+         
           <Route path={ROUTES.full.route} element={<Outlet />}>
             <Route
               index
@@ -229,6 +226,8 @@ const Navigator = () => {
               }
             />
           </Route>
+
+          <Route path={"/"} element={<ModuleTypeNavigator />}></Route>
           <Route path="" element={<DefaultNavigation />} />
         </Routes>
 
