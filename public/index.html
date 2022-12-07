@@ -79,11 +79,7 @@
     /></noscript>
     <!-- Google Tag Manager -->
     <script>
-      var dtpCallback;
-      dtpCallback(() => {
-          clickId = dtpCallback.getClickID();
-          sessionStorage.setItem('clickId', clickId)
-      });
+     
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -96,13 +92,7 @@
       })(window, document, "script", "dataLayer", "GTM-TC59FRB");
     </script>
     <!-- End Google Tag Manager -->
-    <script>
-      var clickId;
-      dtpCallback(() => {
-          clickId = dtpCallback.getClickID();
-          sessionStorage.setItem('clickId', clickId)
-      });
-    </script>
+    
     <style>.dtpcnt{opacity: 0;}</style>
   </head>
   <body>
@@ -130,4 +120,11 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script>
+    var clickId;
+    dtpCallback(() => {
+        clickId = dtpCallback.getClickID();
+        sessionStorage.setItem('clickId', clickId)
+    });
+  </script>
 </html>
