@@ -8,10 +8,11 @@ import {
 } from "../../constants/localStorage.js";
 import { REDIRECT_AND_STORAGE_KEYS } from "../../constants/queryStrings";
 import { ROUTES } from "../../constants/routes";
-import { useRgbaHook } from "../../hooks/rgba";
+import { useRgbaHook, CLICK_ID } from "../../hooks/rgba";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
 import "../../assets/styles/Form.scss";
 import { LEAD } from "../../constants/lead";
+import Cookies from "js-cookie";
 
 const AgeForm = ({ setForm, setFormEnd }) => {
   const [search] = useSearchParams();
@@ -67,6 +68,12 @@ const AgeForm = ({ setForm, setFormEnd }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     getIpAdd();
   }, []);
+
+  useEffect(() => {
+    if(Cookies.get(CLICK_ID) ? Cookies.get(CLICK_ID) : window.clickId){
+      storeRgbaData("click_id", Cookies.get(CLICK_ID) ? Cookies.get(CLICK_ID) : window.clickId );
+    }
+  }, [Cookies.get(CLICK_ID), window.clickId]);
 
   const navigate = useNavigate();
 

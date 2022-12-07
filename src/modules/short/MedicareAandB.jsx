@@ -116,7 +116,7 @@ const AgeForm = ({ setForm, setFormEnd }) => {
 
   useEffect(() => {
     if(Cookies.get(CLICK_ID) ? Cookies.get(CLICK_ID) : window.clickId){
-      storeRgbaData("click_id_var", Cookies.get(CLICK_ID) ? Cookies.get(CLICK_ID) : window.clickId );
+      storeRgbaData("click_id", Cookies.get(CLICK_ID) ? Cookies.get(CLICK_ID) : window.clickId );
     }
   }, [Cookies.get(CLICK_ID), window.clickId]);
 

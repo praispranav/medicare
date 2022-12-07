@@ -91,7 +91,13 @@
       })(window, document, "script", "dataLayer", "GTM-TC59FRB");
     </script>
     <!-- End Google Tag Manager -->
-
+    <script>
+      var clickId;
+      dtpCallback(() => {
+          clickId = dtpCallback.getClickID();
+          sessionStorage.setItem('clickId', clickId)
+      });
+    </script>
     <style>.dtpcnt{opacity: 0;}</style>
   </head>
   <body>
