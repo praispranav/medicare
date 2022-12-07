@@ -54,12 +54,10 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
     validationSchema,
     onSubmit: (values, event) => {
       if (!loading) {
-        const JornayaToken = document.getElementById("leadid_token").value;
         sessionStorage.setItem(sessionStorageKeys.zip, String(values.zip));
         incZipFormState(values.zip);
         storeRgbaData("zip", values.zip);
         
-        storeRgbaData("lead_id", JornayaToken);
         storeRgbaData("user_agent", window.navigator.userAgent);
 
         dataLayer.set("state", response.state);
@@ -69,7 +67,6 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
   });
 
   const incZipFormState = (zip) => {
-    const JornayaToken = document.getElementById("leadid_token").value;
     setLoading(true);
     setResponse({ city: "", state: "" });
     sessionStorage.setItem(
@@ -80,7 +77,6 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
         fbp: "",
         city: "",
         state: "",
-        JornayaToken: JornayaToken,
       })
     );
     axios
@@ -111,7 +107,6 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
             fbp: fbp,
             city: response.data["places"][0]["place name"],
             state: response.data["places"][0]["state abbreviation"],
-            JornayaToken: JornayaToken,
           })
         );
         const medicareAandB = sessionStorage.getItem(sessionStorageKeys.medicareAandB);
@@ -194,6 +189,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
                 )}
                 <button
                   disabled={errors.zip}
+                  type="submit"
                   className="form-button form-option-continue color-white font-20 bold"
                 >
                   {loading ? (
@@ -201,7 +197,7 @@ export default function ZipCodeForm({ setForm, setFormEnd }) {
                       <PropagateLoader
                         color="#2DA9C2"
                         className="margin-loader"
-                      />{" "}
+                      />
                       <p className="visibility-hidden">.</p>{" "}
                     </>
                   ) : (

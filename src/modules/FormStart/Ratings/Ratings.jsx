@@ -3,12 +3,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './Ratings.scss';
 
-import star5 from '../../../assets/ratings/5star.svg';
-import trustpilot from '../../../assets/ratings/trustpilot.svg';
 import { RatingCard } from "./RatingCard/RatingCard";
 import { Carousel } from "react-configurable-carousel";
 
-
+const trustpilot = "/assets/images/ratings/trustpilot.svg";
+const star5 = "/assets/images/ratings/5star.svg";
 
 export const Rating = () => {
     const rc = [

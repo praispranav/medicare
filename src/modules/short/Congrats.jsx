@@ -41,7 +41,6 @@ const Congrats = ({ fname, lname }) => {
         Congratulations We’ve Found Plans in your Area!
       </div>
       <div className="congrats-card font-16">
-
         <div className="flex-a-cen keymain">
           <div className="flex-a-cen">
             <img src={location} alt="" /> &nbsp;&nbsp; {zipCodeData["city"]},
@@ -130,12 +129,9 @@ const CongratsPage = ({ fname, lname }) => {
   fname = sessionStorage.getItem(sessionStorageKeys.firstName);
   lname = sessionStorage.getItem(sessionStorageKeys.lastName);
 
-  const navigate = useNavigate();
-  const dataLayer = useDataLayer();
   const [min, setMin] = useState(3);
   const [sec, setSec] = useState(3);
-  const [history, setHistory] = useSearchParams();
-  const generatorQuery = useGeneratorQuery();
+  const [history] = useSearchParams();
 
   const ringbaKey = useRingbaUser(history);
   const { number: num } = useInitRingba();
@@ -144,7 +140,7 @@ const CongratsPage = ({ fname, lname }) => {
     const submitted = sessionStorage.getItem(
       sessionStorageKeys.submitSuccessful
     );
-      if(submitted === 'yes') return navigate({ pathname:ROUTES.short.children.zipCodeForm , search: generatorQuery.get() })
+    // if(submitted === 'yes') return navigate({ pathname:ROUTES.short.children.zipCodeForm , search: generatorQuery.get() })
   };
 
   const addDataLayerAndQuery = () => {
@@ -152,7 +148,6 @@ const CongratsPage = ({ fname, lname }) => {
     // window.dataLayer[0].campaign_id = form["CID"] || "";
     // window.dataLayer[0].utm_source = form["ADS_ID"] || "";
     // window.dataLayer[0].utm_source = form["ADID"] || "";
-
     // setHistory({ ...dataLayer.get() });
   };
 
@@ -162,7 +157,6 @@ const CongratsPage = ({ fname, lname }) => {
 
     checkPreviousPage();
   }, []);
-
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -187,14 +181,14 @@ const CongratsPage = ({ fname, lname }) => {
       <div>
         {/* <Navigate to={ROUTES.short.children.noOffer} /> */}
         {load ? (
-           <End
-           number={num}
-           staticNumber={ringbaKey.number}
-           fname={fname}
-           lname={lname}
-           sec={sec}
-           min={min}
-         />
+          <End
+            number={num}
+            staticNumber={ringbaKey.number}
+            fname={fname}
+            lname={lname}
+            sec={sec}
+            min={min}
+          />
         ) : (
           <Congrats fname={fname} lname={lname} />
         )}

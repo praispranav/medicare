@@ -2,7 +2,7 @@ import React from "react";
 
 import './RatingCard.css';
 
-import star5 from '../../../../assets/ratings/5star.svg';
+const star5 = "/assets/images/ratings/5star.svg";
 
 export const RatingCard = ({head, body, name}) => {
     return <div className="rating-card flex-a-cen-j-cen flex-d-col">

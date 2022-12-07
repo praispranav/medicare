@@ -34,6 +34,9 @@ const AgeForm = ({ setForm, setFormEnd }) => {
       JSON.stringify(redirectQueries)
     );
     
+    for (const entry of search.entries()) {
+      generatorQuery.set(entry[0], entry[1]);
+    }
   
     storeRgbaData("visitor_id", localStorage.getItem(localStorageKeys.visitorId));
   };
@@ -68,7 +71,7 @@ const AgeForm = ({ setForm, setFormEnd }) => {
   const navigate = useNavigate();
 
   const incFormState = () => {
-    navigate({ pathname: ROUTES.zipCodeForm, search: generatorQuery.get() });
+    navigate({ pathname: ROUTES.full.children.zipCodeForm, search: generatorQuery.get() });
   };
 
   const blankEnter = (e) => {};

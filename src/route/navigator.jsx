@@ -14,6 +14,10 @@ import "../assets/styles/Navigator.scss";
 import { ROUTES } from "../constants/routes";
 import { MODULE_TYPE } from "../constants/moduleType";
 import PropagateLoader from "react-spinners/PropagateLoader";
+import TypeShortMedicareAandB from "../modules/short/MedicareAandB";
+import TypeShortZipCodeForm from "../modules/short/ZipCodeForm";
+import TypeShortCongrats from "../modules/short/Congrats";
+import TypeShortNoOffer from "../modules/short/NoOffer"
 
 const TypeFullAgeForm = React.lazy(() => import("../modules/full/AgeForm"));
 const TypeFullCongrats = React.lazy(() => import("../modules/full/Congrats"));
@@ -28,14 +32,7 @@ const TypeFullPhoneEmailForm = React.lazy(() =>
 const TypeShortMedicareMedicaid = React.lazy(() =>
   import("../modules/short/MedicareMedicaid")
 );
-const TypeShortMedicareAandB = React.lazy(() =>
-  import("../modules/short/MedicareAandB")
-);
-const TypeShortZipCodeForm = React.lazy(() =>
-  import("../modules/short/ZipCodeForm")
-);
-const TypeShortCongrats = React.lazy(() => import("../modules/short/Congrats"));
-const TypeShortNoOffer = React.lazy(() => import("../modules/short/NoOffer"));
+
 
 const TypeCallCongrats = React.lazy(() => import("../modules/call/Congrats"));
 
@@ -89,7 +86,6 @@ const Navigator = () => {
         <Navbar />
 
         <Routes>
-         
           <Route path={ROUTES.full.route} element={<Outlet />}>
             <Route
               index
@@ -144,35 +140,19 @@ const Navigator = () => {
             />
             <Route
               path={ROUTES.short.children.medicareAandB}
-              element={
-                <React.Suspense fallback={<Loading />}>
-                  <TypeShortMedicareAandB />
-                </React.Suspense>
-              }
+              element={<TypeShortMedicareAandB />}
             />
             <Route
               path={ROUTES.short.children.zipCodeForm}
-              element={
-                <React.Suspense fallback={<Loading />}>
-                  <TypeShortZipCodeForm />
-                </React.Suspense>
-              }
+              element={<TypeShortZipCodeForm />}
             />
             <Route
               path={ROUTES.short.children.congrats}
-              element={
-                <React.Suspense fallback={<Loading />}>
-                  <TypeShortCongrats />
-                </React.Suspense>
-              }
+              element={<TypeShortCongrats />}
             />
             <Route
               path={ROUTES.short.children.noOffer}
-              element={
-                <React.Suspense fallback={<Loading />}>
-                  <TypeShortNoOffer />
-                </React.Suspense>
-              }
+              element={<TypeShortNoOffer />}
             />
           </Route>
           <Route path={ROUTES.call.route} element={<Outlet />}>

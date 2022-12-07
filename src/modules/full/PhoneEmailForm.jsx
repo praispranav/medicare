@@ -39,7 +39,7 @@ const validationSchema = yup.object({
     .max(10),
 });
 
-export default function PhoneEmailForm({ setFormEnd, setForm }) {
+export default function PhoneEmailForm({ }) {
   const navigate = useNavigate();
   const { storeRgbaData } = useRgbaHook();
   const generatorQuery = useGeneratorQuery();
@@ -96,7 +96,6 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
       ...zipCodeDataParsed,
       ...utmParsed,
     };
-    setForm(preparedData);
     save(preparedData);
   };
 
@@ -150,10 +149,10 @@ export default function PhoneEmailForm({ setFormEnd, setForm }) {
           sessionStorageKeys.finalPreparedData,
           JSON.stringify(formData)
         );
-        setFormEnd({
-          fname: formData.firstName,
-          lname: formData.lastName,
-        });
+        // setFormEnd({
+        //   fname: formData.firstName,
+        //   lname: formData.lastName,
+        // });
 
         sessionStorage.setItem(sessionStorageKeys.submitSuccessful, "yes");
       })

@@ -5,13 +5,20 @@ import "./FormStart.css";
 import { Rating } from "./Ratings/Ratings";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import image1 from "../../assets/ratings/image1.svg";
-import image2 from "../../assets/ratings/image2.svg";
-import image3 from "../../assets/ratings/image3.svg";
-import image4 from "../../assets/ratings/image4.svg";
-import image5 from "../../assets/ratings/image5.svg";
-import image6 from "../../assets/ratings/image6.svg";
+// import image1 from "../../assets/ratings/image1.svg";
+// import image2 from "../../assets/ratings/image2.svg";
+// import image3 from "../../assets/ratings/image3.svg";
+// import image4 from "../../assets/ratings/image4.svg";
+// import image5 from "../../assets/ratings/image5.svg";
+// import image6 from "../../assets/ratings/image6.svg";
 import { FloatingCard } from "../../components/FloatingCard/FloatingCard";
+
+const image1 = "/assets/images/ratings/image1.svg"
+const image2 = "/assets/images/ratings/image2.svg"
+const image3 = "/assets/images/ratings/image3.svg"
+const image4 = "/assets/images/ratings/image4.svg"
+const image5 = "/assets/images/ratings/image5.svg"
+const image6 = "/assets/images/ratings/image6.svg"
 
 export const PreForm = ({ setForm }) => {
   let nav = useNavigate();
