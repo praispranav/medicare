@@ -9,8 +9,8 @@ import { sessionStorageKeys } from "../../constants/localStorage";
 import { useRingbaUser } from "../../constants/ringba";
 import { useInitRingba } from "../../hooks/rgba";
 import { FormStart } from "../FormStart/FormStart";
-import { useRgbaHook, CLICK_ID } from "../../hooks/rgba"
-import Cookies from "js-cookie"
+import { useRgbaHook } from "../../hooks/rgba";
+import VoluumScripts from "../../constants/voluumScripts.js";
 
 let load = 0;
 const PAGE_TITLE = "Congratulations - Qualify Benefits";
@@ -70,12 +70,8 @@ const CongratsPage = ({ form, fname, lname }) => {
 
   const { number: num } = useInitRingba();
   const ringbaKey = useRingbaUser(history);
-
-  useEffect(() => {
-    if(Cookies.get(CLICK_ID) ? Cookies.get(CLICK_ID) : window.clickId){
-      storeRgbaData("click_id", Cookies.get(CLICK_ID) ? Cookies.get(CLICK_ID) : window.clickId );
-    }
-  }, [Cookies.get(CLICK_ID), window.clickId]);
+  const [clickId, setClickId] = useState();
+  const [search] = useSearchParams();
 
   const leadNode = window.document.getElementById(LEAD.id);
 
@@ -102,7 +98,38 @@ const CongratsPage = ({ form, fname, lname }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  useEffect(() => {}, []);
+  const addVoluumScript = async () => {
+    const scriptId = "trackScript";
+    const element = window.document.getElementById(scriptId);
+    const clickIdValue = search.get("click_id");
+    if (
+      clickIdValue !== "" &&
+      clickIdValue !== "{click_id}" &&
+      clickIdValue !== "{clickid}" &&
+      clickIdValue !== null &&
+      clickIdValue !== undefined &&
+      clickIdValue.length > 10
+    )
+      return storeRgbaData("click_id", search.get("click_id"));
+
+    if (element) return;
+
+    const doc = document.createElement("script");
+    doc.src = VoluumScripts.CALL_SCRIPT;
+    doc.id = scriptId;
+    doc.async = false;
+    window.document.body.appendChild(doc);
+  };
+
+  useEffect(() => {
+    addVoluumScript();
+  }, []);
+
+  useEffect(() => {
+    if (clickId) {
+      storeRgbaData("click_id", clickId);
+    }
+  }, [clickId]);
 
   while (true) {
     setTimeout(function () {
@@ -118,20 +145,37 @@ const CongratsPage = ({ form, fname, lname }) => {
     }, 1000);
 
     return (
-      <div>
-        <End
-          number={num}
-          staticNumber={ringbaKey.number}
-          fname={fname}
-          lname={lname}
-          sec={sec}
-          min={min}
-        />
-        <FloatingCard />
-        <FormStart />
-      </div>
+      <>
+        <div>
+          <End
+            number={num}
+            staticNumber={ringbaKey.number}
+            fname={fname}
+            lname={lname}
+            sec={sec}
+            min={min}
+          />
+          <FloatingCard />
+          <FormStart />
+        </div>
+        {!clickId ? (
+          <GetClickId clickId={clickId} setClickId={setClickId} />
+        ) : undefined}
+      </>
     );
   }
 };
+
+function GetClickId(props) {
+  React.useEffect(() => {
+    if (!props.clickId) {
+      const interval = setInterval(() => {
+        props.setClickId(window.clickId);
+      }, 400);
+      return () => clearInterval(interval);
+    }
+  }, []);
+  return <></>;
+}
 
 export default CongratsPage;

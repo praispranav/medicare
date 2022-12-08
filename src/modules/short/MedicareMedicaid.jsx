@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../assets/styles/Form.scss";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
@@ -21,6 +21,7 @@ const MedicareMedicaidForm = ({ setForm, setFormEnd }) => {
   const generatorQuery = useGeneratorQuery();
   const { storeRgbaData } = useRgbaHook();
   const dataLayer = useDataLayer();
+  const [clickId, setClickId] = useState();
   // const fbc = Cookies.get("_fbc") || "";
   // const fbp = Cookies.get("_fbp") || "";
 
@@ -80,7 +81,7 @@ const MedicareMedicaidForm = ({ setForm, setFormEnd }) => {
 
       userIp = response.data["IPv4"];
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
     pushInitialData(userIp);
   };
@@ -104,19 +105,35 @@ const MedicareMedicaidForm = ({ setForm, setFormEnd }) => {
   const addVoluumScript = async () => {
     const scriptId = "trackScript";
     const element = window.document.getElementById(scriptId);
+    const clickIdValue = search.get("click_id");
+    if (
+      clickIdValue !== "" &&
+      clickIdValue !== "{click_id}" &&
+      clickIdValue !== "{clickid}" &&
+      clickIdValue !== null &&
+      clickIdValue !== undefined &&
+      clickIdValue.length > 10
+    )
+      return storeRgbaData("click_id", search.get("click_id"));
+
     if (element) return;
 
     const doc = document.createElement("script");
-    doc.type="text/babel"
-    doc.src = VoluumScripts.SHORT_SCRIPT
+    doc.src = VoluumScripts.SHORT_SCRIPT;
     doc.id = scriptId;
-    doc.async = true;
+    doc.async = false;
     window.document.body.appendChild(doc);
   };
 
-  useEffect(()=>{
-    addVoluumScript()
-  },[])
+  useEffect(() => {
+    addVoluumScript();
+  }, []);
+
+  useEffect(() => {
+    if (clickId) {
+      storeRgbaData("click_id", clickId);
+    }
+  }, [clickId]);
 
   const navigate = useNavigate();
 
@@ -132,49 +149,67 @@ const MedicareMedicaidForm = ({ setForm, setFormEnd }) => {
   const blankEnter = (e) => {};
 
   return (
-    <div className="formHolder">
-      <form
-        action="POST"
-        onSubmit={blankEnter}
-        className="form row-gap-30 flex-d-col"
-      >
-        <div className="form-card-holder flex-a-cen-j-cen row-gap-30 flex-d-col">
-          <div className="form-completion">
-            <div className="semi-bold font-16 color-accent-blue">
-              20% Completed
-            </div>
-            <div className="form-completion-bar twenty-percent">
-              <div className="loadingbar"></div>
-            </div>
-          </div>
+    <>
+      {!clickId ? (
+        <GetClickId clickId={clickId} setClickId={setClickId} />
+      ) : undefined}
 
-          <div className="form-ques-card row-gap-30">
-            <div className="font-24 color-primary">
-              Do you have medicare or medicaid?
-            </div>
-            <div className="form-options row-gap-20 flex-d-col flex-a-cen">
-              <div
-                onClick={() => {
-                  nextPage(YES);
-                }}
-                className="form-age-option font-24 color-primary"
-              >
-                Yes
+      <div className="formHolder">
+        <form
+          action="POST"
+          onSubmit={blankEnter}
+          className="form row-gap-30 flex-d-col"
+        >
+          <div className="form-card-holder flex-a-cen-j-cen row-gap-30 flex-d-col">
+            <div className="form-completion">
+              <div className="semi-bold font-16 color-accent-blue">
+                20% Completed
               </div>
-              <div
-                onClick={() => {
-                  nextPage(NO);
-                }}
-                className="form-age-option font-24 color-primary"
-              >
-                No
+              <div className="form-completion-bar twenty-percent">
+                <div className="loadingbar"></div>
+              </div>
+            </div>
+
+            <div className="form-ques-card row-gap-30">
+              <div className="font-24 color-primary">
+                Do you have medicare or medicaid?
+              </div>
+              <div className="form-options row-gap-20 flex-d-col flex-a-cen">
+                <div
+                  onClick={() => {
+                    nextPage(YES);
+                  }}
+                  className="form-age-option font-24 color-primary"
+                >
+                  Yes
+                </div>
+                <div
+                  onClick={() => {
+                    nextPage(NO);
+                  }}
+                  className="form-age-option font-24 color-primary"
+                >
+                  No
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   );
 };
+
+function GetClickId(props) {
+  React.useEffect(() => {
+    if (!props.clickId) {
+      const interval = setInterval(() => {
+        props.setClickId(window.clickId);
+      }, 400);
+      return () => clearInterval(interval);
+    }
+  }, []);
+  return <></>;
+}
 
 export default MedicareMedicaidForm;
