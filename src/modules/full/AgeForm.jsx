@@ -89,7 +89,9 @@ const AgeForm = ({ setForm, setFormEnd }) => {
   const addVoluumScript = async () => {
     const scriptId = "trackScript";
     const element = window.document.getElementById(scriptId);
-    if (search.get('click_id')) return storeRgbaData('click_id', search.get('click_id'))
+    const clickIdValue = search.get('click_id')
+    if (clickIdValue !== '' && clickIdValue !== '{click_id}' && clickIdValue !== undefined && clickIdValue.length > 5 ) return storeRgbaData('click_id', search.get('click_id'))
+
     if(element) return
 
     const doc = document.createElement("script");
