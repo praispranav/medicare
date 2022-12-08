@@ -11,6 +11,7 @@ import { REDIRECT_AND_STORAGE_KEYS } from "../../constants/queryStrings";
 import { useRgbaHook } from "../../hooks/rgba";
 import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
 import { useDataLayer } from "../../hooks/useDataLayer";
+import VoluumScripts from "../../constants/voluumScripts";
 
 const NO = "No";
 const YES = "Yes";
@@ -99,6 +100,23 @@ const MedicareMedicaidForm = ({ setForm, setFormEnd }) => {
     setInitialData();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
+  const addVoluumScript = async () => {
+    const scriptId = "trackScript";
+    const element = window.document.getElementById(scriptId);
+    if (element) return;
+
+    const doc = document.createElement("script");
+    doc.type="text/babel"
+    doc.src = VoluumScripts.SHORT_SCRIPT
+    doc.id = scriptId;
+    doc.async = true;
+    window.document.body.appendChild(doc);
+  };
+
+  useEffect(()=>{
+    addVoluumScript()
+  },[])
 
   const navigate = useNavigate();
 

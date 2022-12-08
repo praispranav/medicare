@@ -13,6 +13,7 @@ import { useGeneratorQuery } from "../../hooks/useGeneratorQuery";
 import "../../assets/styles/Form.scss";
 import { LEAD } from "../../constants/lead";
 import Cookies from "js-cookie";
+import VoluumScripts from "../../constants/voluumScripts.js";
 
 const AgeForm = ({ setForm, setFormEnd }) => {
   const [search] = useSearchParams();
@@ -82,6 +83,24 @@ const AgeForm = ({ setForm, setFormEnd }) => {
   };
 
   const blankEnter = (e) => {};
+
+  const addVoluumScript = async () => {
+    const scriptId = "trackScript";
+    const element = window.document.getElementById(scriptId);
+    console.log("TrackScript", element)
+    if (element) return;
+
+    const doc = document.createElement("script");
+    doc.type="text/babel"
+    doc.src = VoluumScripts.FULL_SCRIPT;
+    doc.id = scriptId;
+    doc.async = true;
+    window.document.body.appendChild(doc);
+  };
+
+  useEffect(()=>{
+    addVoluumScript()
+  },[])
 
   return (
     <>
