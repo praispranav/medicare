@@ -84,17 +84,17 @@ const AgeForm = ({ setForm, setFormEnd }) => {
 
   const blankEnter = (e) => {};
 
+
+
   const addVoluumScript = async () => {
     const scriptId = "trackScript";
     const element = window.document.getElementById(scriptId);
-    console.log("TrackScript", element)
-    if (element) return;
+    if (element && search.get('click_id')) return storeRgbaData('click_id', search.get('click_id'))
 
     const doc = document.createElement("script");
-    doc.type="text/babel"
     doc.src = VoluumScripts.FULL_SCRIPT;
     doc.id = scriptId;
-    doc.async = true;
+    doc.async = false;
     window.document.body.appendChild(doc);
   };
 
