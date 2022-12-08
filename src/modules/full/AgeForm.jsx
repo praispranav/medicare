@@ -129,7 +129,9 @@ const AgeForm = ({ setForm, setFormEnd }) => {
 
   return (
     <>
-      {window.location.pathname !== ROUTES.congrats ? <LeadNode /> : undefined}
+      {!sessionStorage.getItem(sessionStorageKeys.leadScriptInjected) ? (
+        <LeadNode />
+      ) : undefined}
 
       {!clickId ? (
         <GetClickId clickId={clickId} setClickId={setClickId} />
@@ -187,6 +189,9 @@ const AgeForm = ({ setForm, setFormEnd }) => {
 };
 
 function LeadNode() {
+  useEffect(() => {
+    sessionStorage.setItem(sessionStorageKeys.leadScriptInjected, "yes");
+  }, []);
   return (
     <Helmet>
       <script
