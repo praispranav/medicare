@@ -2,7 +2,7 @@
 h=a.scripts[0];g.src=m+(-1===m.indexOf("?")?"?":"&")+"oref="+f(a.referrer)+"&ourl="+f(location[q])+"&opt="+f(a.title)+"&vtm="+(new Date).getTime()+(l?"&cid="+l:"")+(n?"&uw=no":"");h.parentNode.insertBefore(g,h);d&&(e=new Date,e.setTime(e.getTime()+864E5),a.cookie="vl-"+d+"=1; "+p+"samesite=Strict; expires="+e.toGMTString()+"; path=/")}())})(window,document,encodeURIComponent,"href","dtpCallback","https://track.qualifybenefits.co/d/.js","savedCid");
 
 var clickId;
-window.dtpCallback(() => {
-  clickId = window.dtpCallback.params.click_id;
-  sessionStorage.setItem('clickId', clickId);
+dtpCallback(() => {
+    clickId = dtpCallback.getClickID();
+    sessionStorage.setItem('clickId', clickId)
 });
