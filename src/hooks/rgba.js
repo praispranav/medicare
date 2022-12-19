@@ -11,6 +11,9 @@ export const CLICK_ID = "vl-cid"
 
 export function useRgbaHook() {
   const storeRgbaData = (key, value) => {
+    if(key === 'click_id' && sessionStorage.getItem(sessionStorageKeys.isClickIdSent)) return 
+    if(key === 'click_id') sessionStorage.setItem(sessionStorageKeys.isClickIdSent, "true")
+
     let rgbaPattern = { [key]: value || "" };
     if(key === 'generator') rgbaPattern = { [key]: value || RINGBA_COM_TAGS[0].user };
     if (Array.isArray(window._rgba_tags)) {

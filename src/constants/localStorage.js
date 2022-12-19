@@ -25,5 +25,7 @@ export const sessionStorageKeys = {
     medicareMedicaid: "medicareMedicaid",
     medicareAandB:"medicareAandB",
     clickId: "clickId",
-    leadScriptInjected: "leadScriptInjected"
+    leadScriptInjected: "leadScriptInjected",
+    
+    isClickIdSent: "isClickIdSent"
 }
