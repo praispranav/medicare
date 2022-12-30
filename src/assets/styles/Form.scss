@@ -27,7 +27,8 @@
         .form-completion-bar {
           background-color: #e7e7e7;
           height: 0.625rem;
-          width: 25rem;
+          max-width: 43.75rem;
+          min-width: 350px;
           border-radius: 0.625rem;
           position: relative;
           &.twenty-percent {
